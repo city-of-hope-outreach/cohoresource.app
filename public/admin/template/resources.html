@@ -1,0 +1,24 @@
+<div class="main_col">
+	<h1>Resources</h1>
+
+	<div class="table_header">
+		<a class="button" href="#!/resources/new">ADD</a>
+		<input type="text" placeholder="SEARCH">
+	</div>
+	<div class="tableView">
+		<div class="tableView-row" ng-repeat="resource in mockdata.resources">
+			<div class="tableView-title">
+				<a href="#!/resources/edit/{{resource.id}}">
+					{{resource.name}}
+				</a>
+			</div>
+			<div class="tableView-action">
+				<a class="tableView-action-link"
+				   href="#!/resources/edit/{{resource.id}}">
+				   EDIT
+			   </a>
+		   </div>
+		</div>
+	</div>
+	<div class="pagination">{PAGINATION}</div>
+</div>

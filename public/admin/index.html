@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Coho Resource Book</title>
+
+	<!-- ANGULAR JS -->
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+
+	<!-- scripts -->
+	<script type="text/javascript" src="/js/jquery.selectric.min.js"></script>
+	<script type="text/javascript" src="/js/app.js"></script>
+	<script type="text/javascript" src="/js/home.js"></script>
+	<script type="text/javascript" src="/js/categories.js"></script>
+	<script type="text/javascript" src="/js/counties.js"></script>
+	<script type="text/javascript" src="/js/resources.js"></script>
+
+
+	<script type="text/javascript" src="/js/docready.js"></script>
+	<script type="text/javascript" src="/js/dynaddr.js"></script>
+	<script type="text/javascript" src="/js/dyncont.js"></script>
+
+	<script type="text/javascript">
+	// window.onresize = sizing;
+	//        $(window).on('resize', sizing());
+	</script>
+
+	<!-- stylesheets -->
+	<link rel="stylesheet" href="/css/selectric.css">
+	<link rel="stylesheet" href="/css/body.css">
+	<link rel="stylesheet" href="/css/sidebar.css">
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/table.css">
+	<link rel="stylesheet" href="/css/form.css">
+
+	<!-- head elements -->
+</head>
+<body>
+
+	<!-- left navbar -->
+	<div class="sidebar">
+		<a href="#" id="sidebar_header">
+			<img src="/img/coho-off-white.png">
+			<h1>COHO RESOURCE BOOK</h1>
+		</a>
+		<ul class="sidebar_items_main">
+			<li><a href="#!/categories">CATEGORIES</a></li>
+			<li><a href="#!/counties">COUNTIES</a></li>
+			<li><a href="#!/resources">RESOURCES</a></li>
+			<li>USERS</li>
+		</ul>
+
+		<ul class="sidebar_items_bottom" style="display: none">
+			<li class="sidebar_items_bottom_item">SETTINGS</li>
+			<li class="sidebar_items_bottom_item">SIGN OUT</li>
+		</ul>
+	</div>
+
+	<!-- main content -->
+	<div class="main" ng-app="cohoapp">
+		<div class="content" ng-view></div>
+	</div>
+
+</body>
+</html>

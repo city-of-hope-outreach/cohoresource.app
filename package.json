@@ -1,0 +1,15 @@
+{
+  "name": "cohoreasource.app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"server": "sass --watch public/scss:public/css & http-server -p 8000 ./public"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^0.12.3"
+  }
+}

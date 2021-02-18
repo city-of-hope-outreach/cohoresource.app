@@ -1,0 +1,24 @@
+<div class="main_col">
+	<h1>Counties</h1>
+
+	<div class="table_header">
+		<a class="button" href="#!/counties/new">ADD</a>
+		<input type="text" placeholder="SEARCH">
+	</div>
+	<div class="tableView">
+		<div class="tableView-row" ng-repeat="county in mockdata.counties">
+			<div class="tableView-title">
+				<a href="#!/counties/edit/{{county.id}}">
+					{{county.name}}
+				</a>
+			</div>
+			<div class="tableView-action">
+				<a class="tableView-action-link"
+				   href="#!/counties/edit/{{county.id}}">
+				   EDIT
+			   </a>
+		   </div>
+		</div>
+	</div>
+	<div class="pagination">{PAGINATION}</div>
+</div>

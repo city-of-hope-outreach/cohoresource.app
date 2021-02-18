@@ -1,0 +1,27 @@
+h1 {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  font-weight: 100;
+  margin: 0;
+}
+
+.main {
+  flex-grow: 1;
+  overflow: auto;
+  padding: 1rem;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  z-index: 1;
+}
+.content .main_col {
+  flex-grow: 1;
+  z-index: 1;
+}
+.content .main_left {
+  padding-right: 1rem;
+}
+
+/*# sourceMappingURL=main.css.map */

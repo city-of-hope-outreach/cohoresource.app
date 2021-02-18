@@ -1,0 +1,53 @@
+@mixin transition($what: all, $time: 0.15s, $how: ease-in-out) {
+  -webkit-transition: $what $time $how;
+  -moz-transition:    $what $time $how;
+  -ms-transition:     $what $time $how;
+  -o-transition:      $what $time $how;
+  transition:         $what $time $how;
+}
+
+@mixin intrinsic($property, $value) {
+  @if $value == fit-content or $value == min-content or $value == max-content {
+    #{$property}: -webkit-#{$value};
+    #{$property}: -moz-#{$value};
+    #{$property}: $value;
+  }
+
+  @else if $value == fill-available or $value == available {
+    #{$property}: -webkit-fill-available;
+    #{$property}: -moz-available;
+    #{$property}: fill-available;
+  }
+
+  @else {
+    #{$property}: $value;
+  }
+}
+
+@mixin inputPlaceholder() {
+  $selector: '';
+  $prefixes: (
+          moz: "::-moz",
+          webkit: "::-webkit",
+          ie: ":-ms"
+  );
+  @each $prop, $value in $prefixes {
+    @if $prop != "moz" {
+      $selector: #{$value}-input-placeholder;
+    } @else {
+      $selector: #{$value}-placeholder;
+    }
+    @if & {
+      &#{$selector} {
+        @content;
+      }
+    } @else {
+      #{$selector} {
+        @content;
+      }
+    }
+  }
+  &::placeholder {
+    @content;
+  }
+}

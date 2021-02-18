@@ -1,0 +1,100 @@
+@import "colors";
+@import "mixins";
+
+.tableView {
+	width: 100%;
+	background-color: $lighter;
+
+	border: 0.5px solid rgba(30, 62, 63, 0.4);
+
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+
+	-webkit-box-shadow: 1px 2px 10px -1px rgba(0, 0, 0, 0.12);
+	-moz-box-shadow: 1px 2px 10px -1px rgba(0, 0, 0, 0.12);
+	box-shadow: 1px 2px 10px -1px rgba(0, 0, 0, 0.12);
+
+	a {
+		font-weight: 700;
+		color: $primary;
+		text-decoration: none;
+	}
+
+	a:hover {
+		color: $secondary;
+		@include transition();
+	}
+
+	.tableView-row {
+		display: flex;
+		padding: 0.5rem;
+		border-bottom: 0.5px solid rgba(30, 62, 63, 0.4);
+	}
+
+	.tableView-row:last-child{
+		border: none;
+	}
+
+	.tableView-title {
+		flex-grow: 1;
+
+		a {
+			vertical-align: middle;
+		}
+	}
+
+	.tableView-action-link {
+		display: block;
+		border-radius: 45px;
+		padding: 0.25rem 1rem;
+
+		color: white;
+		background-color: $primary;
+
+		@include transition();
+	}
+
+	.tableView-action-link:hover {
+		color: white;
+		background-color: $secondary;
+	}
+}
+
+.table_header {
+	display: flex;
+	padding-bottom: 10px;
+
+	input {
+		margin-left: 10px;
+		padding: 10px;
+		padding-left: 40px;
+
+		background: $lighter url('/img/search.png') no-repeat left;
+		background-size: contain;
+	}
+}
+
+.pagination {
+	float: right;
+	padding-top: 10px;
+	font-size: 1.2rem;
+
+	a {
+
+		padding-left: 10px;
+
+		color: $secondary;
+		text-decoration: none;
+	}
+
+	.current {
+		color: $secondary-lightest;
+	}
+}
+
+.content {
+	div {
+		z-index: 1;
+	}
+}
