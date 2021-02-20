@@ -39,7 +39,7 @@ var mockdata = {
             })
             .when('/categories/new', {
                 templateUrl: "template/editcategory.html",
-                controller: "newCategoryController"
+                controller: "editCategoryController"
             })
             .when('/categories/edit/:categoryId', {
                 templateUrl: "template/editcategory.html",
@@ -50,11 +50,11 @@ var mockdata = {
 				controller: "countiesController"
 			})
 			.when('/counties/new', {
-				templateUrl: "template/editcounty.html",
-				controller: "newCountyController"
+				templateUrl: "template/editcategory.html",
+				controller: "editCountyController"
 			})
 			.when('/counties/edit/:categoryId', {
-				templateUrl: "template/editcounty.html",
+				templateUrl: "template/editcategory.html",
 				controller: "editCountyController"
 			})
             .when('/resources', {
@@ -63,7 +63,7 @@ var mockdata = {
             })
             .when('/resources/new', {
                 templateUrl: "template/editresource.html",
-				controller: "newResourceController"
+				controller: "editResourceController"
             })
             .when('/resources/edit/:resourceId', {
                 templateUrl: "template/editresource.html",

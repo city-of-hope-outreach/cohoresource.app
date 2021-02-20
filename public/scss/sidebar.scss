@@ -8,6 +8,7 @@
   overflow: hidden;
   background-color: $secondary;
   color: $light;
+  z-index: 99;
 
   #sidebar_header {
     background-color: $primary;

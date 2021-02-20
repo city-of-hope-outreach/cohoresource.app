@@ -24,6 +24,7 @@ html {
 
 body {
   margin: 0;
+  max-height: 100vh;
   background-color: #DEEAEA;
   color: #1E3E3F;
   display: flex;

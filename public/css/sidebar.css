@@ -6,6 +6,7 @@
   overflow: hidden;
   background-color: #1E3E3F;
   color: #F5FCFC;
+  z-index: 99;
 }
 .sidebar #sidebar_header {
   background-color: #40D3DB;

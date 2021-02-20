@@ -20,7 +20,7 @@ button:hover, .button:hover {
 }
 
 input {
-  font-size: 1.1rem;
+  font-size: 1rem;
   border: 0.5px solid rgba(30, 62, 63, 0.4);
   border-radius: 5px;
   width: 100%;
@@ -64,7 +64,7 @@ input::placeholder {
 }
 
 .edit_form {
-  margin-top: 10px;
+  margin-top: 0.5rem;
   width: 100%;
   background-color: #F8FFFF;
   border: 0.5px solid rgba(30, 62, 63, 0.4);
@@ -82,14 +82,14 @@ input::placeholder {
   max-width: 205px;
   font-size: 1.3rem;
   border-bottom: solid #1E3E3F 1px;
-  margin: 10px 0px 10px 20px;
+  margin: 0.5rem 0px 0.5rem 1rem;
 }
 .edit_form .form_element {
   display: flex;
-  padding-bottom: 20px;
+  padding-bottom: 1rem;
 }
 .edit_form .form_element:first-child {
-  padding-top: 20px;
+  padding-top: 1rem;
 }
 .edit_form .left_label {
   min-width: 225px;
@@ -115,12 +115,12 @@ input::placeholder {
 .edit_form textarea {
   flex-grow: 1;
   padding: 10px;
-  margin-right: 20px;
+  margin-right: 1rem;
   border: 0.5px solid rgba(30, 62, 63, 0.4);
   border-radius: 5px;
   font-family: sans-serif;
   font-weight: 400;
-  font-size: 1.1rem;
+  font-size: 1rem;
   resize: none;
 }
 .edit_form p {
@@ -155,7 +155,7 @@ input::placeholder {
   background: white url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M16.59%208.59L12%2013.17%207.41%208.59%206%2010l6%206%206-6z'%20fill='rgba(30,%2062,%2063,%200.800)'%20/%3E%3C/svg%3E") no-repeat right 0.5rem center;
   border-radius: 4px;
   padding: 0rem 3rem 0rem 1rem;
-  margin: 2px 10px 0 0;
+  margin: 2px 0.5rem 0 0;
 }
 .edit_form select .contact_input {
   margin-top: 0px;
@@ -174,7 +174,7 @@ input::placeholder {
 .multi-checkbox {
   border: 0.5px solid rgba(30, 62, 63, 0.4);
   border-radius: 5px;
-  margin-right: 20px;
+  margin-right: 1rem;
   width: 100%;
   background-color: white;
   padding: 0;
@@ -198,7 +198,7 @@ input::placeholder {
 }
 .checkbox_item label {
   display: inline;
-  padding-left: 10px;
+  padding-left: 0.5rem;
 }
 
 .checkbox_item:hover {
@@ -238,9 +238,9 @@ input::placeholder {
 
 #icon_preview {
   display: block;
-  padding-top: 10px;
-  height: 60px;
-  max-height: 60px;
+  padding-top: 0.5rem;
+  height: 3rem;
+  max-height: 3rem;
   width: auto;
 }
 
@@ -249,9 +249,7 @@ input::placeholder {
   width: 100%;
   bottom: 0px;
   left: 0px;
-  padding-bottom: 10px;
-  padding-right: 10px;
-  padding-top: 10px;
+  padding: 0.5rem 0.5rem 0.5rem;
   background-color: #DEEAEA;
   border-top: 0.5px solid rgba(30, 62, 63, 0.4);
 }
@@ -264,7 +262,7 @@ input::placeholder {
   padding-right: 20px;
 }
 .bottom_elements button {
-  padding: 10px 30px;
+  padding: 0.5rem 1.5rem;
 }
 
 #cancel {
