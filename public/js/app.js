@@ -32,46 +32,57 @@ var mockdata = {
 	var app = angular.module('cohoapp', ['ngRoute']);
 
 	app.config(function ($routeProvider) {
-        $routeProvider
-            .when('/categories', {
-                templateUrl: "template/categories.html",
-                controller: "categoriesController"
-            })
-            .when('/categories/new', {
-                templateUrl: "template/editcategory.html",
-                controller: "editCategoryController"
-            })
-            .when('/categories/edit/:categoryId', {
-                templateUrl: "template/editcategory.html",
-				controller: "editCategoryController"
-            })
-			.when('/counties', {
-				templateUrl: "template/counties.html",
-				controller: "countiesController"
-			})
-			.when('/counties/new', {
-				templateUrl: "template/editcategory.html",
-				controller: "editCountyController"
-			})
-			.when('/counties/edit/:categoryId', {
-				templateUrl: "template/editcategory.html",
-				controller: "editCountyController"
-			})
-            .when('/resources', {
-                templateUrl: "template/resources.html",
-				controller: "resourcesController"
-            })
-            .when('/resources/new', {
-                templateUrl: "template/editresource.html",
-				controller: "editResourceController"
-            })
-            .when('/resources/edit/:resourceId', {
-                templateUrl: "template/editresource.html",
-				controller: "editResourceController"
-            })
-            .otherwise({
-                templateUrl: "template/home.html",
-				controller: "homeController"
-            });
-    });
+		$routeProvider
+		.when('/categories', {
+			templateUrl: "template/categories.html",
+			controller: "categoriesController"
+		})
+		.when('/categories/new', {
+			templateUrl: "template/editcategory.html",
+			controller: "editCategoryController"
+		})
+		.when('/categories/edit/:categoryId', {
+			templateUrl: "template/editcategory.html",
+			controller: "editCategoryController"
+		})
+		.when('/counties', {
+			templateUrl: "template/counties.html",
+			controller: "countiesController"
+		})
+		.when('/counties/new', {
+			templateUrl: "template/editcategory.html",
+			controller: "editCountyController"
+		})
+		.when('/counties/edit/:categoryId', {
+			templateUrl: "template/editcategory.html",
+			controller: "editCountyController"
+		})
+		.when('/resources', {
+			templateUrl: "template/resources.html",
+			controller: "resourcesController"
+		})
+		.when('/resources/new', {
+			templateUrl: "template/editresource.html",
+			controller: "editResourceController"
+		})
+		.when('/resources/edit/:resourceId', {
+			templateUrl: "template/editresource.html",
+			controller: "editResourceController"
+		})
+		.otherwise({
+			templateUrl: "template/home.html",
+			controller: "homeController"
+		});
+	});
+
+	app.directive("dyncont", function () {
+		return {
+			templateUrl: 'template/dyncont.html',
+			restrict: 'E',
+			replace: true,
+			scope: {
+				contact: "="
+			}
+		};
+	});
 })();

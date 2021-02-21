@@ -50,91 +50,61 @@
 
 		<h4>CONTACT</h4>
 		<div class="dynamic-form" id="contact">
-			<div class="form_element" id="contact_{ID}">
+			<div ng-repeat="contact in resource.contact" class="form_element" id="contact_{{contact.id}}">
 				<div class="left_label">
 					<button class="delete_button" type="button" onclick="deleteContact()">DELETE</button>
 				</div>
 				<div class="dynamic_fieldset contact">
-					<select class="contact_input type" name="{NAME_CONT_TYPE}">
-						<option value="0" selected>PHONE</option>
-						<option value="1">EMAIL</option>
-						<option value="2">WEBSITE</option>
-						<option value="3">FAX</option>
+					<select class="contact_input type" name="contact[{{contact.id}}][typeInt]" ng-model="contact.typeInt">
+						<option ng-value="0">PHONE</option>
+						<option ng-value="1">EMAIL</option>
+						<option ng-value="2">WEBSITE</option>
+						<option ng-value="3">FAX</option>
 					</select>
-					<input type="text" class="contact_input name"  placeholder="NAME"  name="{NAME_CONT_NAME}" value="{CONT_NAME}">
-					<input type="text" class="contact_input value" placeholder="VALUE" name="{NAME_CONT_VALUE}" value="{CONT_VALUE}">
-					<input type="hidden" class="contact_input id" name="{NAME_CONT_ID}" value="{CONT_ID}">
+					<input type="text" class="contact_input name"  placeholder="NAME"
+					       name="contact[{{contact.id}}][name]" ng-model="contact.name">
+					<input type="text" class="contact_input value" placeholder="VALUE"
+					       name="contact[{{contact.id}}][value]" ng-model="contact.value">
+					<input type="hidden" class="contact_input id"
+					       name="contact[{{contact.id}}][id]" ng-model="contact.id">
 				</div>
 			</div>
-		</div>
-
-		<!-- the freaking template guys -->
-		<div class="templatecontainer" style="display:none;">
-
 		</div>
 
 		<div class="form_element" id="new_contact_container">
 			<div class="left_label"></div>
-			<button type="button" id="new_contact_button" onclick="addContact()">NEW CONTACT</button>
+			<button type="button" id="new_contact_button" ng-click="addContact()">NEW CONTACT</button>
 		</div>
-		<!--<div class="dynamic-form" id="contact">-->
-		<!--<div class="form_element" id="contact_0">-->
-		<!--<div class="left_label">-->
-		<!--<button class="delete_button" type="button" onclick="deleteContact(0)">DELETE</button>-->
-		<!--</div>-->
-		<!--<fieldset class="dynamic_fieldset contact">-->
-		<!--<select class="contact_input type" name="contact[0][type]">-->
-		<!--<option value="0">PHONE</option>-->
-		<!--<option value="1">EMAIL</option>-->
-		<!--<option value="2">WEBSITE</option>-->
-		<!--</select>-->
-		<!--<input type="text" class="contact_input name" placeholder="NAME" name="contact[0][name]">-->
-		<!--<input type="text" class="contact_input value" placeholder="VALUE" name="contact[0][value]">-->
-		<!--</fieldset>-->
-		<!--</div>-->
-		<!--</div>-->
-
-		<!--<div class="form_element" id="new_contact_container">-->
-		<!--<div class="left_label"></div>-->
-		<!--<button type="button" id="new_contact_button" onclick="addContact()">NEW CONTACT</button>-->
-		<!--</div>-->
-
-		<!--<div class="form_element" id="contact_TEMPLATE" style="display: none;">-->
-		<!--<div class="left_label">-->
-		<!--<button class="delete_button" type="button">DELETE</button>-->
-		<!--</div>-->
-		<!--<fieldset class="dynamic_fieldset contact">-->
-		<!--<select name="contact[0][type]">-->
-		<!--<option value="0">PHONE</option>-->
-		<!--<option value="1">EMAIL</option>-->
-		<!--<option value="2">WEBSITE</option>-->
-		<!--</select>-->
-		<!--<input type="text" class="contact_input name" placeholder="NAME" name="contact[0][name]">-->
-		<!--<input type="text" class="contact_input value" placeholder="VALUE" name="contact[0][value]">-->
-		<!--</fieldset>-->
-		<!--</div>-->
 
 		<h4>LOCATIONS</h4>
 		<div class="dynamic-form" id="addresses">
-			<div class="form_element" id="address_{ID}">
+			<div ng-repeat="address in resource.locations" class="form_element" id="address_{{address.id}}">
 				<div class="left_label">
-					<button class="delete_button" type="button" onclick="deleteAddress({ID})">DELETE</button>
+					<button class="delete_button" type="button" onclick="deleteAddress()">DELETE</button>
 				</div>
 				<fieldset class="dynamic_fieldset">
-					<input type="text"   class="address_input desc" placeholder="DESCRIPTION"  name="{NAME_DESC}" value="{ADDR_DESC}">
-					<input type="text"   class="address_input street1" placeholder="STREET 1"  name="{NAME_STR1}"     value="{ADDR_STR1}">
-					<input type="text"   class="address_input street2" placeholder="STREET 2"  name="{NAME_STR2}"     value="{ADDR_STR2}">
-					<input type="text"   class="address_input city"    placeholder="CITY"      name="{NAME_CITY}"     value="{ADDR_CITY}">
-					<input type="text"   class="address_input state"   placeholder="STATE"     name="{NAME_STATE}"    value="{ADDR_STATE}">
-					<input type="text"   class="address_input zip"     placeholder="ZIP"       name="{NAME_ZIP}"      value="{ADDR_ZIP}">
-					<input type="hidden" class="address_input id"                              name="{NAME_ID}"       value="{ADDR_ID}">
+					<input type="text"   class="address_input desc"
+					       placeholder="DESCRIPTION" name="address[{{address.id}}][desc]"
+						   ng-model="address.desc">
+					<input type="text"   class="address_input street1"
+					       placeholder="STREET 1"    name="address[{{address.id}}][street1]"
+						   ng-model="address.street1">
+					<input type="text"   class="address_input street2"
+					       placeholder="STREET 2"    name="address[{{address.id}}][street2]"
+						   ng-model="address.street2">
+					<input type="text"   class="address_input city"
+					       placeholder="CITY"        name="address[{{address.id}}][city]"
+						   ng-model="address.city">
+					<input type="text"   class="address_input state"
+					       placeholder="STATE"       name="address[{{address.id}}][state]"
+						   ng-model="address.state">
+					<input type="text"   class="address_input zip"
+					       placeholder="ZIP"         name="address[{{address.id}}][zip]"
+						   ng-model="address.zip">
+					<input type="hidden" class="address_input id" name="address[address.id}}][id]"
+					       ng-model="address.id">
 				</fieldset>
 			</div>
-		</div>
-
-		<!-- the freaking template guys -->
-		<div class="templatecontainer" style="display:none;">
-			{TEMPLATE}
 		</div>
 
 		<div class="form_element" id="new_address_container">
