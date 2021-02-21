@@ -52,7 +52,7 @@
 		<div class="dynamic-form" id="contact">
 			<div ng-repeat="contact in resource.contact" class="form_element" id="contact_{{contact.id}}">
 				<div class="left_label">
-					<button class="delete_button" type="button" onclick="deleteContact()">DELETE</button>
+					<button class="delete_button" type="button" ng-click="deleteContact(contact)">DELETE</button>
 				</div>
 				<div class="dynamic_fieldset contact">
 					<select class="contact_input type" name="contact[{{contact.id}}][typeInt]" ng-model="contact.typeInt">
@@ -80,7 +80,7 @@
 		<div class="dynamic-form" id="addresses">
 			<div ng-repeat="address in resource.locations" class="form_element" id="address_{{address.id}}">
 				<div class="left_label">
-					<button class="delete_button" type="button" onclick="deleteAddress()">DELETE</button>
+					<button class="delete_button" type="button" ng-click="deleteAddress(address)">DELETE</button>
 				</div>
 				<fieldset class="dynamic_fieldset">
 					<input type="text"   class="address_input desc"
@@ -109,7 +109,7 @@
 
 		<div class="form_element" id="new_address_container">
 			<div class="left_label"></div>
-			<button type="button" id="new_address_button" onclick="addAddress()">NEW LOCATION</button>
+			<button type="button" id="new_address_button" ng-click="addAddress()">NEW LOCATION</button>
 		</div>
 
 		<h4>INFORMATION</h4>
@@ -158,9 +158,8 @@
 				<p>Use Asterisks for bullet lists:</p>
 
 				<pre>* Item 1
-					* Item 2
-					* Item 3
-				</pre>
+* Item 2
+* Item 3</pre>
 
 				<p>Will become</p>
 
@@ -173,9 +172,8 @@
 				<p>And similarily,</p>
 
 				<pre>1. Item 1
-					2. Item 2
-					3. Item 3
-				</pre>
+2. Item 2
+3. Item 3</pre>
 
 				<p>Will become</p>
 

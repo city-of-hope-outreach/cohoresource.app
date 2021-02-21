@@ -48,6 +48,7 @@ const mockresource = {
 ( function () {
 	const app = angular.module('cohoapp');
 	app.controller('editResourceController', function ($scope, $routeParams) {
+		$scope.mockdata = mockdata;
 		$scope.resource = mockresource;
 
 		$scope.header = "New Resource";
@@ -58,12 +59,48 @@ const mockresource = {
 		$scope.addContact = function () {
 			$scope.resource.contact.push(
 				{
-					id : 1857,
-					name : "Mike 2",
-					typeInt : 1,
-					value : "mike@anewdirection.life2"
+					id: newId($scope.resource.contact),
+					name : "",
+					typeInt : 0,
+					value : ""
 				}
 			)
 		}
+
+		$scope.deleteContact = function(contact) {
+			const index = $scope.resource.contact.indexOf(contact);
+			$scope.resource.contact.splice(index, 1);
+		}
+
+		$scope.addAddress = function () {
+			$scope.resource.locations.push({
+				id: newId($scope.resource.locations),
+				city : "",
+				desc : "",
+				state : "",
+				street1 : "",
+				street2 : "",
+				zip : ""
+			});
+		};
+
+		$scope.deleteAddress = function (address) {
+			const index = $scope.resource.locations.indexOf(address);
+			$scope.resource.locations.splice(index, 1);
+		}
+
+		const newId = function (array) {
+			var contactIds = [];
+			array.forEach((e) => {
+				contactIds.push(e.id);
+			});
+
+			var newId = 0;
+			while (contactIds.indexOf(newId) !== -1) {
+				newId++;
+			}
+
+			return newId;
+		};
 	});
 })();
