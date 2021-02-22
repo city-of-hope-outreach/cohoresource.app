@@ -3,17 +3,17 @@
 	<p style="display: none;" class="result_message">Error</p>
 	<form class="edit_form" id="edit_form" onsubmit="alert('submit')">
 		<div class="form_element">
-			<label id="name_label" class="{NAME_REQUIRED} left_label" for="name">NAME</label>
+			<label id="name_label" class="{NAME_REQUIRED} form_left_col" for="name">NAME</label>
 			<input id="name" name="name" type="text" style="width: 400px" placeholder="NAME" value="">
 		</div>
 
 		<div class="form_element">
-			<label id="desc_label" class="{DESC_REQUIRED} left_label" for="desc">DESCRIPTION</label>
+			<label id="desc_label" class="{DESC_REQUIRED} form_left_col" for="desc">DESCRIPTION</label>
 			<textarea id="desc" name="desc" style="width: 100%; height: 300px;"></textarea>
 		</div>
 
 		<div class="form_element">
-			<label id="icon_label" class="left_label" for="icon">ICON</label>
+			<label id="icon_label" class="form_left_col" for="icon">ICON</label>
 			<div>
 				<select id="icon" name="icon">
 					<option ng-repeat="icon in icons" value="categories/{{icon}}">{{icon}}</option>

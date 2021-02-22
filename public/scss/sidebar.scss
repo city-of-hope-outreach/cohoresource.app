@@ -10,6 +10,8 @@
   color: $light;
   z-index: 99;
 
+  flex-shrink: 0;
+
   #sidebar_header {
     background-color: $primary;
     display: flex;

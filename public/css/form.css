@@ -24,6 +24,7 @@ input {
   border: 0.5px solid rgba(30, 62, 63, 0.4);
   border-radius: 5px;
   width: 100%;
+  box-sizing: border-box;
 }
 input::-moz-placeholder {
   font-family: "Unite", sans-serif;
@@ -65,7 +66,9 @@ input::placeholder {
 
 .edit_form {
   margin-top: 0.5rem;
+  padding: 1rem;
   width: 100%;
+  box-sizing: border-box;
   background-color: #F8FFFF;
   border: 0.5px solid rgba(30, 62, 63, 0.4);
   -webkit-border-radius: 4px;
@@ -82,46 +85,49 @@ input::placeholder {
   max-width: 205px;
   font-size: 1.2rem;
   border-bottom: solid #1E3E3F 1px;
-  margin: 0.5rem 0px 0.5rem 1rem;
 }
 .edit_form .form_element {
   display: flex;
-  padding-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 .edit_form .form_element:first-child {
-  padding-top: 1rem;
+  margin-top: 1rem;
 }
-.edit_form .left_label {
-  min-width: 225px;
-  width: 225px;
-  max-width: 225px;
+.edit_form .form_left_col {
   padding-top: 2px;
   text-align: right;
-  padding-right: 20px;
+  margin-right: 1rem;
   font-size: 1rem;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 205px;
 }
-.edit_form .left_label label, .edit_form .left_label button {
+.edit_form .form_left_col label, .edit_form .form_left_col button {
   display: block;
 }
-.edit_form .left_label button {
+.edit_form .form_left_col button {
   float: right;
+}
+.edit_form .form_right_col {
+  flex-grow: 1;
+  flex-basis: 0;
 }
 .edit_form input {
   font-family: sans-serif;
   font-weight: 400;
   padding: 6px;
-  margin: 0px 10px 0px 0px;
+  min-width: 0;
 }
 .edit_form textarea {
   flex-grow: 1;
-  padding: 10px;
-  margin-right: 1rem;
+  padding: 0.5rem;
   border: 0.5px solid rgba(30, 62, 63, 0.4);
   border-radius: 5px;
   font-family: sans-serif;
   font-weight: 400;
   font-size: 1rem;
   resize: none;
+  margin: 0;
 }
 .edit_form p {
   margin: 0;
@@ -131,7 +137,7 @@ input::placeholder {
   color: #40D3DB;
   border: solid 2px #40D3DB;
   font-size: 1rem;
-  padding: 5px 20px;
+  padding: 0.25rem 1rem;
   text-transform: uppercase;
   cursor: pointer;
   -webkit-transition: all 0.1s ease-in-out;
@@ -152,13 +158,10 @@ input::placeholder {
   line-height: normal;
   cursor: pointer;
   outline: 0;
-  background: white url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M16.59%208.59L12%2013.17%207.41%208.59%206%2010l6%206%206-6z'%20fill='rgba(30,%2062,%2063,%200.800)'%20/%3E%3C/svg%3E") no-repeat right 0.5rem center;
+  background: white url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M16.59%208.59L12%2013.17%207.41%208.59%206%2010l6%206%206-6z'%20fill='rgba(30,%2062,%2063,%200.800)'%20/%3E%3C/svg%3E") no-repeat right 0.25rem center;
   border-radius: 4px;
-  padding: 0rem 3rem 0rem 1rem;
-  margin: 2px 0.5rem 0 0;
-}
-.edit_form select .contact_input {
-  margin-top: 0px;
+  padding: 0rem 1.5rem 0rem 0.5rem;
+  margin: 0;
 }
 
 .dynamic-form .form_element {
@@ -174,7 +177,6 @@ input::placeholder {
 .multi-checkbox {
   border: 0.5px solid rgba(30, 62, 63, 0.4);
   border-radius: 5px;
-  margin-right: 1rem;
   width: 100%;
   background-color: white;
   padding: 0;
@@ -189,7 +191,7 @@ input::placeholder {
   -ms-transition: background-color 0.1s ease-in-out;
   -o-transition: background-color 0.1s ease-in-out;
   transition: background-color 0.1s ease-in-out;
-  padding: 5px 5px;
+  padding: 0.25rem;
 }
 .checkbox_item input {
   display: inline;
@@ -208,16 +210,11 @@ input::placeholder {
 .dynamic_fieldset {
   border: none;
   padding: 0px;
-  margin-right: 33px;
   width: 100%;
 }
 
-.contact_input:last-child {
-  margin-right: 0;
-}
-
 .address_input {
-  margin-bottom: 10px !important;
+  margin-bottom: 0.5rem !important;
 }
 
 .address_input.city {
@@ -234,6 +231,10 @@ input::placeholder {
 
 .contact {
   display: flex;
+}
+
+.contact_input {
+  margin-left: 0.5rem;
 }
 
 #icon_preview {

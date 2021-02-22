@@ -7,6 +7,7 @@
   background-color: #1E3E3F;
   color: #F5FCFC;
   z-index: 99;
+  flex-shrink: 0;
 }
 .sidebar #sidebar_header {
   background-color: #40D3DB;
