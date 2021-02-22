@@ -50,7 +50,7 @@
 
 		<h4>CONTACT</h4>
 		<div class="dynamic-form" id="contact">
-			<div ng-repeat="contact in resource.contact" class="form_element" id="contact_{{contact.id}}">
+			<div ng-repeat="contact in resource.contact" class="form_element slide" id="contact_{{contact.id}}">
 				<div class="left_label">
 					<button class="delete_button" type="button" ng-click="deleteContact(contact)">DELETE</button>
 				</div>
@@ -78,7 +78,7 @@
 
 		<h4>LOCATIONS</h4>
 		<div class="dynamic-form" id="addresses">
-			<div ng-repeat="address in resource.locations" class="form_element" id="address_{{address.id}}">
+			<div ng-repeat="address in resource.locations" class="form_element slide" id="address_{{address.id}}">
 				<div class="left_label">
 					<button class="delete_button" type="button" ng-click="deleteAddress(address)">DELETE</button>
 				</div>

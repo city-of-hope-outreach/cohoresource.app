@@ -29,7 +29,7 @@ var mockdata = {
 };
 
 (function () {
-	var app = angular.module('cohoapp', ['ngRoute']);
+	var app = angular.module('cohoapp', ['ngRoute', 'ngAnimate']);
 
 	app.config(function ($routeProvider) {
 		$routeProvider
@@ -85,4 +85,23 @@ var mockdata = {
 			}
 		};
 	});
+
+	app.animation('.slide', [function() {
+		return {
+			// make note that other events (like addClass/removeClass)
+			// have different function input parameters
+			enter: function(element, doneFn) {
+				jQuery(element).hide().slideDown(100, doneFn);
+
+				// remember to call doneFn so that AngularJS
+				// knows that the animation has concluded
+			},
+
+			leave: function(element, doneFn) {
+				jQuery(element).slideUp(100, doneFn);
+			}
+		}
+	}]);
 })();
+
+
