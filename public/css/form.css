@@ -174,6 +174,48 @@ input::placeholder {
   font-size: 0.8rem !important;
 }
 
+.g-checkbox-row {
+  cursor: pointer;
+  display: flex;
+  padding: 0.25rem 0.5rem;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.g-checkbox-row:hover .g-checkbox {
+  background: #40D3DB;
+}
+
+.g-checkbox-row .g-checkbox {
+  -webkit-transition: background-color 0.1s ease-in-out;
+  -moz-transition: background-color 0.1s ease-in-out;
+  -ms-transition: background-color 0.1s ease-in-out;
+  -o-transition: background-color 0.1s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 5px;
+  background: #DEEAEA;
+  margin-right: 0.5rem;
+  box-sizing: border-box;
+  color: #F5FCFC;
+}
+
+.g-checkbox-row.checked .g-checkbox {
+  background: #40D3DB;
+}
+
+.g-checkbox-row .g-checkbox .fa-check {
+  display: none;
+}
+
+.g-checkbox-row.checked .g-checkbox .fa-check {
+  display: block;
+}
+
 .multi-checkbox {
   border: 0.5px solid rgba(30, 62, 63, 0.4);
   border-radius: 5px;
@@ -191,16 +233,6 @@ input::placeholder {
   -ms-transition: background-color 0.1s ease-in-out;
   -o-transition: background-color 0.1s ease-in-out;
   transition: background-color 0.1s ease-in-out;
-  padding: 0.25rem;
-}
-.checkbox_item input {
-  display: inline;
-  width: 20px;
-  height: 20px;
-}
-.checkbox_item label {
-  display: inline;
-  padding-left: 0.5rem;
 }
 
 .checkbox_item:hover {

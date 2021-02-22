@@ -11,11 +11,10 @@
         <div class="form_element">
             <label id="categories_label" class="form_left_col">CATEGORIES</label>
             <fieldset class="multi-checkbox form_right_col">
-                <div class="checkbox_item" ng-repeat="category in mockdata.categories">
-                    <input class="category_checkbox" type="checkbox" name="categories[]"
-                           value="{{category.id}}" id="cat_{{category.id}}">
-                    <label for="cat_{{category.id}}">{{category.name}}</label>
-                </div>
+                    <div class="checkbox_item" ng-repeat="category in mockdata.categories">
+                        <checkbox id="cat_{{category.id}}" ng-model="enabledCategories[category.id]"
+                                  data-label="{{category.name}}"></checkbox>
+                    </div>
             </fieldset>
         </div>
 
@@ -23,10 +22,15 @@
         <div class="form_element">
             <label id="counties_label" class="form_left_col">COUNTIES</label>
             <fieldset class="multi-checkbox form_right_col">
+<!--                <div class="checkbox_item" ng-repeat="county in mockdata.counties">-->
+<!--                    <input class="county_checkbox" type="checkbox" name="counties[]"-->
+<!--                           value="{{county.id}}" id="county_{{county.id}}">-->
+<!--                    <label for="county_{{county.id}}">{{county.name}}</label>-->
+<!--                </div>-->
+
                 <div class="checkbox_item" ng-repeat="county in mockdata.counties">
-                    <input class="county_checkbox" type="checkbox" name="counties[]"
-                           value="{{county.id}}" id="county_{{county.id}}">
-                    <label for="county_{{county.id}}">{{county.name}}</label>
+                    <checkbox id="cat_{{county.id}}" ng-model="enabledCategories[county.id]"
+                              data-label="{{county.name}}"></checkbox>
                 </div>
             </fieldset>
         </div>

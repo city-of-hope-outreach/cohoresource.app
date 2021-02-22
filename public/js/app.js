@@ -75,13 +75,47 @@ var mockdata = {
 		});
 	});
 
-	app.directive("dyncont", function () {
+	app.directive('checkbox', function(){
 		return {
-			templateUrl: 'template/dyncont.html',
-			restrict: 'E',
+			restrict: 'EA',
+			require: 'ngModel',
 			replace: true,
+			template: '<span class="g-checkbox-row">' +
+				'<span class="g-checkbox"><i class="fas fa-check"></i></span>' +
+				'{{label}}' +
+				'<input id="{{id}}" type="checkbox" style="display: none" ng-checked="ngModel"/>' +
+				'</span>',
 			scope: {
-				contact: "="
+				id: '@',
+				ngModel: '='
+			},
+			link: function(scope, element, attrs, ngModelController){
+				var render = function() {
+					if (scope.ngModel) {
+						element.addClass('checked');
+					} else {
+						element.removeClass('checked');
+					}
+				}
+
+				if (attrs.label) {
+					scope.label = attrs.label;
+				} else {
+					scope.label = "";
+				}
+
+				element.removeAttr('id');
+				element.bind('click', function(){
+					scope.$apply(function () {
+						scope.ngModel = !scope.ngModel;
+						ngModelController.$setViewValue(scope.ngModel);
+						render();
+					});
+				});
+
+				ngModelController.$render = function() {
+					scope.$evalAsync(render);
+				}
 			}
 		};
 	});

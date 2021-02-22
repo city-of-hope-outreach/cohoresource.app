@@ -185,6 +185,48 @@ input {
 
 
 ///////     CHECKBOX     ///////
+.g-checkbox-row {
+  cursor: pointer;
+  display: flex;
+  padding: 0.25rem 0.5rem;
+  align-items: center;
+
+  font-size: 0.9rem;
+}
+
+.g-checkbox-row:hover .g-checkbox {
+  background: $primary;
+}
+
+.g-checkbox-row .g-checkbox {
+  @include transition(background-color, 0.1s);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 5px;
+  background: $main-bkgd;
+  margin-right: 0.5rem;
+
+  box-sizing: border-box;
+
+  color: $light;
+}
+
+.g-checkbox-row.checked .g-checkbox {
+  background: $primary;
+}
+
+.g-checkbox-row .g-checkbox .fa-check {
+  display: none;
+}
+
+.g-checkbox-row.checked .g-checkbox .fa-check {
+  display: block;
+}
 
 .multi-checkbox {
   border: 0.5px solid rgba(30, 62, 63, 0.4);
@@ -202,20 +244,6 @@ input {
 .checkbox_item {
   //background-color: white;
   @include transition(background-color, 0.1s);
-
-  padding: 0.25rem;
-
-  input {
-    display: inline;
-    width: 20px;
-    height: 20px;
-    //padding-right: 20px;
-  }
-
-  label {
-    display: inline;
-    padding-left: 0.5rem;
-  }
 }
 
 .checkbox_item:hover {
