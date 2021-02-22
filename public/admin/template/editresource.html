@@ -1,7 +1,7 @@
 <div class="main_col">
 	<h1 id="action_title" class="edit_page_header">{{header}}</h1>
 	<p style="display: none;" class="result_message">Success</p>
-	<form class="edit_form" id="edit_form" onsubmit="alert('submit')">
+	<form class="edit_form" id="edit_form" ng-submit="saveResource()">
 		<div class="form_element">
 			<label id="name_label" class="left_label" for="name">NAME</label>
 			<input id="name" name="name" type="text" style="width: 400px" placeholder="NAME">
@@ -184,14 +184,12 @@
 				</ol>
 			</div>
 		</div>
-
-		{RESOURCES_ID}
 	</form>
 </div>
 
 <div class="the_bottom">
 	<div class="bottom_elements">
-		<button id="cancel" onclick="window.location='../../../index.php'">CANCEL</button>
+		<button id="cancel" ng-click="cancel()">CANCEL</button>
 		<button id="save" type="submit" form="edit_form">SAVE</button>
 	</div>
 </div>

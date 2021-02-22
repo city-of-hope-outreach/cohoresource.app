@@ -89,6 +89,14 @@ const mockresource = {
 			$scope.resource.locations.splice(index, 1);
 		}
 
+		$scope.cancel = function () {
+			// route back
+		}
+
+		$scope.saveResource = function () {
+			alert('submit');
+		}
+
 		const newId = function (array) {
 			var contactIds = [];
 			array.forEach((e) => {
