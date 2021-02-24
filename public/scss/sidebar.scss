@@ -33,18 +33,30 @@
     }
   }
 
+  a {
+    display: block;
+    text-decoration: none;
+    color: $light;
+  }
+
   ul {
     list-style: none;
     padding: 0;
   }
 
   li {
-    padding: 0.15rem 0 0.15rem 1rem;
+    padding: 0;
+    margin: 0;
     opacity: .8;
 
     cursor: pointer;
 
     @include transition (all, 0.2s, ease);
+
+    a {
+      padding: 0.15rem 0 0.15rem 1rem;
+      margin: 0;
+    }
   }
 
   li:hover {
@@ -57,10 +69,5 @@
     bottom: 0px;
     width: 100%;
     z-index: -1;
-  }
-
-  a {
-    color: $light;
-    text-decoration: none;
   }
 }
