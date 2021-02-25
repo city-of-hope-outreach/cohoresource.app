@@ -29,7 +29,7 @@ var mockdata = {
 };
 
 (function () {
-	var app = angular.module('cohoapp', ['ngRoute', 'ngAnimate']);
+	var app = angular.module('cohoapp', ['ngRoute', 'ngAnimate', 'firebase']);
 
 	app.config(function ($routeProvider) {
 		$routeProvider

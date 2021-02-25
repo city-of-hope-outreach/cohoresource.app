@@ -32,9 +32,14 @@
 }
 .tableView .tableView-title {
   flex-grow: 1;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }
 .tableView .tableView-title a {
-  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .tableView .tableView-action-link {
   display: block;

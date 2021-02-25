@@ -2,9 +2,9 @@
 <div class="main_col main_left">
 	<h1>Categories</h1>
 	<div class="tableView">
-		<div class="tableView-row" ng-repeat="category in mockdata.categories">
+		<div class="tableView-row" ng-repeat="category in categories">
 			<div class="tableView-title"><a href="#">{{category.name}}</a></div>
-			<div class="tableView-action"><a class="tableView-action-link" href="#">EDIT</a></div>
+			<div class="tableView-action"><a class="tableView-action-link" href="#!/categories/edit/{{category.id}}">EDIT</a></div>
 		</div>
 	</div>
 </div>
@@ -12,9 +12,9 @@
 <div class="main_col main_right">
 	<h1>Resources</h1>
 	<div class="tableView">
-		<div class="tableView-row" ng-repeat="resource in mockdata.resources">
+		<div class="tableView-row" ng-repeat="resource in resources">
 			<div class="tableView-title"><a href="#">{{resource.name}}</a></div>
-			<div class="tableView-action"><a class="tableView-action-link" href="#">EDIT</a></div>
+			<div class="tableView-action"><a class="tableView-action-link" href="#!/resources/edit/{{resource.id}}">EDIT</a></div>
 		</div>
 	</div>
 </div>

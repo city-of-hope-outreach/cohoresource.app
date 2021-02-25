@@ -38,9 +38,14 @@
 
 	.tableView-title {
 		flex-grow: 1;
+		display: flex;
+		align-items: center;
+		overflow: hidden;
 
 		a {
-			vertical-align: middle;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
 		}
 	}
 
