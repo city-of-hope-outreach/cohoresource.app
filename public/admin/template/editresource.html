@@ -11,7 +11,7 @@
         <div class="form_element">
             <label id="categories_label" class="form_left_col">CATEGORIES</label>
             <fieldset class="multi-checkbox form_right_col">
-                    <div class="checkbox_item" ng-repeat="category in mockdata.categories">
+                    <div class="checkbox_item" ng-repeat="category in allCategories">
                         <checkbox id="cat_{{category.id}}" ng-model="enabledCategories[category.id]"
                                   data-label="{{category.name}}"></checkbox>
                     </div>
@@ -28,8 +28,8 @@
 <!--                    <label for="county_{{county.id}}">{{county.name}}</label>-->
 <!--                </div>-->
 
-                <div class="checkbox_item" ng-repeat="county in mockdata.counties">
-                    <checkbox id="cat_{{county.id}}" ng-model="enabledCategories[county.id]"
+                <div class="checkbox_item" ng-repeat="county in allCounties">
+                    <checkbox id="cat_{{county.id}}" ng-model="enabledCounties[county.id]"
                               data-label="{{county.name}}"></checkbox>
                 </div>
             </fieldset>

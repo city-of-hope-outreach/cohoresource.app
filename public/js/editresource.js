@@ -47,7 +47,35 @@ const mockresource = {
 
 ( function () {
 	const app = angular.module('cohoapp');
-	app.controller('editResourceController', function ($scope, $routeParams) {
+	app.controller('editResourceController', function ($scope, $routeParams, database) {
+		$scope.enabledCategories = {};
+		$scope.enabledCounties = {};
+		$scope.allCategories = [];
+		$scope.allCounties = [];
+
+		database.ref("categories").orderByChild('name').once("value").then((snapshot) => {
+			$scope.allCategories = snapshot.val();
+
+			$scope.enabledCategories = {};
+			$scope.resource.categories.forEach((id) => {
+				$scope.enabledCategories[id] = true;
+			});
+
+			$scope.$apply();
+		});
+
+		database.ref("counties").orderByChild('name').once("value").then((snapshot) => {
+			$scope.allCounties = snapshot.val();
+
+			$scope.enabledCounties = {};
+			$scope.resource.counties.forEach((id) => {
+				$scope.enabledCounties[id] = true;
+			});
+
+			$scope.$apply();
+		});
+
+
 		$scope.mockdata = mockdata;
 		$scope.resource = mockresource;
 
@@ -94,7 +122,8 @@ const mockresource = {
 		}
 
 		$scope.saveResource = function () {
-			alert('submit');
+			getListOfCategories();
+			getListOfCounties();
 		}
 
 		const newId = function (array) {
@@ -110,5 +139,27 @@ const mockresource = {
 
 			return newId;
 		};
+
+		const getListOfCategories = function () {
+			const ids = [];
+			Object.keys($scope.enabledCategories).forEach((id) => {
+				if($scope.enabledCategories[id]) {
+					ids.push(parseInt(id));
+				}
+			});
+
+			$scope.resource.categories = ids;
+		}
+
+		const getListOfCounties = function () {
+			const ids = [];
+			Object.keys($scope.enabledCounties).forEach((id) => {
+				if($scope.enabledCounties[id]) {
+					ids.push(parseInt(id));
+				}
+			});
+
+			$scope.resource.counties = ids;
+		}
 	});
 })();
