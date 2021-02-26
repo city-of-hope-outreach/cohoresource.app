@@ -53,7 +53,7 @@ var mockdata = {
 			templateUrl: "template/editcategory.html",
 			controller: "editCountyController"
 		})
-		.when('/counties/edit/:categoryId', {
+		.when('/counties/edit/:countyId', {
 			templateUrl: "template/editcategory.html",
 			controller: "editCountyController"
 		})

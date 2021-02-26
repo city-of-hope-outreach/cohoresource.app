@@ -1,22 +1,22 @@
 <div class="main_col">
 	<h1 id="action_title" class="edit_page_header">{{header}}</h1>
 	<p style="display: none;" class="result_message">Error</p>
-	<form class="edit_form" id="edit_form" onsubmit="alert('submit')">
+	<form class="edit_form" id="edit_form" ng-submit="saveCategory()">
 		<div class="form_element">
 			<label id="name_label" class="{NAME_REQUIRED} form_left_col" for="name">NAME</label>
-			<input id="name" name="name" type="text" style="width: 400px" placeholder="NAME" value="">
+			<input id="name" name="name" type="text" ng-model="category.name" placeholder="NAME" value="">
 		</div>
 
 		<div class="form_element">
 			<label id="desc_label" class="{DESC_REQUIRED} form_left_col" for="desc">DESCRIPTION</label>
-			<textarea id="desc" name="desc" style="width: 100%; height: 300px;"></textarea>
+			<textarea id="desc" name="desc" style="width: 100%; height: 300px;" ng-model="category.description"></textarea>
 		</div>
 
 		<div class="form_element">
 			<label id="icon_label" class="form_left_col" for="icon">ICON</label>
 			<div>
-				<select id="icon" name="icon">
-					<option ng-repeat="icon in icons" value="categories/{{icon}}">{{icon}}</option>
+				<select id="icon" name="icon" ng-model="category.icon" ng-options="icon for icon in icons">
+<!--					<option ng-repeat="icon in icons" value="{{org}}/{{icon}}">{{icon}}</option>-->
 				</select>
 				<img id="icon_preview" style="display: none" src="/">
 			</div>
