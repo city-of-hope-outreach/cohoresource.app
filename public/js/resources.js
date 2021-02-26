@@ -1,10 +1,10 @@
 ( function () {
 	const app = angular.module('cohoapp');
-	app.controller('resourcesController', function ($scope, database) {
-		database.ref("resources").orderByChild('name').once("value").then((snapshot) => {
-			$scope.resources = snapshot.val();
+	app.controller('resourcesController', function ($scope, loadResources) {
+		// TODO set up pagination
+		loadResources((resources) => {
+			$scope.resources = resources;
 			$scope.$apply();
 		});
-		$scope.mockdata = mockdata;
 	});
 })();

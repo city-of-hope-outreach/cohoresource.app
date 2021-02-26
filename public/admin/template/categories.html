@@ -8,13 +8,13 @@
 	<div class="tableView">
 		<div class="tableView-row" ng-repeat="category in categories">
 			<div class="tableView-title">
-				<a href="#!/categories/edit/{{category.id}}">
+				<a href="#!/categories/edit/{{category.firebasekey}}">
 					{{category.name}}
 				</a>
 			</div>
 			<div class="tableView-action">
 				<a class="tableView-action-link"
-				   href="#!/categories/edit/{{category.id}}">
+				   href="#!/categories/edit/{{category.firebasekey}}">
 				   EDIT
 			   </a>
 		   </div>

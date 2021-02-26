@@ -8,13 +8,13 @@
 	<div class="tableView">
 		<div class="tableView-row" ng-repeat="county in counties">
 			<div class="tableView-title">
-				<a href="#!/counties/edit/{{county.id}}">
+				<a href="#!/counties/edit/{{county.firebasekey}}">
 					{{county.name}}
 				</a>
 			</div>
 			<div class="tableView-action">
 				<a class="tableView-action-link"
-				   href="#!/counties/edit/{{county.id}}">
+				   href="#!/counties/edit/{{county.firebasekey}}">
 				   EDIT
 			   </a>
 		   </div>

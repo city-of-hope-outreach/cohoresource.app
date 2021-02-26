@@ -4,7 +4,7 @@
 	<div class="tableView">
 		<div class="tableView-row" ng-repeat="category in categories">
 			<div class="tableView-title"><a href="#">{{category.name}}</a></div>
-			<div class="tableView-action"><a class="tableView-action-link" href="#!/categories/edit/{{category.id}}">EDIT</a></div>
+			<div class="tableView-action"><a class="tableView-action-link" href="#!/categories/edit/{{category.firebasekey}}">EDIT</a></div>
 		</div>
 	</div>
 </div>
@@ -14,7 +14,7 @@
 	<div class="tableView">
 		<div class="tableView-row" ng-repeat="resource in resources">
 			<div class="tableView-title"><a href="#">{{resource.name}}</a></div>
-			<div class="tableView-action"><a class="tableView-action-link" href="#!/resources/edit/{{resource.id}}">EDIT</a></div>
+			<div class="tableView-action"><a class="tableView-action-link" href="#!/resources/edit/{{resource.firebasekey}}">EDIT</a></div>
 		</div>
 	</div>
 </div>

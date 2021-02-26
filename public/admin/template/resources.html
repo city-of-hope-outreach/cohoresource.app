@@ -8,13 +8,13 @@
 	<div class="tableView">
 		<div class="tableView-row" ng-repeat="resource in resources">
 			<div class="tableView-title">
-				<a href="#!/resources/edit/{{resource.id}}">
+				<a href="#!/resources/edit/{{resource.firebasekey}}">
 					{{resource.name}}
 				</a>
 			</div>
 			<div class="tableView-action">
 				<a class="tableView-action-link"
-				   href="#!/resources/edit/{{resource.id}}">
+				   href="#!/resources/edit/{{resource.firebasekey}}">
 				   EDIT
 			   </a>
 		   </div>

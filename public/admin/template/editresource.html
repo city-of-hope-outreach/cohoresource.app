@@ -22,12 +22,6 @@
         <div class="form_element">
             <label id="counties_label" class="form_left_col">COUNTIES</label>
             <fieldset class="multi-checkbox form_right_col">
-<!--                <div class="checkbox_item" ng-repeat="county in mockdata.counties">-->
-<!--                    <input class="county_checkbox" type="checkbox" name="counties[]"-->
-<!--                           value="{{county.id}}" id="county_{{county.id}}">-->
-<!--                    <label for="county_{{county.id}}">{{county.name}}</label>-->
-<!--                </div>-->
-
                 <div class="checkbox_item" ng-repeat="county in allCounties">
                     <checkbox id="cat_{{county.id}}" ng-model="enabledCounties[county.id]"
                               data-label="{{county.name}}"></checkbox>

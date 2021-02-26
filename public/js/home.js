@@ -1,13 +1,13 @@
 ( function () {
 	const app = angular.module('cohoapp');
-	app.controller('homeController', function ($scope, database) {
-		database.ref("categories").orderByChild('name').once("value").then((snapshot) => {
-			$scope.categories = snapshot.val();
+	app.controller('homeController', function ($scope, loadCategories, loadResources) {
+		loadCategories((categories) => {
+			$scope.categories = categories;
 			$scope.$apply();
 		});
 
-		database.ref("resources").orderByChild('name').once("value").then((snapshot) => {
-			$scope.resources = snapshot.val();
+		loadResources((resources) => {
+			$scope.resources = resources;
 			$scope.$apply();
 		});
 	});

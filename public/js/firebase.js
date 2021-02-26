@@ -22,5 +22,35 @@
             })
             return values;
         });
+
+        $provide.value('loadCategories', (completion = (categories) => {}) => {
+            dbRefToList('categories', completion);
+        });
+
+        $provide.value('loadCounties', (completion = (counties) => {}) => {
+            dbRefToList('counties', completion);
+        });
+
+        $provide.value('loadResources', (completion = (resources) => {}) => {
+            dbRefToList('resources', completion)
+        });
+
+        function dbRefToList(ref, completion) {
+            firebase.database()
+                .ref(ref)
+                .orderByChild('name')
+                .once("value")
+                .then((snapshot) => {
+                    const list = [];
+
+                    snapshot.forEach((childSnapshot) => {
+                        const item = childSnapshot.val();
+                        item.firebasekey = childSnapshot.key;
+                        list.push(item);
+                    });
+
+                    completion(list);
+                });
+        }
     });
 })();
