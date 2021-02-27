@@ -19,7 +19,6 @@
 			firebase.database().ref(`categories/${$routeParams.categoryId}`).once("value").then((snapshot) => {
 				$scope.category = snapshot.val();
 				$scope.$apply();
-				console.log($scope.category.icon);
 			});
 		}
 
