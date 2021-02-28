@@ -25,7 +25,14 @@
 		}
 
 		$scope.saveCategory = function () {
+			const category = angular.copy($scope.category);
 
-		};
+			if ($routeParams.categoryId) {
+				database.ref(`categories/${$routeParams.categoryId}`).set(category);
+			} else {
+				const newRef = database.ref(`counties`).push();
+				newRef.set(category);
+			}
+		}
 	});
 })();

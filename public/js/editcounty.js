@@ -1,6 +1,6 @@
 ( function () {
 	const app = angular.module('cohoapp');
-	app.controller('editCountyController', function ($scope, $location, notSignedIn, $routeParams) {
+	app.controller('editCountyController', function ($scope, $location, notSignedIn, database, $routeParams) {
 		notSignedIn($location);
 
 		$scope.org = "county";
@@ -15,6 +15,17 @@
 				$scope.category = snapshot.val();
 				$scope.$apply();
 			});
+		}
+
+		$scope.saveCategory = function () {
+			const county = angular.copy($scope.category);
+
+			if ($routeParams.countyId) {
+				database.ref(`counties/${$routeParams.countyId}`).set(county);
+			} else {
+				const newRef = database.ref(`counties`).push();
+				newRef.set(county);
+			}
 		}
 	});
 })();

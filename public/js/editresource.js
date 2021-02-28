@@ -95,7 +95,7 @@
 			if ($routeParams.resourceId) {
 				database.ref(`resources/${$routeParams.resourceId}`).set(res);
 			} else {
-				const newRef = database.ref(`test`).push();
+				const newRef = database.ref(`resources`).push();
 				newRef.set(res);
 			}
 		}
