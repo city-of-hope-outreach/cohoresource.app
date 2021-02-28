@@ -1,11 +1,36 @@
 ( function () {
 	const app = angular.module('cohoapp');
-	app.controller('editResourceController', function ($scope, $routeParams, database, loadCategories, loadCounties) {
+
+	const emptyContact = {
+		id: 0,
+		name: "",
+		typeInt: 0,
+		value: ""
+	}
+
+	const emptyLoc = {
+		id: 0,
+		city : "",
+		desc : "",
+		state : "",
+		street1 : "",
+		street2 : "",
+		zip : ""
+	};
+
+	app.controller('editResourceController', function ($scope, $location, notSignedIn, $routeParams, database, loadCategories, loadCounties) {
+		notSignedIn($location);
+
 		$scope.enabledCategories = {};
 		$scope.enabledCounties = {};
 		$scope.allCategories = [];
 		$scope.allCounties = [];
-		$scope.resource = {};
+		$scope.resource = {
+			categories: [],
+			counties: [],
+			contact: [angular.copy(emptyContact)],
+			locations: [angular.copy(emptyLoc)]
+		};
 
 		loadCategories((categories) => {
 			$scope.allCategories = categories;
@@ -19,6 +44,7 @@
 			$scope.$apply();
 		});
 
+		// load in resource if we're editing it
 		$scope.header = "New Resource";
 		if ($routeParams.resourceId) {
 			$scope.header = "Edit Resource";
@@ -32,12 +58,9 @@
 		}
 
 		$scope.addContact = function () {
-			$scope.resource.contact.push({
-				id: newId($scope.resource.contact),
-				name: "",
-				typeInt: 0,
-				value: ""
-			})
+			const newCont = angular.copy(emptyContact);
+			newCont.id = newId($scope.resource.contact);
+			$scope.resource.contact.push(newCont);
 		}
 
 		$scope.deleteContact = function(contact) {
@@ -46,15 +69,9 @@
 		}
 
 		$scope.addAddress = function () {
-			$scope.resource.locations.push({
-				id: newId($scope.resource.locations),
-				city : "",
-				desc : "",
-				state : "",
-				street1 : "",
-				street2 : "",
-				zip : ""
-			});
+			const newLoc = angular.copy(emptyLoc);
+			newLoc.id = newId($scope.resource.locations);
+			$scope.resource.locations.push(newLoc);
 		};
 
 		$scope.deleteAddress = function (address) {
@@ -63,13 +80,24 @@
 		}
 
 		$scope.cancel = function () {
-			// route back
+			$location.path("/resources");
 		}
 
 		$scope.saveResource = function () {
 			$scope.resource.categories = convertEnabledDictToArray($scope.enabledCategories);
 			$scope.resource.counties = convertEnabledDictToArray($scope.enabledCounties);
-			// console.log($scope.resource);
+
+			cleanupContacts();
+			cleanupLocations();
+
+			const res = angular.copy($scope.resource);
+
+			if ($routeParams.resourceId) {
+				database.ref(`resources/${$routeParams.resourceId}`).set(res);
+			} else {
+				const newRef = database.ref(`test`).push();
+				newRef.set(res);
+			}
 		}
 
 		const newId = function (array) {
@@ -106,6 +134,42 @@
 			}
 
 			return enabledDict;
+		}
+
+		const cleanupContacts = function () {
+			const emptyContacts = [];
+			$scope.resource.contact.forEach((cont) => {
+				cont.name = cont.name.trim();
+				cont.value = cont.value.trim();
+				if (cont.name.length === 0 && cont.value.length === 0) {
+					emptyContacts.push(cont);
+				}
+			});
+
+			emptyContacts.forEach((cont) => {
+				$scope.deleteContact(cont);
+			});
+		}
+
+		const cleanupLocations = function () {
+			const emptyLocs = [];
+			$scope.resource.locations.forEach((loc) => {
+				loc.desc = loc.desc.trim();
+				loc.street1 = loc.street1.trim();
+				loc.street2 = loc.street2.trim();
+				loc.city = loc.city.trim();
+				loc.state = loc.state.trim();
+				loc.zip = loc.zip.trim();
+
+				if (loc.desc.length === 0 && loc.street1.length === 0 && loc.street2.length === 0 && loc.city.length === 0 &&
+					loc.state.length === 0 && loc.zip.length === 0) {
+					emptyLocs.push(loc);
+				}
+			});
+
+			emptyLocs.forEach((loc) => {
+				$scope.deleteAddress(loc);
+			});
 		}
 	});
 })();
