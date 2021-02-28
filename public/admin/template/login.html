@@ -1,0 +1,10 @@
+<div class="main_col login">
+    <h1 id="action_title" class="edit_page_header">Login</h1>
+    <form class="login_form" name="loginForm" ng-submit="login()">
+        <input type="email" placeholder="Email" ng-model="user.email" ng-required="true">
+        <input type="password" placeholder="Password" ng-model="user.password" ng-required="true" ng-minlength="6">
+        <div style="text-align: right">
+            <button class="login_button" type="submit" ng-disabled="loginForm.$invalid">Log in</button>
+        </div>
+    </form>
+</div>

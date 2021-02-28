@@ -1,6 +1,8 @@
 ( function () {
 	const app = angular.module('cohoapp');
-	app.controller('editCountyController', function ($scope, $routeParams) {
+	app.controller('editCountyController', function ($scope, $location, notSignedIn, $routeParams) {
+		notSignedIn($location);
+
 		$scope.org = "county";
 		$scope.icons = ['counties/faulkner', 'counties/pulaski', 'counties/conway'];
 

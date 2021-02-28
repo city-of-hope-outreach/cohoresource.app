@@ -1,6 +1,8 @@
 ( function () {
 	const app = angular.module('cohoapp');
-	app.controller('editCategoryController', function ($scope, $routeParams, database) {
+	app.controller('editCategoryController', function ($scope, $location, notSignedIn, $routeParams, database) {
+		notSignedIn($location);
+
 		$scope.org = "category";
 		$scope.icons = ['categories/book', 'categories/businessperson1', 'categories/businessperson2',
 			'categories/businessperson3', 'categories/businessperson4', 'categories/car',

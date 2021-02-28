@@ -12,6 +12,8 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
 
+        // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+
         $provide.value('firebase', firebase);
         $provide.value('database', firebase.database());
         $provide.value('auth', firebase.auth());
@@ -21,6 +23,14 @@
                 values.push(child.val());
             })
             return values;
+        });
+
+        $provide.value('notSignedIn', ($location) => {
+            firebase.auth().onAuthStateChanged((user) => {
+                if (user == null) {
+                    $location.path('/login');
+                }
+            });
         });
 
         $provide.value('loadCategories', (completion = (categories) => {}) => {

@@ -55,7 +55,7 @@ input {
   font-size: 1.2rem;
 }
 
-.edit_form {
+.edit_form, .login_form {
   margin-top: 0.5rem;
   padding: 1rem;
   width: 100%;
@@ -183,6 +183,32 @@ input {
   font-size: .8rem !important;
 }
 
+
+
+///////     LOGIN FORMS     ///////
+.login {
+  max-width: 430px;
+  margin: auto;
+}
+
+.login_form input{
+  margin: 0.5rem 0;
+}
+
+.login_button {
+  color: white !important;
+  background: #40D3DB !important;
+  font-size: 0.75rem !important;
+  margin: 0.5rem 0;
+}
+
+.login_button[disabled="disabled"] {
+  opacity: 0.4;
+
+  &:hover {
+    opacity: 0.4;
+  }
+}
 
 ///////     CHECKBOX     ///////
 .g-checkbox-row {

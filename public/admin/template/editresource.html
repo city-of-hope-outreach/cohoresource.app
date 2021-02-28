@@ -44,12 +44,12 @@
 
         <h4>CONTACT</h4>
         <div class="dynamic-form" id="contact">
-            <div ng-repeat="contact in resource.contact" class="form_element slide" id="contact_{{contact.id}}">
+            <div ng-repeat="contact in resource.contact" class="form_element slide" id="contact_{{$index}}">
                 <div class="form_left_col">
-                    <button class="delete_button" type="button" ng-click="deleteContact(contact)">DELETE</button>
+                    <button class="delete_button" type="button" ng-click="deleteContact($index)">DELETE</button>
                 </div>
                 <div class="dynamic_fieldset contact form_right_col">
-                    <select class="contact_input type" name="contact[{{contact.id}}][typeInt]"
+                    <select class="contact_input type" name="contact[{{$index}}][typeInt]"
                             ng-model="contact.typeInt">
                         <option ng-value="0">PHONE</option>
                         <option ng-value="1">EMAIL</option>
@@ -57,9 +57,9 @@
                         <option ng-value="3">FAX</option>
                     </select>
                     <input type="text" class="contact_input name" placeholder="NAME"
-                           name="contact[{{contact.id}}][name]" ng-model="contact.name">
+                           name="contact[{{$index}}][name]" ng-model="contact.name">
                     <input type="text" class="contact_input value" placeholder="VALUE"
-                           name="contact[{{contact.id}}][value]" ng-model="contact.value">
+                           name="contact[{{$index}}][value]" ng-model="contact.value">
                 </div>
             </div>
         </div>
@@ -118,26 +118,26 @@
         <!--  SERVICES  -->
         <div class="form_element">
             <label id="services_label" class="form_left_col" for="services">SERVICES</label>
-            <textarea id="services" class="form_right_col" name="services" style="height: 300px;">{{resource.services}}</textarea>
+            <textarea id="services" class="form_right_col" name="services" style="height: 300px;" ng-model="resource.services"></textarea>
         </div>
 
         <!--  DOCUMENTATION  -->
         <div class="form_element">
             <label id="documentation_label" class="form_left_col" for="documentation">DOCUMENTATION</label>
             <textarea id="documentation" class="form_right_col" name="documentation"
-                      style="height: 300px;">{{resource.documentation}}</textarea>
+                      style="height: 300px;" ng-model="resource.documentation"></textarea>
         </div>
 
         <!--  HOURS  -->
         <div class="form_element">
             <label id="hours_label" class="form_left_col" for="hours">HOURS</label>
-            <textarea id="hours" class="form_right_col" name="hours" style="height: 300px;">{{resource.hours}}</textarea>
+            <textarea id="hours" class="form_right_col" name="hours" style="height: 300px;" ng-model="resource.hours"></textarea>
         </div>
 
         <!--  DESCRIPTION  -->
         <div class="form_element">
             <label id="desc_label" class="form_left_col" for="desc">DESCRIPTION</label>
-            <textarea id="desc" class="form_right_col" name="desc" style="height: 300px;">{{resource.description}}</textarea>
+            <textarea id="desc" class="form_right_col" name="desc" style="height: 300px;" ng-model="resource.description"></textarea>
         </div>
 
         <!-- Multiple emails -->
