@@ -21,6 +21,11 @@
 	app.controller('editResourceController', function ($scope, $location, notSignedIn, $routeParams, database, loadCategories, loadCounties) {
 		notSignedIn($location);
 
+		$scope.loading = false;
+		$scope.saveBtnText = "SAVE";
+		$scope.success = false;
+		$scope.errmsg = "";
+
 		$scope.enabledCategories = {};
 		$scope.enabledCounties = {};
 		$scope.allCategories = [];
@@ -47,12 +52,15 @@
 		// load in resource if we're editing it
 		$scope.header = "New Resource";
 		if ($routeParams.resourceId) {
-			$scope.header = "Edit Resource";
+			$scope.header = "Loading...";
+			$scope.loading = true;
 
 			firebase.database().ref(`resources/${$routeParams.resourceId}`).once("value").then((snapshot) => {
 				$scope.resource = snapshot.val();
 				$scope.enabledCategories = convertArrayToEnabledDict($scope.resource.categories);
 				$scope.enabledCounties = convertArrayToEnabledDict($scope.resource.counties);
+				$scope.loading = false;
+				$scope.header = "Edit Resource";
 				$scope.$apply();
 			});
 		}
@@ -84,6 +92,10 @@
 		}
 
 		$scope.saveResource = function () {
+			$scope.loading = true;
+			$scope.saveBtnText = "SAVING...";
+			$scope.success = false;
+			$scope.errmsg = "";
 			$scope.resource.categories = convertEnabledDictToArray($scope.enabledCategories);
 			$scope.resource.counties = convertEnabledDictToArray($scope.enabledCounties);
 
@@ -92,11 +104,39 @@
 
 			const res = angular.copy($scope.resource);
 
+			// check if we're creating brand new resource or not
 			if ($routeParams.resourceId) {
-				database.ref(`resources/${$routeParams.resourceId}`).set(res);
+				database.ref(`resources/${$routeParams.resourceId}`).set(res)
+					.then(() => {
+						$scope.loading = false;
+						$scope.saveBtnText = "SAVE";
+						$scope.success = true;
+						$scope.$apply();
+					})
+					.catch((error) => {
+						if (error) {
+							$scope.errmsg = error.message;
+						} else {
+							$scope.errmsg = "An unknown error occurred.";
+						}
+						$scope.$apply();
+					});
 			} else {
 				const newRef = database.ref(`resources`).push();
-				newRef.set(res);
+				newRef.set(res).then(() => {
+					$scope.header = "Edit Resource";
+					$scope.loading = false;
+					$scope.saveBtnText = "SAVE";
+					$scope.success = true;
+					$scope.$apply();
+				}).catch((error) => {
+					if (error) {
+						$scope.errmsg = error.message;
+					} else {
+						$scope.errmsg = "An unknown error occurred.";
+					}
+					$scope.$apply();
+				});
 			}
 		}
 

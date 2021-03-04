@@ -1,7 +1,8 @@
 <div class="main_col">
     <h1 id="action_title" class="edit_page_header">{{header}}</h1>
-    <p style="display: none;" class="result_message">Success</p>
-    <form class="edit_form" id="edit_form" ng-submit="saveResource()">
+    <p ng-show="success" class="result_message">Successfully saved resource</p>
+    <p class="result_message required" ng-show="errmsg">There was an issue saving the resource: {{errmsg}}</p>
+    <form class="edit_form" id="edit_form" name="resourceForm" ng-submit="saveResource()">
         <div class="form_element">
             <label id="name_label" class="form_left_col" for="name">NAME</label>
             <input id="name" class="form_right_col" name="name" type="text" ng-model="resource.name" placeholder="NAME">
@@ -191,6 +192,6 @@
 <div class="the_bottom">
     <div class="bottom_elements">
         <button id="cancel" ng-click="cancel()">CANCEL</button>
-        <button id="save" type="submit" form="edit_form">SAVE</button>
+        <button id="save" type="submit" form="edit_form" ng-disabled="resourceForm.$invalid || loading">{{saveBtnText}}</button>
     </div>
 </div>

@@ -1,7 +1,8 @@
 <div class="main_col">
 	<h1 id="action_title" class="edit_page_header">{{header}}</h1>
-	<p style="display: none;" class="result_message">Error</p>
-	<form class="edit_form" id="edit_form" ng-submit="saveCategory()">
+    <p ng-show="success" class="result_message">Successfully saved resource</p>
+    <p class="result_message required" ng-show="errmsg">There was an issue saving the resource: {{errmsg}}</p>
+	<form class="edit_form" name="categoryForm" id="edit_form" ng-submit="saveCategory()">
 		<div class="form_element">
 			<label id="name_label" class="{NAME_REQUIRED} form_left_col" for="name">NAME</label>
 			<input id="name" name="name" type="text" ng-model="category.name" placeholder="NAME" value="">
@@ -27,6 +28,6 @@
 <div class="the_bottom">
 	<div class="bottom_elements">
 		<button id="cancel" onclick="alert('canceled')">CANCEL</button>
-		<button id="save" type="submit" form="edit_form">SAVE</button>
+		<button id="save" type="submit" form="edit_form" ng-disabled="categoryForm.$invalid || loading">{{saveBtnText}}</button>
 	</div>
 </div>

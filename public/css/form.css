@@ -19,6 +19,14 @@ button:hover, .button:hover {
   background-color: rgba(64, 211, 219, 0.8);
 }
 
+button[disabled=disabled], .button[disabled=disabled] {
+  opacity: 0.4;
+}
+button[disabled=disabled]:hover, .button[disabled=disabled]:hover {
+  opacity: 0.4 !important;
+  background-color: #40D3DB;
+}
+
 input {
   font-size: 1rem;
   border: 0.5px solid rgba(30, 62, 63, 0.4);
@@ -189,13 +197,6 @@ input::placeholder {
   background: #40D3DB !important;
   font-size: 0.75rem !important;
   margin: 0.5rem 0;
-}
-
-.login_button[disabled=disabled] {
-  opacity: 0.4;
-}
-.login_button[disabled=disabled]:hover {
-  opacity: 0.4;
 }
 
 .g-checkbox-row {

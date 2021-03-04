@@ -3,6 +3,11 @@
 	app.controller('editCategoryController', function ($scope, $location, notSignedIn, $routeParams, database) {
 		notSignedIn($location);
 
+		$scope.loading = false;
+		$scope.saveBtnText = "SAVE";
+		$scope.success = false;
+		$scope.errmsg = "";
+
 		$scope.org = "category";
 		$scope.icons = ['categories/book', 'categories/businessperson1', 'categories/businessperson2',
 			'categories/businessperson3', 'categories/businessperson4', 'categories/car',
@@ -16,22 +21,57 @@
 		$scope.category = {};
 
 		if ($routeParams.categoryId) {
-			$scope.header = "Edit Category";
+			$scope.header = "Loading...";
+			$scope.loading = true;
 
 			firebase.database().ref(`categories/${$routeParams.categoryId}`).once("value").then((snapshot) => {
 				$scope.category = snapshot.val();
+				$scope.header = "Edit Category";
+				$scope.loading = false;
 				$scope.$apply();
 			});
 		}
 
 		$scope.saveCategory = function () {
+			$scope.loading = true;
+			$scope.saveBtnText = "SAVING...";
+			$scope.success = false;
+			$scope.errmsg = "";
+
 			const category = angular.copy($scope.category);
 
 			if ($routeParams.categoryId) {
-				database.ref(`categories/${$routeParams.categoryId}`).set(category);
+				database.ref(`categories/${$routeParams.categoryId}`).set(category)
+					.then(() => {
+						$scope.loading = false;
+						$scope.saveBtnText = "SAVE";
+						$scope.success = true;
+						$scope.$apply();
+					})
+					.catch((error) => {
+						if (error) {
+							$scope.errmsg = error.message;
+						} else {
+							$scope.errmsg = "An unknown error occurred.";
+						}
+						$scope.$apply();
+					});
 			} else {
 				const newRef = database.ref(`counties`).push();
-				newRef.set(category);
+				newRef.set(category).then(() => {
+					$scope.header = "Edit Resource";
+					$scope.loading = false;
+					$scope.saveBtnText = "SAVE";
+					$scope.success = true;
+					$scope.$apply();
+				}).catch((error) => {
+					if (error) {
+						$scope.errmsg = error.message;
+					} else {
+						$scope.errmsg = "An unknown error occurred.";
+					}
+					$scope.$apply();
+				});
 			}
 		}
 	});

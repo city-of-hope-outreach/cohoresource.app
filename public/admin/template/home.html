@@ -3,7 +3,7 @@
 	<h1>Categories</h1>
 	<div class="tableView">
 		<div class="tableView-row" ng-repeat="category in categories">
-			<div class="tableView-title"><a href="#">{{category.name}}</a></div>
+			<div class="tableView-title"><a href="#!/categories/edit/{{category.firebasekey}}">{{category.name}}</a></div>
 			<div class="tableView-action"><a class="tableView-action-link" href="#!/categories/edit/{{category.firebasekey}}">EDIT</a></div>
 		</div>
 	</div>
@@ -13,7 +13,7 @@
 	<h1>Resources</h1>
 	<div class="tableView">
 		<div class="tableView-row" ng-repeat="resource in resources">
-			<div class="tableView-title"><a href="#">{{resource.name}}</a></div>
+			<div class="tableView-title"><a href="#!/resources/edit/{{resource.firebasekey}}">{{resource.name}}</a></div>
 			<div class="tableView-action"><a class="tableView-action-link" href="#!/resources/edit/{{resource.firebasekey}}">EDIT</a></div>
 		</div>
 	</div>
