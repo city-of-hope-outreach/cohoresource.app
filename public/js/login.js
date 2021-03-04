@@ -2,6 +2,7 @@
     const app = angular.module("cohoapp");
     app.controller("loginController", function ($scope, auth, $location, notSignedIn) {
 
+
         if (auth.currentUser) {
             $location.path("/");
         } else {

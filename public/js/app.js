@@ -43,6 +43,10 @@
 				templateUrl: "template/login.html",
 				controller: "loginController"
 			})
+			.when('/signout', {
+				template: "",
+				controller: "signoutController"
+			})
 			.otherwise({
 				templateUrl: "template/home.html",
 				controller: "homeController"

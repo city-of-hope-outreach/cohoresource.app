@@ -12,6 +12,10 @@
 
   flex-shrink: 0;
 
+  // put sign out button on the bottom
+  display: flex;
+  flex-direction: column;
+
   #sidebar_header {
     background-color: $primary;
     display: flex;
@@ -64,10 +68,7 @@
     opacity: 1;
   }
 
-  .sidebar_items_bottom {
-    position: fixed;
-    bottom: 0px;
-    width: 100%;
-    z-index: -1;
+  .sidebar_items_main {
+    flex-grow: 1;
   }
 }
