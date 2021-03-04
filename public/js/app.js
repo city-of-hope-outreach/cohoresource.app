@@ -1,5 +1,5 @@
 (function () {
-	var app = angular.module('cohoapp', ['ngRoute', 'ngAnimate', 'firebase']);
+	var app = angular.module('cohoapp', ['ngRoute', 'ngAnimate', 'ngSanitize', 'firebase']);
 
 	app.config(function ($routeProvider) {
 		$routeProvider
