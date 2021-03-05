@@ -108,12 +108,14 @@
 			if ($routeParams.resourceId) {
 				database.ref(`resources/${$routeParams.resourceId}`).set(res)
 					.then(() => {
+						$('.main').scrollTop(0);
 						$scope.loading = false;
 						$scope.saveBtnText = "SAVE";
 						$scope.success = true;
 						$scope.$apply();
 					})
 					.catch((error) => {
+						$('.main').scrollTop(0);
 						if (error) {
 							$scope.errmsg = error.message;
 						} else {
@@ -124,12 +126,14 @@
 			} else {
 				const newRef = database.ref(`resources`).push();
 				newRef.set(res).then(() => {
+					$('.main').scrollTop(0);
 					$scope.header = "Edit Resource";
 					$scope.loading = false;
 					$scope.saveBtnText = "SAVE";
 					$scope.success = true;
 					$scope.$apply();
 				}).catch((error) => {
+					$('.main').scrollTop(0);
 					if (error) {
 						$scope.errmsg = error.message;
 					} else {

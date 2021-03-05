@@ -114,6 +114,12 @@
 			}
 		}
 	}]);
+
+	app.run(function($rootScope) {
+		$rootScope.$on("$locationChangeSuccess", function () {
+			$('.main').scrollTop(0);
+		});
+	});
 })();
 
 

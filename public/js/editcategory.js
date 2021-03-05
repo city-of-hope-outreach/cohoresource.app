@@ -43,12 +43,14 @@
 			if ($routeParams.categoryId) {
 				database.ref(`categories/${$routeParams.categoryId}`).set(category)
 					.then(() => {
+						$('.main').scrollTop(0);
 						$scope.loading = false;
 						$scope.saveBtnText = "SAVE";
 						$scope.success = true;
 						$scope.$apply();
 					})
 					.catch((error) => {
+						$('.main').scrollTop(0);
 						if (error) {
 							$scope.errmsg = error.message;
 						} else {
@@ -59,12 +61,14 @@
 			} else {
 				const newRef = database.ref(`counties`).push();
 				newRef.set(category).then(() => {
+					$('.main').scrollTop(0);
 					$scope.header = "Edit Resource";
 					$scope.loading = false;
 					$scope.saveBtnText = "SAVE";
 					$scope.success = true;
 					$scope.$apply();
 				}).catch((error) => {
+					$('.main').scrollTop(0);
 					if (error) {
 						$scope.errmsg = error.message;
 					} else {
