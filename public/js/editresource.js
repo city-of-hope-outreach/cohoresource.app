@@ -62,7 +62,7 @@
 				$scope.loading = false;
 				$scope.header = "Edit Resource";
 				$scope.$apply();
-			});
+			}).catch(error => handleError(error));
 		}
 
 		$scope.addContact = function () {
@@ -85,6 +85,27 @@
 		$scope.deleteAddress = function (address) {
 			const index = $scope.resource.locations.indexOf(address);
 			$scope.resource.locations.splice(index, 1);
+		}
+
+		$scope.deleteResource = function () {
+			if (!$routeParams.resourceId) {
+				$location.path('/resources/');
+				return;
+			}
+
+			if (!window.confirm(`Are you sure you want to delete ${$scope.resource.name}? This cannot be undone.`)) {
+				return;
+			}
+
+			$scope.loading = true;
+			$scope.saveBtnText = "DELETING...";
+			$scope.success = false;
+			$scope.errmsg = "";
+
+			database.ref(`resources/${$routeParams.resourceId}`).remove().then(() => {
+				$location.path('/resources');
+				$scope.$apply();
+			}).catch(error => handleError(error));
 		}
 
 		$scope.cancel = function () {
@@ -114,33 +135,13 @@
 						$scope.success = true;
 						$scope.$apply();
 					})
-					.catch((error) => {
-						$('.main').scrollTop(0);
-						if (error) {
-							$scope.errmsg = error.message;
-						} else {
-							$scope.errmsg = "An unknown error occurred.";
-						}
-						$scope.$apply();
-					});
+					.catch(error => handleError(error));
 			} else {
 				const newRef = database.ref(`resources`).push();
 				newRef.set(res).then(() => {
-					$('.main').scrollTop(0);
-					$scope.header = "Edit Resource";
-					$scope.loading = false;
-					$scope.saveBtnText = "SAVE";
-					$scope.success = true;
+					$location.path(`/resources/edit/${newRef.key}`);
 					$scope.$apply();
-				}).catch((error) => {
-					$('.main').scrollTop(0);
-					if (error) {
-						$scope.errmsg = error.message;
-					} else {
-						$scope.errmsg = "An unknown error occurred.";
-					}
-					$scope.$apply();
-				});
+				}).catch(error => handleError(error));
 			}
 		}
 
@@ -214,6 +215,16 @@
 			emptyLocs.forEach((loc) => {
 				$scope.deleteAddress(loc);
 			});
+		}
+
+		const handleError = function (error) {
+			$('.main').scrollTop(0);
+			if (error) {
+				$scope.errmsg = error.message;
+			} else {
+				$scope.errmsg = "An unknown error occurred.";
+			}
+			$scope.$apply();
 		}
 	});
 })();
