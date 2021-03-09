@@ -5,7 +5,7 @@
     <form class="edit_form" id="edit_form" name="resourceForm" ng-submit="saveResource()">
         <div class="form_element">
             <label id="name_label" class="form_left_col" for="name">NAME</label>
-            <input id="name" class="form_right_col" name="name" type="text" ng-model="resource.name" placeholder="NAME">
+            <input id="name" class="form_right_col" name="name" type="text" ng-model="resource.name" placeholder="NAME" ng-required="true">
         </div>
 
         <!-- CATEGORIES -->
@@ -60,7 +60,7 @@
                     <input type="text" class="contact_input name" placeholder="NAME"
                            name="contact[{{$index}}][name]" ng-model="contact.name">
                     <input type="text" class="contact_input value" placeholder="VALUE"
-                           name="contact[{{$index}}][value]" ng-model="contact.value">
+                           name="contact[{{$index}}][value]" ng-model="contact.value" ng-required="contact.name">
                 </div>
             </div>
         </div>
@@ -86,19 +86,19 @@
                            ng-model="address.desc">
                     <input type="text" class="address_input street1"
                            placeholder="STREET 1" name="address[{{address.id}}][street1]"
-                           ng-model="address.street1">
+                           ng-model="address.street1" ng-required="address.desc">
                     <input type="text" class="address_input street2"
                            placeholder="STREET 2" name="address[{{address.id}}][street2]"
                            ng-model="address.street2">
                     <input type="text" class="address_input city"
                            placeholder="CITY" name="address[{{address.id}}][city]"
-                           ng-model="address.city">
+                           ng-model="address.city" ng-required="address.desc">
                     <input type="text" class="address_input state"
                            placeholder="STATE" name="address[{{address.id}}][state]"
-                           ng-model="address.state">
+                           ng-model="address.state" ng-required="address.desc">
                     <input type="text" class="address_input zip"
                            placeholder="ZIP" name="address[{{address.id}}][zip]"
-                           ng-model="address.zip">
+                           ng-model="address.zip" ng-required="address.desc">
                     <input type="hidden" class="address_input id" name="address[address.id}}][id]"
                            ng-model="address.id">
                 </fieldset>

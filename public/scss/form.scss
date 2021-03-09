@@ -56,6 +56,10 @@ input {
   font-size: 0.85rem;
 }
 
+input[type='text'].ng-invalid {
+  border: 1px solid $required;
+}
+
 .edit_page_header {
   margin-bottom: 0;
 }
