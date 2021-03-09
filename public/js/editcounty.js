@@ -53,11 +53,7 @@
 			} else {
 				const newRef = database.ref(`counties`).push();
 				newRef.set(county).then(() => {
-					$('.main').scrollTop(0);
-					$scope.header = "Edit Resource";
-					$scope.loading = false;
-					$scope.saveBtnText = "SAVE";
-					$scope.success = true;
+					$location.path(`/counties/edit/${newRef.key}`);
 					$scope.$apply();
 				}).catch((error) => {
 					$('.main').scrollTop(0);
@@ -69,6 +65,27 @@
 					$scope.$apply();
 				});
 			}
+		}
+
+		$scope.deleteCategory = function() {
+			if (!$routeParams.countyId) {
+				$location.path('/counties/');
+				return;
+			}
+
+			if (!window.confirm(`Are you sure you want to delete ${$scope.category.name}? This cannot be undone.`)) {
+				return;
+			}
+
+			$scope.loading = true;
+			$scope.saveBtnText = "DELETING...";
+			$scope.success = false;
+			$scope.errmsg = "";
+
+			database.ref(`/counties/${$routeParams.countyId}`).remove().then(() => {
+				$location.path('/counties/');
+				$scope.$apply();
+			});
 		}
 	});
 })();

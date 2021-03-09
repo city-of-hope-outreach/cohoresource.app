@@ -59,13 +59,9 @@
 						$scope.$apply();
 					});
 			} else {
-				const newRef = database.ref(`counties`).push();
+				const newRef = database.ref(`categories`).push();
 				newRef.set(category).then(() => {
-					$('.main').scrollTop(0);
-					$scope.header = "Edit Resource";
-					$scope.loading = false;
-					$scope.saveBtnText = "SAVE";
-					$scope.success = true;
+					$location.path(`/categories/edit/${newRef.key}`);
 					$scope.$apply();
 				}).catch((error) => {
 					$('.main').scrollTop(0);
@@ -77,6 +73,27 @@
 					$scope.$apply();
 				});
 			}
+		}
+
+		$scope.deleteCategory = function() {
+			if (!$routeParams.categoryId) {
+				$location.path('/categories/');
+				return;
+			}
+
+			if (!window.confirm(`Are you sure you want to delete ${$scope.category.name}? This cannot be undone.`)) {
+				return;
+			}
+
+			$scope.loading = true;
+			$scope.saveBtnText = "DELETING...";
+			$scope.success = false;
+			$scope.errmsg = "";
+
+			database.ref(`/categories/${$routeParams.categoryId}`).remove().then(() => {
+				$location.path('/categories/');
+				$scope.$apply();
+			});
 		}
 	});
 })();
