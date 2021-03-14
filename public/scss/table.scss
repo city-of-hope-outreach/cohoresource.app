@@ -72,17 +72,52 @@
 	display: flex;
 	padding-bottom: 10px;
 
+	a {
+		display: flex;
+		align-items: center;
+	}
+
 	// search form
 	form {
 		margin-left: 0.5rem;
 		flex-grow: 1;
+		display: flex;
+		align-items: center;
 
 		input {
 			padding: 0.5rem;
 			padding-left: 2rem;
+			outline: none;
+
+			height: 2.5rem;
 
 			background: $lighter url('/img/search.png') no-repeat left;
 			background-size: contain;
+
+			&.ng-not-empty {
+				border-right-width: 0;
+				border-bottom-right-radius: 0;
+				border-top-right-radius: 0;
+			}
+		}
+
+		.clearSearch {
+			background: $lighter;
+			box-sizing: border-box;
+			padding: 0.5rem;
+			display: flex;
+			align-items: center;
+			height: 2.5rem;
+			color: $placeholder-grey;
+			cursor: pointer;
+
+			border: solid rgba(30, 62, 63, 0.4);
+			border-width: 0.5px 0.5px 0.5px 0;
+			border-radius: 0 5px 5px 0;
+
+			&:hover {
+				color: $placeholder-grey-hover;
+			}
 		}
 	}
 }

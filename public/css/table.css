@@ -63,15 +63,44 @@
   display: flex;
   padding-bottom: 10px;
 }
+.table_header a {
+  display: flex;
+  align-items: center;
+}
 .table_header form {
   margin-left: 0.5rem;
   flex-grow: 1;
+  display: flex;
+  align-items: center;
 }
 .table_header form input {
   padding: 0.5rem;
   padding-left: 2rem;
+  outline: none;
+  height: 2.5rem;
   background: #F8FFFF url("/img/search.png") no-repeat left;
   background-size: contain;
+}
+.table_header form input.ng-not-empty {
+  border-right-width: 0;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+.table_header form .clearSearch {
+  background: #F8FFFF;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  height: 2.5rem;
+  color: #747777;
+  cursor: pointer;
+  border: solid rgba(30, 62, 63, 0.4);
+  border-width: 0.5px 0.5px 0.5px 0;
+  border-radius: 0 5px 5px 0;
+}
+.table_header form .clearSearch:hover {
+  color: #AAAAAA;
 }
 
 .pagination {

@@ -11,25 +11,15 @@
 			$scope.$apply();
 		});
 
-		$scope.searchChanged = function () {
-			$timeout.cancel(currentTimeout);
-			currentTimeout = $timeout(doSearch, 1000); // wait a second before actually searching
-		}
-
-		$scope.submit = function () {
-			$timeout.cancel(currentTimeout);
-			doSearch($scope.search);
-		}
-
-		const doSearch = function () {
-			$scope.displayedResources = $scope.resources.filter((resource) => {
-				const q = $scope.search.toLowerCase();
-				return resource.name.toLowerCase().includes(q);
+		$scope.performSearch = function(searchVal) {
+			$scope.displayedResources = $scope.resources.filter((res) => {
+				const q = searchVal.toLowerCase();
+				return res.name.toLowerCase().includes(q);
 			});
-			// $scope.$apply();
-			console.log($scope.displayedResources);
+		};
+
+		$scope.clearSearch = function() {
+			$scope.displayedResources = $scope.resources;
 		}
-
-
 	});
 })();

@@ -3,9 +3,8 @@
 
 	<div class="table_header">
 		<a class="button" href="#!/counties/new">ADD</a>
-		<form ng-submit="submit()" name="searchForm">
-			<input type="text" placeholder="SEARCH" ng-model="search" ng-change="searchChanged()">
-		</form>	</div>
+		<search do-search="performSearch(searchVal)" clear-search="clearSearch()"></search>
+	</div>
 	<div class="tableView">
 		<div class="tableView-row" ng-repeat="county in displayedCounties">
 			<div class="tableView-title">

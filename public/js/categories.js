@@ -10,21 +10,15 @@
 			$scope.$apply();
 		});
 
-		$scope.searchChanged = function () {
-			$timeout.cancel(currentTimeout);
-			currentTimeout = $timeout(doSearch, 1000); // wait a second before actually searching
-		}
-
-		$scope.submit = function () {
-			$timeout.cancel(currentTimeout);
-			doSearch($scope.search);
-		}
-
-		const doSearch = function () {
+		$scope.performSearch = function(searchVal) {
 			$scope.displayedCategories = $scope.categories.filter((cat) => {
-				const q = $scope.search.toLowerCase();
+				const q = searchVal.toLowerCase();
 				return cat.name.toLowerCase().includes(q);
 			});
+		};
+
+		$scope.clearSearch = function() {
+			$scope.displayedCategories = $scope.categories;
 		}
 	});
 })();
