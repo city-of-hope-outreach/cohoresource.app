@@ -3,10 +3,12 @@
 
 	<div class="table_header">
 		<a class="button" href="#!/resources/new">ADD</a>
-		<input type="text" placeholder="SEARCH">
+		<form ng-submit="submit()" name="searchForm">
+			<input type="text" placeholder="SEARCH" ng-model="search" ng-change="searchChanged()">
+		</form>
 	</div>
 	<div class="tableView">
-		<div class="tableView-row" ng-repeat="resource in resources">
+		<div class="tableView-row" ng-repeat="resource in displayedResources">
 			<div class="tableView-title">
 				<a href="#!/resources/edit/{{resource.firebasekey}}">
 					{{resource.name}}

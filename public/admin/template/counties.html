@@ -3,10 +3,11 @@
 
 	<div class="table_header">
 		<a class="button" href="#!/counties/new">ADD</a>
-		<input type="text" placeholder="SEARCH">
-	</div>
+		<form ng-submit="submit()" name="searchForm">
+			<input type="text" placeholder="SEARCH" ng-model="search" ng-change="searchChanged()">
+		</form>	</div>
 	<div class="tableView">
-		<div class="tableView-row" ng-repeat="county in counties">
+		<div class="tableView-row" ng-repeat="county in displayedCounties">
 			<div class="tableView-title">
 				<a href="#!/counties/edit/{{county.firebasekey}}">
 					{{county.name}}

@@ -63,10 +63,13 @@
   display: flex;
   padding-bottom: 10px;
 }
-.table_header input {
-  margin-left: 10px;
-  padding: 10px;
-  padding-left: 40px;
+.table_header form {
+  margin-left: 0.5rem;
+  flex-grow: 1;
+}
+.table_header form input {
+  padding: 0.5rem;
+  padding-left: 2rem;
   background: #F8FFFF url("/img/search.png") no-repeat left;
   background-size: contain;
 }

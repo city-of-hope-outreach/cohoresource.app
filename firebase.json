@@ -5,6 +5,16 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "api/fulldatabase",
+        "function": "fulldatabase"
+      },
+      {
+        "source": "api/feedback",
+        "function": "feedback"
+      }
     ]
   }
 }
