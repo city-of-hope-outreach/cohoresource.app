@@ -156,9 +156,9 @@
                     }
                 };
 
-                const itemsPerPage = 10;
+                const itemsPerPage = 15;
                 scope.pageNum = 1;
-                scope.numPages = 10;
+                scope.numPages = 1;
 
                 scope.pages = {
                     first: 0,
