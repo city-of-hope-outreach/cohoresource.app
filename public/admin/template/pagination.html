@@ -1,4 +1,4 @@
-<div class="pagination">
+<div class="pagination" ng-show="numPages > 1">
     <button ng-click="page(pages.prev)" ng-if="pages.prev">&lt; PREV</button>
     <span ng-if="pages.first">
         <button ng-click="page(pages.first)">{{pages.first}}</button>

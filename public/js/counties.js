@@ -5,7 +5,7 @@
 
 		loadCounties((counties) => {
 			$scope.counties = counties;
-			$scope.displayedCounties = counties;
+			$scope.displayedCounties = [];
 			$scope.$apply();
 		});
 
@@ -18,6 +18,10 @@
 
 		$scope.clearSearch = function() {
 			$scope.displayedCounties = $scope.counties;
+		}
+
+		$scope.renderPage = function (page) {
+			$scope.displayedCounties = page;
 		}
 	});
 })();

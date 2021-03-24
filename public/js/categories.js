@@ -20,5 +20,9 @@
 		$scope.clearSearch = function() {
 			$scope.displayedCategories = $scope.categories;
 		}
+
+		$scope.renderPage = function(page) {
+			$scope.displayedCategories = page;
+		}
 	});
 })();
