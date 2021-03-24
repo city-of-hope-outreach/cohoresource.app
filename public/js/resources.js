@@ -6,19 +6,20 @@
 		// TODO set up pagination
 		loadResources((resources) => {
 			$scope.resources = resources;
+			$scope.searchFilteredResources = $scope.resources;
 			$scope.displayedResources = [];
 			$scope.$apply();
 		});
 
 		$scope.performSearch = function(searchVal) {
-			$scope.displayedResources = $scope.resources.filter((res) => {
+			$scope.searchFilteredResources = $scope.resources.filter((res) => {
 				const q = searchVal.toLowerCase();
 				return res.name.toLowerCase().includes(q);
 			});
 		};
 
 		$scope.clearSearch = function() {
-			$scope.displayedResources = $scope.resources;
+			$scope.searchFilteredResources = $scope.resources;
 		}
 
 		$scope.renderPage = function(page) {

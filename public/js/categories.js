@@ -6,19 +6,20 @@
 
 		loadCategories((categories) => {
 			$scope.categories = categories;
+			$scope.searchFilteredCategories = categories;
 			$scope.displayedCategories = categories;
 			$scope.$apply();
 		});
 
 		$scope.performSearch = function(searchVal) {
-			$scope.displayedCategories = $scope.categories.filter((cat) => {
+			$scope.searchFilteredCategories = $scope.categories.filter((cat) => {
 				const q = searchVal.toLowerCase();
 				return cat.name.toLowerCase().includes(q);
 			});
 		};
 
 		$scope.clearSearch = function() {
-			$scope.displayedCategories = $scope.categories;
+			$scope.searchFilteredCategories = $scope.categories;
 		}
 
 		$scope.renderPage = function(page) {
