@@ -125,17 +125,27 @@
 .pagination {
 	float: right;
 	padding-top: 10px;
-	font-size: 1.2rem;
 
-	a {
-
-		padding-left: 10px;
-
-		color: $secondary;
-		text-decoration: none;
+	button, .pagination-current {
+		padding: 0.5rem;
+		font-size: 1.2rem;
 	}
 
-	.current {
+	button {
+		background: none;
+		color: $secondary;
+		text-decoration: none;
+		cursor: pointer;
+
+		&:hover {
+			text-decoration: underline;
+			background: none;
+		}
+
+
+	}
+
+	.pagination-current {
 		color: $secondary-lightest;
 	}
 }

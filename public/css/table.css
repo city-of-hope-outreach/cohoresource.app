@@ -106,14 +106,22 @@
 .pagination {
   float: right;
   padding-top: 10px;
+}
+.pagination button, .pagination .pagination-current {
+  padding: 0.5rem;
   font-size: 1.2rem;
 }
-.pagination a {
-  padding-left: 10px;
+.pagination button {
+  background: none;
   color: #1E3E3F;
   text-decoration: none;
+  cursor: pointer;
 }
-.pagination .current {
+.pagination button:hover {
+  text-decoration: underline;
+  background: none;
+}
+.pagination .pagination-current {
   color: #577677;
 }
 

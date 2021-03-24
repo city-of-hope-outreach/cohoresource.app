@@ -1,0 +1,15 @@
+<div class="pagination">
+    <button ng-click="page(pages.prev)" ng-if="pages.prev">&lt; PREV</button>
+    <span ng-if="pages.first">
+        <button ng-click="page(pages.first)">{{pages.first}}</button>
+        <span ng-if="pages.current > 3">...</span>
+    </span>
+    <button ng-click="page(pages.prev)" ng-if="pages.prev">{{pages.prev}}</button>
+    <span ng-click="page(pages.current)" class="pagination-current">{{pages.current}}</span>
+    <button ng-click="page(pages.next)" ng-if="pages.next">{{pages.next}}</button>
+    <span ng-if="pages.last">
+        <span ng-if="pages.current < (numPages - 2)">...</span>
+        <button ng-click="page(pages.last)">{{pages.last}}</button>
+    </span>
+    <button ng-click="page(pages.next)" ng-if="pages.next">NEXT &gt;</button>
+</div>

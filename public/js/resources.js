@@ -2,12 +2,11 @@
 	const app = angular.module('cohoapp');
 	app.controller('resourcesController', function ($scope, $location, $timeout, database, notSignedIn, loadResources) {
 		notSignedIn($location);
-		var currentTimeout = null;
 
 		// TODO set up pagination
 		loadResources((resources) => {
 			$scope.resources = resources;
-			$scope.displayedResources = resources;
+			$scope.displayedResources = [];
 			$scope.$apply();
 		});
 
@@ -21,5 +20,10 @@
 		$scope.clearSearch = function() {
 			$scope.displayedResources = $scope.resources;
 		}
+
+		$scope.renderPage = function(page) {
+			$scope.displayedResources = page;
+		}
+
 	});
 })();
