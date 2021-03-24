@@ -19,7 +19,7 @@
 				<select id="icon" name="icon" ng-model="category.icon" ng-options="icon for icon in icons">
 <!--					<option ng-repeat="icon in icons" value="{{org}}/{{icon}}">{{icon}}</option>-->
 				</select>
-				<img id="icon_preview" style="display: none" src="/">
+				<img id="icon_preview" src="/icon/{{category.icon}}.svg">
 			</div>
 		</div>
         <div class="form_element">
