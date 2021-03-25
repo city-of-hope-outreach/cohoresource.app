@@ -45,6 +45,24 @@
             dbRefToList('resources', completion)
         });
 
+        $provide.value('loadRecentResources', (completion = (resources) => {}) => {
+            firebase.database()
+                .ref('resources')
+                .limitToFirst(10)
+                .once("value")
+                .then((snapshot) => {
+                    const list = [];
+
+                    snapshot.forEach((childSnapshot) => {
+                        const item = childSnapshot.val();
+                        item.firebasekey = childSnapshot.key;
+                        list.push(item);
+                    });
+
+                    completion(list);
+                });
+        });
+
         function dbRefToList(ref, completion) {
             firebase.database()
                 .ref(ref)

@@ -1,6 +1,6 @@
 ( function () {
 	const app = angular.module('cohoapp');
-	app.controller('homeController', function ($scope, $location, notSignedIn, loadCategories, loadResources) {
+	app.controller('homeController', function ($scope, $location, notSignedIn, loadCategories, loadRecentResources) {
 		notSignedIn($location);
 
 		loadCategories((categories) => {
@@ -8,7 +8,7 @@
 			$scope.$apply();
 		});
 
-		loadResources((resources) => {
+		loadRecentResources((resources) => {
 			$scope.resources = resources;
 			$scope.$apply();
 		});
