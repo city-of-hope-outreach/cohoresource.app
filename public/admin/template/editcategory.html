@@ -4,12 +4,12 @@
     <p class="result_message required" ng-show="errmsg">There was an issue saving the resource: {{errmsg}}</p>
 	<form class="edit_form" name="categoryForm" id="edit_form" ng-submit="saveCategory()">
 		<div class="form_element">
-			<label id="name_label" class="{NAME_REQUIRED} form_left_col" for="name">NAME</label>
+			<label id="name_label" class="{NAME_REQUIRED} form_left_col verticalAdjust" for="name">NAME</label>
 			<input id="name" name="name" type="text" ng-model="category.name" placeholder="NAME" value="">
 		</div>
 
 		<div class="form_element">
-			<label id="desc_label" class="{DESC_REQUIRED} form_left_col" for="desc">DESCRIPTION</label>
+			<label id="desc_label" class="{DESC_REQUIRED} form_left_col verticalAdjust" for="desc">DESCRIPTION</label>
 			<textarea id="desc" name="desc" ng-model="category.description"></textarea>
 		</div>
 

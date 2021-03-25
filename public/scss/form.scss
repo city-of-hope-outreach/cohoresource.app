@@ -107,7 +107,6 @@ input[type='text'].ng-invalid {
   }
 
   .form_left_col {
-    padding-top: 2px;
     text-align: right;
     margin-right: 1rem;
     font-size: 1rem;
@@ -123,7 +122,13 @@ input[type='text'].ng-invalid {
     button {
       float: right;
     }
+
+    &.verticalAdjust {
+      padding-top: 4px;
+    }
   }
+
+
 
   .form_right_col {
     flex-grow: 1;

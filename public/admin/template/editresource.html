@@ -4,13 +4,13 @@
     <p class="result_message required" ng-show="errmsg">There was an issue saving the resource: {{errmsg}}</p>
     <form class="edit_form" id="edit_form" name="resourceForm" ng-submit="saveResource()">
         <div class="form_element">
-            <label id="name_label" class="form_left_col" for="name">NAME</label>
+            <label id="name_label" class="form_left_col verticalAdjust" for="name">NAME</label>
             <input id="name" class="form_right_col" name="name" type="text" ng-model="resource.name" placeholder="NAME" ng-required="true">
         </div>
 
         <!-- CATEGORIES -->
         <div class="form_element">
-            <label id="categories_label" class="form_left_col">CATEGORIES</label>
+            <label id="categories_label" class="form_left_col verticalAdjust">CATEGORIES</label>
             <fieldset class="multi-checkbox form_right_col">
                     <div class="checkbox_item" ng-repeat="category in allCategories">
                         <checkbox id="cat_{{category.id}}" ng-model="enabledCategories[category.id]"
@@ -21,7 +21,7 @@
 
         <!-- COUNTIES -->
         <div class="form_element">
-            <label id="counties_label" class="form_left_col">COUNTIES</label>
+            <label id="counties_label" class="form_left_col verticalAdjust">COUNTIES</label>
             <fieldset class="multi-checkbox form_right_col">
                 <div class="checkbox_item" ng-repeat="county in allCounties">
                     <checkbox id="cat_{{county.id}}" ng-model="enabledCounties[county.id]"
@@ -32,8 +32,8 @@
 
         <!--  TAGS  -->
         <div class="form_element">
-            <div class="form_left_col">
-                <label id="tags_label" for="desc">TAGS</label>
+            <div class="form_left_col verticalAdjust">
+                <label id="tags_label" for="tags">TAGS</label>
                 <p>
                     <small>Separate by space</small>
                 </p>
@@ -118,26 +118,26 @@
 
         <!--  SERVICES  -->
         <div class="form_element">
-            <label id="services_label" class="form_left_col" for="services">SERVICES</label>
+            <label id="services_label" class="form_left_col verticalAdjust" for="services">SERVICES</label>
             <textarea id="services" class="form_right_col" name="services" style="height: 300px;" ng-model="resource.services"></textarea>
         </div>
 
         <!--  DOCUMENTATION  -->
         <div class="form_element">
-            <label id="documentation_label" class="form_left_col" for="documentation">DOCUMENTATION</label>
+            <label id="documentation_label" class="form_left_col verticalAdjust" for="documentation">DOCUMENTATION</label>
             <textarea id="documentation" class="form_right_col" name="documentation"
                       style="height: 300px;" ng-model="resource.documentation"></textarea>
         </div>
 
         <!--  HOURS  -->
         <div class="form_element">
-            <label id="hours_label" class="form_left_col" for="hours">HOURS</label>
+            <label id="hours_label" class="form_left_col verticalAdjust" for="hours">HOURS</label>
             <textarea id="hours" class="form_right_col" name="hours" style="height: 300px;" ng-model="resource.hours"></textarea>
         </div>
 
         <!--  DESCRIPTION  -->
         <div class="form_element">
-            <label id="desc_label" class="form_left_col" for="desc">DESCRIPTION</label>
+            <label id="desc_label" class="form_left_col verticalAdjust" for="desc">DESCRIPTION</label>
             <textarea id="desc" class="form_right_col" name="desc" style="height: 300px;" ng-model="resource.description"></textarea>
         </div>
 

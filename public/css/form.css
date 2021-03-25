@@ -107,7 +107,6 @@ input[type=text].ng-invalid {
   margin-top: 1rem;
 }
 .edit_form .form_left_col, .login_form .form_left_col {
-  padding-top: 2px;
   text-align: right;
   margin-right: 1rem;
   font-size: 1rem;
@@ -120,6 +119,9 @@ input[type=text].ng-invalid {
 }
 .edit_form .form_left_col button, .login_form .form_left_col button {
   float: right;
+}
+.edit_form .form_left_col.verticalAdjust, .login_form .form_left_col.verticalAdjust {
+  padding-top: 4px;
 }
 .edit_form .form_right_col, .login_form .form_right_col {
   flex-grow: 1;
