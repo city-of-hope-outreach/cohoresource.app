@@ -1,13 +1,11 @@
 (function () {
     angular.module('firebase', []).config(($provide) => {
         var firebaseConfig = {
-            apiKey: "AIzaSyC3DxqjrQ-bx1smrhKQF1lBdjfYHKYu7sg",
+            apiKey: "AIzaSyDactEm5-ZlUghf8NnkhTD8B3dUaAK3jTk",
             authDomain: "cohodatabase.firebaseapp.com",
             databaseURL: "https://cohodatabase.firebaseio.com",
             projectId: "cohodatabase",
-            storageBucket: "cohodatabase.appspot.com",
-            messagingSenderId: "528491597756",
-            appId: "1:528491597756:web:f533cf0a849f06932be5b9"
+            appId: "1:528491597756:web:6666463ffa53c4b42be5b9"
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
