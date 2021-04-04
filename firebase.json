@@ -16,5 +16,11 @@
         "function": "feedback"
       }
     ]
+  },
+
+  "emulators": {
+    "hosting": {
+      "port": "8000"
+    }
   }
 }
