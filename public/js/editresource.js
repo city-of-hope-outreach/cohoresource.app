@@ -67,6 +67,11 @@
 
 		$scope.addContact = function () {
 			const newCont = angular.copy(emptyContact);
+
+			if (!$scope.resource.contact) {
+				$scope.resource.contact = [];
+			}
+
 			newCont.id = newId($scope.resource.contact);
 			$scope.resource.contact.push(newCont);
 		}
@@ -78,6 +83,11 @@
 
 		$scope.addAddress = function () {
 			const newLoc = angular.copy(emptyLoc);
+
+			if (!$scope.resource.locations) {
+				$scope.resource.locations = [];
+			}
+
 			newLoc.id = newId($scope.resource.locations);
 			$scope.resource.locations.push(newLoc);
 		};
@@ -182,6 +192,10 @@
 		}
 
 		const cleanupContacts = function () {
+			if (!$scope.resource.contact) {
+				return;
+			}
+
 			const emptyContacts = [];
 			$scope.resource.contact.forEach((cont) => {
 				cont.name = cont.name.trim();
@@ -197,6 +211,10 @@
 		}
 
 		const cleanupLocations = function () {
+			if (!$scope.resource.locations) {
+				return;
+			}
+
 			const emptyLocs = [];
 			$scope.resource.locations.forEach((loc) => {
 				loc.desc = loc.desc.trim();
