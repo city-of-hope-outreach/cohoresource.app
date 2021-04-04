@@ -2,9 +2,11 @@ const functions = require('firebase-functions');
 
 const fulldatabase = require('./fulldatabase');
 const feedback = require('./feedback');
+const categoryid = require('./categoryid');
 
 exports.fulldatabase = functions.https.onRequest(fulldatabase.handler);
 exports.feedback = functions.https.onRequest(feedback.handler);
+exports.categoryid = functions.https.onRequest(categoryid.expressApp);
 
 //
 // exports.categories = functions.https.onRequest((req, resp) => {

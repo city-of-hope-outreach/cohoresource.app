@@ -61,6 +61,22 @@
                 });
         });
 
+        $provide.value('uniqueCategoryId', (completion = (id) => {}) => {
+            let functions = firebase.functions();
+
+            if (location.host.includes("localhost")) {
+                functions.useEmulator("localhost", "5001");
+            }
+
+            let getUniqueCategoryId = functions.httpsCallable('categoryid');
+            getUniqueCategoryId({}).then((result) => {
+                console.log(result);
+                if (result.data) {
+                    completion(result.data.id);
+                }
+            });
+        });
+
         function dbRefToList(ref, completion) {
             firebase.database()
                 .ref(ref)

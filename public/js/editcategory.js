@@ -1,6 +1,6 @@
 ( function () {
 	const app = angular.module('cohoapp');
-	app.controller('editCategoryController', function ($scope, $location, notSignedIn, $routeParams, database) {
+	app.controller('editCategoryController', function ($scope, $location, notSignedIn, $routeParams, database, uniqueCategoryId) {
 		notSignedIn($location);
 
 		$scope.loading = false;
@@ -59,18 +59,25 @@
 						$scope.$apply();
 					});
 			} else {
-				const newRef = database.ref(`categories`).push();
-				newRef.set(category).then(() => {
-					$location.path(`/categories/edit/${newRef.key}`);
-					$scope.$apply();
-				}).catch((error) => {
-					$('.main').scrollTop(0);
-					if (error) {
-						$scope.errmsg = error.message;
-					} else {
-						$scope.errmsg = "An unknown error occurred.";
-					}
-					$scope.$apply();
+				// get a unique number for this category
+				// (trying to make new category creation compatible
+				//  with our legacy data structure)
+				uniqueCategoryId(id => {
+					category.id = id;
+
+					const newRef = database.ref(`categories`).push();
+					newRef.set(category).then(() => {
+						$location.path(`/categories/edit/${newRef.key}`);
+						$scope.$apply();
+					}).catch((error) => {
+						$('.main').scrollTop(0);
+						if (error) {
+							$scope.errmsg = error.message;
+						} else {
+							$scope.errmsg = "An unknown error occurred.";
+						}
+						$scope.$apply();
+					});
 				});
 			}
 		}
