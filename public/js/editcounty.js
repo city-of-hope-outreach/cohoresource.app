@@ -1,6 +1,6 @@
 ( function () {
 	const app = angular.module('cohoapp');
-	app.controller('editCountyController', function ($scope, $location, notSignedIn, database, $routeParams) {
+	app.controller('editCountyController', function ($scope, $location, notSignedIn, database, uniqueKey, $routeParams) {
 		notSignedIn($location);
 
 		$scope.loading = false;
@@ -51,19 +51,25 @@
 						$scope.$apply();
 					});
 			} else {
-				const newRef = database.ref(`counties`).push();
-				newRef.set(county).then(() => {
-					$location.path(`/counties/edit/${newRef.key}`);
-					$scope.$apply();
-				}).catch((error) => {
-					$('.main').scrollTop(0);
-					if (error) {
-						$scope.errmsg = error.message;
-					} else {
-						$scope.errmsg = "An unknown error occurred.";
-					}
-					$scope.$apply();
-				});
+				uniqueKey('counties', id =>{
+					county.id = id;
+
+					const newRef = database.ref(`counties`).push();
+					newRef.set(county).then(() => {
+						$location.path(`/counties/edit/${newRef.key}`);
+						$scope.$apply();
+					}).catch((error) => {
+						$('.main').scrollTop(0);
+						if (error) {
+							$scope.errmsg = error.message;
+						} else {
+							$scope.errmsg = "An unknown error occurred.";
+						}
+						$scope.$apply();
+					});
+				})
+
+
 			}
 		}
 

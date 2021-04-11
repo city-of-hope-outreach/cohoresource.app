@@ -61,16 +61,15 @@
                 });
         });
 
-        $provide.value('uniqueCategoryId', (completion = (id) => {}) => {
+        $provide.value('uniqueKey', (unit, completion) => {
             let functions = firebase.functions();
 
             if (location.host.includes("localhost")) {
                 functions.useEmulator("localhost", "5001");
             }
 
-            let getUniqueCategoryId = functions.httpsCallable('categoryid');
+            let getUniqueCategoryId = functions.httpsCallable(`uniqueid/${unit}`);
             getUniqueCategoryId({}).then((result) => {
-                console.log(result);
                 if (result.data) {
                     completion(result.data.id);
                 }

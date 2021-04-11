@@ -7,8 +7,15 @@ const app = express();
 app.use(cors({origin: true}));
 
 
-app.post('/',  async (req, resp) => {
-    const categories = admin.db.ref('/categories');
+app.post('/:unit',  async (req, resp) => {
+    let unit = "categories";
+    let unitParam = req.params['unit'];
+
+    if (unitParam && unitParam === 'counties') {
+        unit = unitParam;
+    }
+
+    const categories = admin.db.ref(`/${unit}`);
 
     let ids = [];
 

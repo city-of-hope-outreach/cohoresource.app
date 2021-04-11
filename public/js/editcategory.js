@@ -1,6 +1,6 @@
 ( function () {
 	const app = angular.module('cohoapp');
-	app.controller('editCategoryController', function ($scope, $location, notSignedIn, $routeParams, database, uniqueCategoryId) {
+	app.controller('editCategoryController', function ($scope, $location, notSignedIn, $routeParams, database, uniqueKey) {
 		notSignedIn($location);
 
 		$scope.loading = false;
@@ -62,7 +62,7 @@
 				// get a unique number for this category
 				// (trying to make new category creation compatible
 				//  with our legacy data structure)
-				uniqueCategoryId(id => {
+				uniqueKey('categories', id => {
 					category.id = id;
 
 					const newRef = database.ref(`categories`).push();
