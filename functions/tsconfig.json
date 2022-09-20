@@ -7,7 +7,7 @@
     "sourceMap": true,
     "strict": true,
     "esModuleInterop": true,
-    "target": "es2017"
+    "target": "es2021"
   },
   "compileOnSave": true,
   "include": [
