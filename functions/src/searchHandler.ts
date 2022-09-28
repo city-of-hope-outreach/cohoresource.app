@@ -9,6 +9,11 @@ const app = express();
 app.use(cors({origin: true}));
 
 type StringMap = { [p: string]: string };
+type SearchResult = {
+  key: string;
+  name: string;
+  rank: number;
+};
 
 app.get('/:unit', async (req, res) => {
   let unit = req.params['unit'];
@@ -32,17 +37,17 @@ app.get('/:unit', async (req, res) => {
   const categoryNames: StringMap = {};
   const words = wordsFromName(q);
 
-  for (const word of words) {
+  // grab first three words of the search query in order to improve performance and limit search results
+  for (const word of words.slice(0, 3)) {
     await getCategoryNamesForWord(unit, ref, word, categoryNames);
   }
 
-
   res.status(200);
-  res.json(categoryNames);
+  res.json(rankedResults(categoryNames, words));
 });
 
 const getCategoryNamesForWord = async (unit: string, ref: Reference, word: string, categoryNames: StringMap) => {
-  const snapshot = await ref.orderByKey().startAt(word).endAt(`${word}\uf8ff`).once('value');
+  const snapshot = await ref.orderByKey().startAt(word).endAt(`${word}\uf8ff`).limitToFirst(3).once('value');
   const snapshotVal = snapshot.val() as { [p: string]: string[] };
 
   for (const searchKey in snapshotVal) {
@@ -51,6 +56,49 @@ const getCategoryNamesForWord = async (unit: string, ref: Reference, word: strin
       categoryNames[categoryKey] = itemSnapshot.val();
     }
   }
+};
+
+const rankedResults = (categoryNames: StringMap, searchWords: string[]): SearchResult[] => {
+  const keysAndNames: SearchResult[] = [];
+
+  for (const key in categoryNames) {
+    if (categoryNames.hasOwnProperty(key)) {
+      keysAndNames.push({
+        key,
+        name: categoryNames[key],
+        rank: rankOfName(searchWords, categoryNames[key])
+      });
+    }
+  }
+
+  keysAndNames.sort((item1, item2) => {
+    if (item1.rank < item2.rank) return 1;
+    if (item1.rank > item2.rank) return -1;
+    return 0;
+  });
+
+  return keysAndNames;
+};
+
+const rankOfName = (searchWords: string[], name: string) => {
+  const thisItemsWords = wordsFromName(name);
+  let modifier = 1;
+
+  if (thisItemsWords[0].startsWith(searchWords[0])) {
+    modifier = 2;
+  }
+
+  let matches = 0;
+  for (const searchWord of searchWords) {
+    for (const thisItemsWord of thisItemsWords) {
+      if (searchWord === thisItemsWord) {
+        matches++;
+      } else if (thisItemsWord.startsWith(searchWord)) {
+        matches += searchWord.length / thisItemsWord.length;
+      }
+    }
+  }
+  return (matches / searchWords.length) * (matches / thisItemsWords.length) * modifier;
 };
 
 export const searchHandler = app;
