@@ -8,3 +8,5 @@ export const wordsFromName = (name: string): string[] => {
     // ignore common words
     .filter(word => word.length > 2 && word !== 'the');
 };
+
+export const difference = <T>(arr1: T[], arr2: T[]): T[] => arr1.filter(item => !arr2.includes(item));

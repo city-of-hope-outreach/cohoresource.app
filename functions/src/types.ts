@@ -39,3 +39,5 @@ export interface Resource extends NamedEntity {
   services: string;
   tags: string;
 }
+
+export type NamedEntityType = 'resources' | 'counties' | 'categories';

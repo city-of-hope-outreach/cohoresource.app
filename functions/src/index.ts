@@ -1,21 +1,22 @@
-import * as functions from "firebase-functions";
+import * as functions from 'firebase-functions';
 import {fulldatabaseHandler} from './fulldatabaseHandler';
 import {feedbackHandler} from './feedbackHandler';
 import {uniqueIdApp} from './uniqueidHandler';
 import {searchHandler} from './searchHandler';
+import {onCreateHandlerFactory, onDeleteHandlerFactory, onUpdateHandlerFactory} from './dbTriggerFunc';
 // import {indexTitlesHandler} from './indexTitles';
-
-
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
 
 export const fulldatabase = functions.https.onRequest(fulldatabaseHandler);
 export const feedback = functions.https.onRequest(feedbackHandler);
 export const uniqueid = functions.https.onRequest(uniqueIdApp);
 export const search = functions.https.onRequest(searchHandler);
+export const resourcesOnCreate = onCreateHandlerFactory('resources');
+export const resourcesOnDelete = onDeleteHandlerFactory('resources');
+export const resourcesOnUpdate = onUpdateHandlerFactory('resources');
+export const categoriesOnCreate = onCreateHandlerFactory('categories');
+export const categoriesOnDelete = onDeleteHandlerFactory('categories');
+export const categoriesOnUpdate = onUpdateHandlerFactory('categories');
+export const countiesOnCreate = onCreateHandlerFactory('counties');
+export const countiesOnDelete = onDeleteHandlerFactory('counties');
+export const countiesOnUpdate = onUpdateHandlerFactory('counties');
 // export const titleindex = functions.https.onRequest(indexTitlesHandler);
