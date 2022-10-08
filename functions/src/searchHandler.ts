@@ -4,14 +4,16 @@ import cors from 'cors';
 import {database} from 'firebase-admin';
 import Reference = database.Reference;
 import {wordsFromName} from './util';
+import {NamedEntity} from './types';
 
 const app = express();
 app.use(cors({origin: true}));
 
-type StringMap = { [p: string]: string };
+type NamedEntityMap = { [p: string]: Pick<NamedEntity, 'name' | 'description'> };
 type SearchResult = {
   key: string;
   name: string;
+  description: string;
   rank: number;
 };
 
@@ -34,7 +36,7 @@ app.get('/:unit', async (req, res) => {
   const q = req.query.q as string;
 
   const ref = db.ref(`/search/${unit}`);
-  const categoryNames: StringMap = {};
+  const categoryNames: NamedEntityMap = {};
   const words = wordsFromName(q);
 
   // grab first three words of the search query in order to improve performance and limit search results
@@ -46,27 +48,31 @@ app.get('/:unit', async (req, res) => {
   res.json(rankedResults(categoryNames, words));
 });
 
-const getCategoryNamesForWord = async (unit: string, ref: Reference, word: string, categoryNames: StringMap) => {
+const getCategoryNamesForWord = async (unit: string, ref: Reference, word: string, categoryNames: NamedEntityMap) => {
   const snapshot = await ref.orderByKey().startAt(word).endAt(`${word}\uf8ff`).limitToFirst(3).once('value');
   const snapshotVal = snapshot.val() as { [p: string]: string[] };
 
   for (const searchKey in snapshotVal) {
     for (const categoryKey of snapshotVal[searchKey]) {
-      const itemSnapshot = await db.ref(`/${unit}/${categoryKey}/name`).once('value');
-      categoryNames[categoryKey] = itemSnapshot.val();
+      const itemSnapshot = await db.ref(`/${unit}/${categoryKey}`).once('value');
+      const item = itemSnapshot.val() as NamedEntity;
+      categoryNames[categoryKey] = {
+        name: item.name,
+        description: item.description
+      };
     }
   }
 };
 
-const rankedResults = (categoryNames: StringMap, searchWords: string[]): SearchResult[] => {
+const rankedResults = (categoryNames: NamedEntityMap, searchWords: string[]): SearchResult[] => {
   const keysAndNames: SearchResult[] = [];
 
   for (const key in categoryNames) {
     if (categoryNames.hasOwnProperty(key)) {
       keysAndNames.push({
         key,
-        name: categoryNames[key],
-        rank: rankOfName(searchWords, categoryNames[key])
+        ...categoryNames[key],
+        rank: rankOfName(searchWords, categoryNames[key].name)
       });
     }
   }
