@@ -28,13 +28,18 @@ app.post('/:unit', async (req, res) => {
     });
   }
 
-  if (typeof req.body.q !== 'string') {
+  if (typeof req.body.data !== 'string') {
     res.status(400);
-    res.json({error: `Type of req.query.q: ${typeof req.query.q}`});
+    res.json({error: `Type of req.query.q: ${typeof req.query.data}`});
     return;
   }
 
-  const q = req.body.q as string;
+  if (req.body.data.length === 0) {
+    res.status(400);
+    res.json({error: 'Search query must be a nonempty string'});
+  }
+
+  const q = req.body.data as string;
 
   const ref = db.ref(`/search/${unit}`);
   const categoryNames: NamedEntityMap = {};
@@ -46,7 +51,7 @@ app.post('/:unit', async (req, res) => {
   }
 
   res.status(200);
-  res.json(rankedResults(categoryNames, words));
+  res.json({data: rankedResults(categoryNames, words)});
 });
 
 const getCategoryNamesForWord = async (unit: string, ref: Reference, word: string, categoryNames: NamedEntityMap) => {
