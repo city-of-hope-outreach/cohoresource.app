@@ -17,23 +17,24 @@ type SearchResult = {
   rank: number;
 };
 
-app.get('/:unit', async (req, res) => {
+app.post('/:unit', async (req, res) => {
+  // let unit = req.body.unit;
   let unit = req.params['unit'];
 
   if (unit !== 'categories' && unit !== 'counties' && unit !== 'resources') {
     res.status(404);
     res.json({
-      error: 'Unit not found',
+      error: 'Unit not found'
     });
   }
 
-  if (typeof req.query.q !== 'string') {
+  if (typeof req.body.q !== 'string') {
     res.status(400);
     res.json({error: `Type of req.query.q: ${typeof req.query.q}`});
     return;
   }
 
-  const q = req.query.q as string;
+  const q = req.body.q as string;
 
   const ref = db.ref(`/search/${unit}`);
   const categoryNames: NamedEntityMap = {};
