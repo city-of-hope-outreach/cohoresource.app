@@ -1,6 +1,7 @@
 export interface NamedEntity {
   id: number;
   name: string;
+  name_lower: string;
   description: string;
 }
 

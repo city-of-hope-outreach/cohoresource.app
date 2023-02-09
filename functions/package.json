@@ -8,7 +8,8 @@
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "build": "tsc",
-    "buildandstart": "npm run build && npm run serve"
+    "deploy-functions-dev": "firebase use dev; firebase deploy --only functions",
+    "deploy-functions-prod": "firebase use default; firebase deploy --only functions"
   },
   "engines": {
     "node": "16"

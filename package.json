@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "sass --watch public/scss:public/css & http-server -p 8000 ./public"
+    "server": "sass --watch public/scss:public/css & http-server -p 8000 ./public",
+    "deploy-functions-dev": "firebase use dev; firebase deploy --only functions",
+    "deploy-functions-prod": "firebase use default; firebase deploy --only functions"
   },
   "author": "",
   "license": "ISC",

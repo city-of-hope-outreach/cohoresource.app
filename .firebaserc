@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "cohodatabase"
-  }
+    "default": "cohodatabase",
+    "dev": "cohodatabase-dev"
+  },
+  "targets": {},
+  "etags": {}
 }

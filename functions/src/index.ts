@@ -3,6 +3,7 @@ import {fulldatabaseHandler} from './fulldatabaseHandler';
 import {feedbackHandler} from './feedbackHandler';
 import {uniqueIdApp} from './uniqueidHandler';
 import {searchHandler} from './searchHandler';
+import generateLowerCaseNamesHandler from './generateLowerCaseNames';
 import {onCreateHandlerFactory, onDeleteHandlerFactory, onUpdateHandlerFactory} from './dbTriggerFunc';
 // import {indexTitlesHandler} from './indexTitles';
 
@@ -10,6 +11,7 @@ export const fulldatabase = functions.https.onRequest(fulldatabaseHandler);
 export const feedback = functions.https.onRequest(feedbackHandler);
 export const uniqueid = functions.https.onRequest(uniqueIdApp);
 export const search = functions.https.onRequest(searchHandler);
+export const generateLowerCaseNames = functions.https.onRequest(generateLowerCaseNamesHandler);
 export const resourcesOnCreate = onCreateHandlerFactory('resources');
 export const resourcesOnDelete = onDeleteHandlerFactory('resources');
 export const resourcesOnUpdate = onUpdateHandlerFactory('resources');
