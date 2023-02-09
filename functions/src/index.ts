@@ -5,7 +5,8 @@ import {uniqueIdApp} from './uniqueidHandler';
 import {searchHandler} from './searchHandler';
 import generateLowerCaseNamesHandler from './generateLowerCaseNames';
 import {onCreateHandlerFactory, onDeleteHandlerFactory, onUpdateHandlerFactory} from './dbTriggerFunc';
-// import {indexTitlesHandler} from './indexTitles';
+import {indexTitlesHandler} from './indexTitles';
+import categoryKeysHandler from './categoryKeys';
 
 export const fulldatabase = functions.https.onRequest(fulldatabaseHandler);
 export const feedback = functions.https.onRequest(feedbackHandler);
@@ -21,4 +22,5 @@ export const categoriesOnUpdate = onUpdateHandlerFactory('categories');
 export const countiesOnCreate = onCreateHandlerFactory('counties');
 export const countiesOnDelete = onDeleteHandlerFactory('counties');
 export const countiesOnUpdate = onUpdateHandlerFactory('counties');
-// export const titleindex = functions.https.onRequest(indexTitlesHandler);
+export const titleindex = functions.https.onRequest(indexTitlesHandler);
+export const categoryKeys = functions.https.onRequest(categoryKeysHandler);
