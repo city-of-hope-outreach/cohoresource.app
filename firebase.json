@@ -33,5 +33,8 @@
     "hosting": {
       "port": "8000"
     }
+  },
+  "database": {
+    "rules": "database.rules.json"
   }
 }
