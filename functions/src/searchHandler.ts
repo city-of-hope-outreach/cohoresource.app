@@ -30,7 +30,7 @@ app.post('/:unit', async (req, res) => {
 
   if (typeof req.body.data !== 'string') {
     res.status(400);
-    res.json({error: `Type of req.query.q: ${typeof req.query.data}`});
+    res.json({error: `Type of req.body.data: ${typeof req.body.data}`});
     return;
   }
 

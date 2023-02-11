@@ -4,7 +4,6 @@ import {db} from './firebaseadmin';
 export const feedbackHandler = async (req: functions.https.Request, res: functions.Response): Promise<void> => {
   const feedbackRef = db.ref('/feedback');
   const validationRef = db.ref("/feedbackvalidation");
-  console.log("feeeeeeeeedback");
   const apikey = req.body.apikey;
   const secret = req.body.secret;
   const type = req.body.type;
