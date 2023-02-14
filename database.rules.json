@@ -1,0 +1,124 @@
+{
+  /* Visit https://firebase.google.com/docs/database/security to learn more about security rules. */
+  "rules": {
+    "resources": {
+      ".read": true,
+      ".write": "auth !== null",
+      //".write": "root.child('users').child(auth.uid).val() == true",
+      ".indexOn": [
+        "id",
+        "name",
+        "name_lower"
+      ],
+      "$resource": {
+        ".validate": "newData.hasChildren(['name', 'name_lower'])",
+        "name": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "name_lower": {
+          ".validate": "newData.isString() && newData.val() === newData.parent().child('name').val().toLowerCase()"
+        },
+        "description": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "documentation": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "hours": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "services": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "tags": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "categoryKeys": {
+          "$key": {
+            ".validate": "root.child('categories').hasChild(newData.val())"
+          }
+        },
+        "countyKeys": {
+          "$key": {
+            ".validate": "root.child('counties').hasChild(newData.val())"
+          }
+        },
+        "contact": {
+          "$idx": {
+            ".validate": "newData.hasChildren(['typeInt','value'])",
+            "typeInt": {
+              ".validate": "newData.val() === 0 || newData.val() === 1 || newData.val() === 2 || newData.val() === 3"
+            },
+            "value": {
+              ".validate": "newData.isString() && (((newData.parent().child('typeInt').val() === 0 || newData.parent().child('typeInt').val() === 3) && newData.val().matches(/^(1-)?\\d{3}-\\d{3}-\\d{4}$/)) || (newData.parent().child('typeInt').val() === 1 && newData.val().matches(/^.+@.+\\..+$/)) || (newData.parent().child('typeInt').val() === 2 && newData.val().length > 0))"
+            },
+            "name": {
+              ".validate": "newData.isString() && newData.val().length > 0"
+            }
+          }
+        },
+        "locations": {
+          "$idx": {
+            ".validate": "newData.hasChildren(['desc', 'street1', 'city', 'state', 'zip'])",
+            "desc": {
+              ".validate": "newData.isString() && newData.val().length > 0"
+            },
+            "street1": {
+              ".validate": "newData.isString() && newData.val().length > 0"
+            },
+            "street2": {
+              ".validate": "newData.isString() && newData.val().length > 0"
+            },
+            "city": {
+              ".validate": "newData.isString() && newData.val().length > 0"
+            },
+            "state": {
+              ".validate": "newData.isString() && newData.val().length === 2"
+            },
+            "zip": {
+              ".validate": "newData.isString() && newData.val().matches(/^\\d{5}(-\\d{4})?$/)"
+            }
+          }
+        }
+      }
+    },
+    "categories": {
+      ".read": true,
+      ".write": "auth !== null",
+      "$category": {
+        ".validate": "newData.hasChildren(['name','name_lower','icon'])",
+        "name": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "name_lower": {
+          ".validate": "newData.isString() && newData.val() === newData.parent().child('name').val().toLowerCase()"
+        },
+        "icon": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "description": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        }
+      },
+      // ".write": "root.child('users').child(auth.uid).val() == true",
+      ".indexOn": [
+        "id",
+        "name",
+        "name_lower"
+      ]
+    },
+    "counties": {
+      ".read": true,
+      ".write": false,
+      ".indexOn": [
+        "id",
+        "name",
+        "name_lower"
+      ]
+    },
+    "test": {
+      ".read": true,
+      ".write": "root.child('users').child(auth.uid).val() == true"
+    }
+  }
+}
