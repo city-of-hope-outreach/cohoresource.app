@@ -3,6 +3,7 @@ export interface NamedEntity {
   name: string;
   name_lower: string;
   description: string;
+  dataValidated?: boolean;
 }
 
 export interface Category extends NamedEntity {
@@ -31,14 +32,16 @@ export type ResourceLocation = {
 }
 
 export interface Resource extends NamedEntity {
-  categories: number[];
-  contact: ResourceContact[];
-  counties: number[];
-  documentation: string;
-  hours: string;
-  locations: ResourceLocation[];
-  services: string;
-  tags: string;
+  categories?: number[];
+  categoryKeys?: string[];
+  contact?: ResourceContact[];
+  counties?: number[];
+  countyKeys?: string[];
+  documentation?: string;
+  hours?: string;
+  locations?: ResourceLocation[];
+  services?: string;
+  tags?: string;
 }
 
 export type NamedEntityType = 'resources' | 'counties' | 'categories';

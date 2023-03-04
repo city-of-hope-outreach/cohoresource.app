@@ -9,7 +9,8 @@
     "logs": "firebase functions:log",
     "build": "tsc",
     "deploy-functions-dev": "firebase use dev; firebase deploy --only functions",
-    "deploy-functions-prod": "firebase use default; firebase deploy --only functions"
+    "deploy-functions-prod": "firebase use default; firebase deploy --only functions",
+    "emulator": "firebase emulators:start"
   },
   "engines": {
     "node": "16"
