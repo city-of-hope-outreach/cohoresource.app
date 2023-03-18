@@ -8,6 +8,7 @@ import {indexTitlesHandler} from './indexTitles';
 import categoryKeysHandler from './categoryKeys';
 import {deleteResourceCallablehandler, postResourceCallableHandler, putResourceCallableHandler} from './writeResource';
 import {deleteCategoryCallableHandler, postCategoryCallableHandler, putCategoryCallableHandler} from './writeCategory';
+import {indexCategoriesCallable} from './indexCategories';
 
 export const fulldatabase = functions.https.onRequest(fulldatabaseHandler);
 export const feedback = functions.https.onRequest(feedbackHandler);
@@ -22,3 +23,4 @@ export const putCategory = functions.https.onCall(putCategoryCallableHandler);
 export const deleteCategory = functions.https.onCall(deleteCategoryCallableHandler);
 export const titleindex = functions.https.onRequest(indexTitlesHandler);
 export const categoryKeys = functions.https.onRequest(categoryKeysHandler);
+export const indexCategories = functions.https.onCall(indexCategoriesCallable);
