@@ -3,19 +3,18 @@ export interface NamedEntity {
   name: string;
   name_lower: string;
   description: string;
-  dataValidated?: boolean;
 }
 
 export interface Category extends NamedEntity {
   icon: string;
+  resources: string[] | null;
 }
 
-export interface County extends NamedEntity{
+export interface County extends NamedEntity {
   icon: string;
 }
 
 export type ResourceContact = {
-  id: number;
   name: string;
   typeInt: number;
   value: string;
@@ -24,7 +23,6 @@ export type ResourceContact = {
 export type ResourceLocation = {
   city: string;
   desc: string;
-  id: number;
   state: string;
   street1: string;
   street2: string;
@@ -45,3 +43,10 @@ export interface Resource extends NamedEntity {
 }
 
 export type NamedEntityType = 'resources' | 'counties' | 'categories';
+
+export type Validator<T> = {
+  [key in keyof Required<T>]: {
+    required: boolean;
+    validate: (obj: any, parent: T) => void;
+  };
+};
