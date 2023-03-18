@@ -1,13 +1,21 @@
 import {db} from './firebaseadmin';
 import {Resource, ResourceContact, ResourceLocation, Validator} from './types';
 import {
-  getNewId, indexNewItem, removeIndexOfItem,
-  runValidator, updateIndexOfItem,
+  getNewId,
+  indexNewItem,
+  removeIndexOfItem,
+  runValidator,
+  updateIndexOfItem,
   validateNonEmptyArrayOfType,
   validateNonEmptyString,
   validateNumberArr,
   validateStringArr,
-  setIntIds, validateNumber, addResourceToCategories, updateCategoriesWithResource, deleteResourceFromCategories
+  setIntIds,
+  validateNumber,
+  addResourceToCategories,
+  updateCategoriesWithResource,
+  deleteResourceFromCategories,
+  checkUserPermission
 } from './util';
 import {CallableContext} from 'firebase-functions/lib/common/providers/https';
 import {https} from 'firebase-functions';
@@ -102,7 +110,7 @@ const resourceValidator: Validator<Resource> = {
 };
 
 export const postResourceCallableHandler = async (data: any, context: CallableContext) => {
-  // todo auth state
+  await checkUserPermission(context);
 
   try {
     runValidator(data, resourceValidator);
@@ -141,7 +149,7 @@ export const postResourceCallableHandler = async (data: any, context: CallableCo
 };
 
 export const putResourceCallableHandler = async (data: any, context: CallableContext) => {
-  // todo auth state
+  await checkUserPermission(context);
 
   if (!data.key) {
     throw new https.HttpsError('invalid-argument', 'data.key is missing');
@@ -194,7 +202,7 @@ export const putResourceCallableHandler = async (data: any, context: CallableCon
 };
 
 export const deleteResourceCallablehandler = async (data: any, context: CallableContext) => {
-  // todo auth state
+  await checkUserPermission(context);
 
   if (!data.key) {
     throw new https.HttpsError('invalid-argument', 'data.key is missing');

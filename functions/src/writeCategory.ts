@@ -1,5 +1,6 @@
 import {Category, Resource, Validator} from './types';
 import {
+  checkUserPermission,
   getNewId, indexNewItem, removeIndexOfItem,
   runValidator, updateIndexOfItem,
   validateNonEmptyString, validateNumber
@@ -19,7 +20,7 @@ const categoryValidator: Validator<Category> = {
 };
 
 export const postCategoryCallableHandler = async (data: any, context: CallableContext) => {
-// todo auth state
+  await checkUserPermission(context);
 
   try {
     runValidator(data, categoryValidator);
@@ -49,7 +50,7 @@ export const postCategoryCallableHandler = async (data: any, context: CallableCo
 }
 
 export const putCategoryCallableHandler = async (data: any, context: CallableContext) => {
-  // todo auth state
+  await checkUserPermission(context);
 
   if (!data.key) {
     throw new https.HttpsError('invalid-argument', 'data.key is missing');
@@ -85,7 +86,9 @@ export const putCategoryCallableHandler = async (data: any, context: CallableCon
   category.name_lower = category.name.toLowerCase();
 
   // set category resources
-  category.resources = oldCategory.resources;
+  if (oldCategory.resources) {
+    category.resources = oldCategory.resources;
+  }
 
   // update indexing of title
   await updateIndexOfItem('categories', data.key, oldCategory.name, category.name);
@@ -96,7 +99,7 @@ export const putCategoryCallableHandler = async (data: any, context: CallableCon
 }
 
 export const deleteCategoryCallableHandler = async (data: any, context: CallableContext) => {
-  // todo auth state
+  await checkUserPermission(context);
 
   if (!data.key) {
     throw new https.HttpsError('invalid-argument', 'data.key is missing');

@@ -2,6 +2,7 @@ import {NamedEntity, NamedEntityType, Resource, Validator} from './types';
 import {db} from './firebaseadmin';
 import {https} from 'firebase-functions';
 import {addToList, removeFromList} from './dbutil';
+import type {CallableContext} from 'firebase-functions/lib/common/providers/https';
 
 export const wordsFromName = (name: string): string[] => {
   const normalized = name
@@ -206,5 +207,15 @@ export const updateCategoriesWithResource =
 export const deleteResourceFromCategories = async (resourceKey: string, categoryKeys?: string[]) => {
   for (const key of categoryKeys ?? []) {
     await removeFromList(`/categories/${key}/resources`, resourceKey);
+  }
+}
+
+export const checkUserPermission = async (context: CallableContext) => {
+  if (!context.auth?.uid){
+    throw new https.HttpsError('unauthenticated', 'Not authenticated');
+  }
+
+  if (!(await db.ref(`/users/${context.auth?.uid}`).get()).val()) {
+    throw new https.HttpsError('permission-denied', 'Not allowed');
   }
 }
