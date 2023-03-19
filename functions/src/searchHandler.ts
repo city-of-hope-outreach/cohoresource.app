@@ -1,13 +1,10 @@
 import {db} from './firebaseadmin';
-import express from 'express';
-import cors from 'cors';
 import {database} from 'firebase-admin';
 import Reference = database.Reference;
-import {wordsFromName} from './util';
-import {NamedEntity} from './types';
-
-const app = express();
-app.use(cors({origin: true}));
+import {checkUserPermission, wordsFromName} from './util';
+import {NamedEntity, NamedEntityType} from './types';
+import type {CallableContext} from 'firebase-functions/lib/common/providers/https';
+import {https} from 'firebase-functions';
 
 type NamedEntityMap = { [p: string]: Pick<NamedEntity, 'name' | 'description'> };
 type SearchResult = {
@@ -17,42 +14,30 @@ type SearchResult = {
   rank: number;
 };
 
-app.post('/:unit', async (req, res) => {
-  // let unit = req.body.unit;
-  let unit = req.params['unit'];
+export const searchHandlerFactory = (unit: NamedEntityType) => {
+  return async (data: any, context: CallableContext) => {
+    await checkUserPermission(context);
 
-  if (unit !== 'categories' && unit !== 'counties' && unit !== 'resources') {
-    res.status(404);
-    res.json({
-      error: 'Unit not found'
-    });
+    if (typeof data !== 'string') {
+      throw new https.HttpsError('invalid-argument', `Type of req.body.data: ${typeof data}`);
+    }
+
+    if (data.length === 0) {
+      throw new https.HttpsError('invalid-argument', 'Search query must be a nonempty string');
+    }
+
+    const ref = db.ref(`/search/${unit}`);
+    const categoryNames: NamedEntityMap = {};
+    const words = wordsFromName(data);
+
+    // grab first three words of the search query in order to improve performance and limit search results
+    for (const word of words.slice(0, 3)) {
+      await getCategoryNamesForWord(unit, ref, word, categoryNames);
+    }
+
+    return rankedResults(categoryNames, words);
   }
-
-  if (typeof req.body.data !== 'string') {
-    res.status(400);
-    res.json({error: `Type of req.body.data: ${typeof req.body.data}`});
-    return;
-  }
-
-  if (req.body.data.length === 0) {
-    res.status(400);
-    res.json({error: 'Search query must be a nonempty string'});
-  }
-
-  const q = req.body.data as string;
-
-  const ref = db.ref(`/search/${unit}`);
-  const categoryNames: NamedEntityMap = {};
-  const words = wordsFromName(q);
-
-  // grab first three words of the search query in order to improve performance and limit search results
-  for (const word of words.slice(0, 3)) {
-    await getCategoryNamesForWord(unit, ref, word, categoryNames);
-  }
-
-  res.status(200);
-  res.json({data: rankedResults(categoryNames, words)});
-});
+}
 
 const getCategoryNamesForWord = async (unit: string, ref: Reference, word: string, categoryNames: NamedEntityMap) => {
   const snapshot = await ref.orderByKey().startAt(word).endAt(`${word}\uf8ff`).limitToFirst(3).once('value');
@@ -112,5 +97,3 @@ const rankOfName = (searchWords: string[], name: string) => {
   }
   return (matches / searchWords.length) * (matches / thisItemsWords.length) * modifier;
 };
-
-export const searchHandler = app;
