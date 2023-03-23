@@ -1,0 +1,298 @@
+{
+  "conway": {
+    "id": 3,
+    "name": "Conway"
+  },
+  "faulkner": {
+    "id": 1,
+    "name": "Faulkner"
+  },
+  "pulaski": {
+    "id": 2,
+    "name": "Pulaski"
+  },
+  "arkansas": {
+    "id": 4,
+    "name": "Arkansas"
+  },
+  "baxter": {
+    "id": 5,
+    "name": "Baxter"
+  },
+  "benton": {
+    "id": 6,
+    "name": "Benton"
+  },
+  "boone": {
+    "id": 7,
+    "name": "Boone"
+  },
+  "bradley": {
+    "id": 8,
+    "name": "Bradley"
+  },
+  "calhoun": {
+    "id": 9,
+    "name": "Calhoun"
+  },
+  "carroll": {
+    "id": 10,
+    "name": "Carroll"
+  },
+  "chicot": {
+    "id": 11,
+    "name": "Chicot"
+  },
+  "clark": {
+    "id": 12,
+    "name": "Clark"
+  },
+  "clay": {
+    "id": 13,
+    "name": "Clay"
+  },
+  "cleburne": {
+    "id": 14,
+    "name": "Cleburne"
+  },
+  "cleveland": {
+    "id": 15,
+    "name": "Cleveland"
+  },
+  "columbia": {
+    "id": 16,
+    "name": "Columbia"
+  },
+  "craighead": {
+    "id": 17,
+    "name": "Craighead"
+  },
+  "crawford": {
+    "id": 18,
+    "name": "Crawford"
+  },
+  "crittenden": {
+    "id": 19,
+    "name": "Crittenden"
+  },
+  "cross": {
+    "id": 20,
+    "name": "Cross"
+  },
+  "dallas": {
+    "id": 21,
+    "name": "Dallas"
+  },
+  "desha": {
+    "id": 22,
+    "name": "Desha"
+  },
+  "drew": {
+    "id": 23,
+    "name": "Drew"
+  },
+  "franklin": {
+    "id": 24,
+    "name": "Franklin"
+  },
+  "fulton": {
+    "id": 25,
+    "name": "Fulton"
+  },
+  "garland": {
+    "id": 26,
+    "name": "Garland"
+  },
+  "grant": {
+    "id": 27,
+    "name": "Grant"
+  },
+  "greene": {
+    "id": 28,
+    "name": "Greene"
+  },
+  "hempstead": {
+    "id": 29,
+    "name": "Hempstead"
+  },
+  "hot_spring": {
+    "id": 30,
+    "name": "Hot Spring"
+  },
+  "howard": {
+    "id": 31,
+    "name": "Howard"
+  },
+  "independence": {
+    "id": 32,
+    "name": "Independence"
+  },
+  "izard": {
+    "id": 33,
+    "name": "Izard"
+  },
+  "jackson": {
+    "id": 34,
+    "name": "Jackson"
+  },
+  "jefferson": {
+    "id": 35,
+    "name": "Jefferson"
+  },
+  "johnson": {
+    "id": 36,
+    "name": "Johnson"
+  },
+  "lafayette": {
+    "id": 37,
+    "name": "Lafayette"
+  },
+  "lawrence": {
+    "id": 38,
+    "name": "Lawrence"
+  },
+  "lee": {
+    "id": 39,
+    "name": "Lee"
+  },
+  "lincoln": {
+    "id": 40,
+    "name": "Lincoln"
+  },
+  "little_river": {
+    "id": 41,
+    "name": "Little River"
+  },
+  "logan": {
+    "id": 42,
+    "name": "Logan"
+  },
+  "lonoke": {
+    "id": 43,
+    "name": "Lonoke"
+  },
+  "madison": {
+    "id": 44,
+    "name": "Madison"
+  },
+  "marion": {
+    "id": 45,
+    "name": "Marion"
+  },
+  "miller": {
+    "id": 46,
+    "name": "Miller"
+  },
+  "mississippi": {
+    "id": 47,
+    "name": "Mississippi"
+  },
+  "monroe": {
+    "id": 48,
+    "name": "Monroe"
+  },
+  "montgomery": {
+    "id": 49,
+    "name": "Montgomery"
+  },
+  "nevada": {
+    "id": 50,
+    "name": "Nevada"
+  },
+  "newton": {
+    "id": 51,
+    "name": "Newton"
+  },
+  "ouachita": {
+    "id": 52,
+    "name": "Ouachita"
+  },
+  "perry": {
+    "id": 53,
+    "name": "Perry"
+  },
+  "philips": {
+    "id": 54,
+    "name": "Philips"
+  },
+  "pike": {
+    "id": 55,
+    "name": "Pike"
+  },
+  "poinsett": {
+    "id": 56,
+    "name": "Poinsett"
+  },
+  "polk": {
+    "id": 57,
+    "name": "Polk"
+  },
+  "pope": {
+    "id": 58,
+    "name": "Pope"
+  },
+  "prairie": {
+    "id": 59,
+    "name": "Prairie"
+  },
+  "randolph": {
+    "id": 60,
+    "name": "Randolph"
+  },
+  "saline": {
+    "id": 61,
+    "name": "Saline"
+  },
+  "scott": {
+    "id": 62,
+    "name": "Scott"
+  },
+  "searcy": {
+    "id": 63,
+    "name": "Searcy"
+  },
+  "sebastian": {
+    "id": 64,
+    "name": "Sebastian"
+  },
+  "sevier": {
+    "id": 65,
+    "name": "Sevier"
+  },
+  "sharp": {
+    "id": 66,
+    "name": "Sharp"
+  },
+  "st_francis": {
+    "id": 67,
+    "name": "St. Francis"
+  },
+  "stone": {
+    "id": 68,
+    "name": "Stone"
+  },
+  "union": {
+    "id": 69,
+    "name": "Union"
+  },
+  "van_buren": {
+    "id": 70,
+    "name": "Van Buren"
+  },
+  "washington": {
+    "id": 71,
+    "name": "Washington"
+  },
+  "white": {
+    "id": 72,
+    "name": "White"
+  },
+  "woodruff": {
+    "id": 73,
+    "name": "Woodruff"
+  },
+  "yell": {
+    "id": 74,
+    "name": "Yell"
+  }
+}
