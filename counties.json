@@ -1,298 +1,372 @@
 {
   "conway": {
     "id": 3,
-    "name": "Conway"
+    "name": "Conway",
+    "name_lower": "conway"
   },
   "faulkner": {
     "id": 1,
-    "name": "Faulkner"
+    "name": "Faulkner",
+    "name_lower": "faulkner"
   },
   "pulaski": {
     "id": 2,
-    "name": "Pulaski"
+    "name": "Pulaski",
+    "name_lower": "pulaski"
   },
   "arkansas": {
     "id": 4,
-    "name": "Arkansas"
+    "name": "Arkansas",
+    "name_lower": "arkansas"
   },
   "baxter": {
     "id": 5,
-    "name": "Baxter"
+    "name": "Baxter",
+    "name_lower": "baxter"
   },
   "benton": {
     "id": 6,
-    "name": "Benton"
+    "name": "Benton",
+    "name_lower": "benton"
   },
   "boone": {
     "id": 7,
-    "name": "Boone"
+    "name": "Boone",
+    "name_lower": "boone"
   },
   "bradley": {
     "id": 8,
-    "name": "Bradley"
+    "name": "Bradley",
+    "name_lower": "bradley"
   },
   "calhoun": {
     "id": 9,
-    "name": "Calhoun"
+    "name": "Calhoun",
+    "name_lower": "calhoun"
   },
   "carroll": {
     "id": 10,
-    "name": "Carroll"
+    "name": "Carroll",
+    "name_lower": "carroll"
   },
   "chicot": {
     "id": 11,
-    "name": "Chicot"
+    "name": "Chicot",
+    "name_lower": "chicot"
   },
   "clark": {
     "id": 12,
-    "name": "Clark"
+    "name": "Clark",
+    "name_lower": "clark"
   },
   "clay": {
     "id": 13,
-    "name": "Clay"
+    "name": "Clay",
+    "name_lower": "clay"
   },
   "cleburne": {
     "id": 14,
-    "name": "Cleburne"
+    "name": "Cleburne",
+    "name_lower": "cleburne"
   },
   "cleveland": {
     "id": 15,
-    "name": "Cleveland"
+    "name": "Cleveland",
+    "name_lower": "cleveland"
   },
   "columbia": {
     "id": 16,
-    "name": "Columbia"
+    "name": "Columbia",
+    "name_lower": "columbia"
   },
   "craighead": {
     "id": 17,
-    "name": "Craighead"
+    "name": "Craighead",
+    "name_lower": "craighead"
   },
   "crawford": {
     "id": 18,
-    "name": "Crawford"
+    "name": "Crawford",
+    "name_lower": "crawford"
   },
   "crittenden": {
     "id": 19,
-    "name": "Crittenden"
+    "name": "Crittenden",
+    "name_lower": "crittenden"
   },
   "cross": {
     "id": 20,
-    "name": "Cross"
+    "name": "Cross",
+    "name_lower": "cross"
   },
   "dallas": {
     "id": 21,
-    "name": "Dallas"
+    "name": "Dallas",
+    "name_lower": "dallas"
   },
   "desha": {
     "id": 22,
-    "name": "Desha"
+    "name": "Desha",
+    "name_lower": "desha"
   },
   "drew": {
     "id": 23,
-    "name": "Drew"
+    "name": "Drew",
+    "name_lower": "drew"
   },
   "franklin": {
     "id": 24,
-    "name": "Franklin"
+    "name": "Franklin",
+    "name_lower": "franklin"
   },
   "fulton": {
     "id": 25,
-    "name": "Fulton"
+    "name": "Fulton",
+    "name_lower": "fulton"
   },
   "garland": {
     "id": 26,
-    "name": "Garland"
+    "name": "Garland",
+    "name_lower": "garland"
   },
   "grant": {
     "id": 27,
-    "name": "Grant"
+    "name": "Grant",
+    "name_lower": "grant"
   },
   "greene": {
     "id": 28,
-    "name": "Greene"
+    "name": "Greene",
+    "name_lower": "greene"
   },
   "hempstead": {
     "id": 29,
-    "name": "Hempstead"
+    "name": "Hempstead",
+    "name_lower": "hempstead"
   },
   "hot_spring": {
     "id": 30,
-    "name": "Hot Spring"
+    "name": "Hot Spring",
+    "name_lower": "hot spring"
   },
   "howard": {
     "id": 31,
-    "name": "Howard"
+    "name": "Howard",
+    "name_lower": "howard"
   },
   "independence": {
     "id": 32,
-    "name": "Independence"
+    "name": "Independence",
+    "name_lower": "independence"
   },
   "izard": {
     "id": 33,
-    "name": "Izard"
+    "name": "Izard",
+    "name_lower": "izard"
   },
   "jackson": {
     "id": 34,
-    "name": "Jackson"
+    "name": "Jackson",
+    "name_lower": "jackson"
   },
   "jefferson": {
     "id": 35,
-    "name": "Jefferson"
+    "name": "Jefferson",
+    "name_lower": "jefferson"
   },
   "johnson": {
     "id": 36,
-    "name": "Johnson"
+    "name": "Johnson",
+    "name_lower": "johnson"
   },
   "lafayette": {
     "id": 37,
-    "name": "Lafayette"
+    "name": "Lafayette",
+    "name_lower": "lafayette"
   },
   "lawrence": {
     "id": 38,
-    "name": "Lawrence"
+    "name": "Lawrence",
+    "name_lower": "lawrence"
   },
   "lee": {
     "id": 39,
-    "name": "Lee"
+    "name": "Lee",
+    "name_lower": "lee"
   },
   "lincoln": {
     "id": 40,
-    "name": "Lincoln"
+    "name": "Lincoln",
+    "name_lower": "lincoln"
   },
   "little_river": {
     "id": 41,
-    "name": "Little River"
+    "name": "Little River",
+    "name_lower": "little river"
   },
   "logan": {
     "id": 42,
-    "name": "Logan"
+    "name": "Logan",
+    "name_lower": "logan"
   },
   "lonoke": {
     "id": 43,
-    "name": "Lonoke"
+    "name": "Lonoke",
+    "name_lower": "lonoke"
   },
   "madison": {
     "id": 44,
-    "name": "Madison"
+    "name": "Madison",
+    "name_lower": "madison"
   },
   "marion": {
     "id": 45,
-    "name": "Marion"
+    "name": "Marion",
+    "name_lower": "marion"
   },
   "miller": {
     "id": 46,
-    "name": "Miller"
+    "name": "Miller",
+    "name_lower": "miller"
   },
   "mississippi": {
     "id": 47,
-    "name": "Mississippi"
+    "name": "Mississippi",
+    "name_lower": "mississippi"
   },
   "monroe": {
     "id": 48,
-    "name": "Monroe"
+    "name": "Monroe",
+    "name_lower": "monroe"
   },
   "montgomery": {
     "id": 49,
-    "name": "Montgomery"
+    "name": "Montgomery",
+    "name_lower": "montgomery"
   },
   "nevada": {
     "id": 50,
-    "name": "Nevada"
+    "name": "Nevada",
+    "name_lower": "nevada"
   },
   "newton": {
     "id": 51,
-    "name": "Newton"
+    "name": "Newton",
+    "name_lower": "newton"
   },
   "ouachita": {
     "id": 52,
-    "name": "Ouachita"
+    "name": "Ouachita",
+    "name_lower": "ouachita"
   },
   "perry": {
     "id": 53,
-    "name": "Perry"
+    "name": "Perry",
+    "name_lower": "perry"
   },
   "philips": {
     "id": 54,
-    "name": "Philips"
+    "name": "Philips",
+    "name_lower": "philips"
   },
   "pike": {
     "id": 55,
-    "name": "Pike"
+    "name": "Pike",
+    "name_lower": "pike"
   },
   "poinsett": {
     "id": 56,
-    "name": "Poinsett"
+    "name": "Poinsett",
+    "name_lower": "poinsett"
   },
   "polk": {
     "id": 57,
-    "name": "Polk"
+    "name": "Polk",
+    "name_lower": "polk"
   },
   "pope": {
     "id": 58,
-    "name": "Pope"
+    "name": "Pope",
+    "name_lower": "pope"
   },
   "prairie": {
     "id": 59,
-    "name": "Prairie"
+    "name": "Prairie",
+    "name_lower": "prairie"
   },
   "randolph": {
     "id": 60,
-    "name": "Randolph"
+    "name": "Randolph",
+    "name_lower": "randolph"
   },
   "saline": {
     "id": 61,
-    "name": "Saline"
+    "name": "Saline",
+    "name_lower": "saline"
   },
   "scott": {
     "id": 62,
-    "name": "Scott"
+    "name": "Scott",
+    "name_lower": "scott"
   },
   "searcy": {
     "id": 63,
-    "name": "Searcy"
+    "name": "Searcy",
+    "name_lower": "searcy"
   },
   "sebastian": {
     "id": 64,
-    "name": "Sebastian"
+    "name": "Sebastian",
+    "name_lower": "sebastian"
   },
   "sevier": {
     "id": 65,
-    "name": "Sevier"
+    "name": "Sevier",
+    "name_lower": "sevier"
   },
   "sharp": {
     "id": 66,
-    "name": "Sharp"
+    "name": "Sharp",
+    "name_lower": "sharp"
   },
   "st_francis": {
     "id": 67,
-    "name": "St. Francis"
+    "name": "St. Francis",
+    "name_lower": "st. francis"
   },
   "stone": {
     "id": 68,
-    "name": "Stone"
+    "name": "Stone",
+    "name_lower": "stone"
   },
   "union": {
     "id": 69,
-    "name": "Union"
+    "name": "Union",
+    "name_lower": "union"
   },
   "van_buren": {
     "id": 70,
-    "name": "Van Buren"
+    "name": "Van Buren",
+    "name_lower": "van buren"
   },
   "washington": {
     "id": 71,
-    "name": "Washington"
+    "name": "Washington",
+    "name_lower": "washington"
   },
   "white": {
     "id": 72,
-    "name": "White"
+    "name": "White",
+    "name_lower": "white"
   },
   "woodruff": {
     "id": 73,
-    "name": "Woodruff"
+    "name": "Woodruff",
+    "name_lower": "woodruff"
   },
   "yell": {
     "id": 74,
-    "name": "Yell"
+    "name": "Yell",
+    "name_lower": "yell"
   }
 }
