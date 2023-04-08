@@ -172,7 +172,7 @@ const keysArrayKey: {
 export const setIntIds = async (unit: 'categories' | 'counties', obj: Resource) => {
   const keys = obj[keysArrayKey[unit]];
 
-  if (keys === undefined) {
+  if (!keys) {
     return;
   }
 
