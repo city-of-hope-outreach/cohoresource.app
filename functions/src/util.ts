@@ -67,13 +67,22 @@ export const runValidator = <T>(obj: any, validator: Validator<T>) => {
 
   const objKeys = Object.keys(obj);
 
+  for (const key of objKeys) {
+    // if whitespace, empty, or undefined, normalize to null
+    if (obj[key] === undefined ||
+      (Array.isArray(obj[key]) && obj[key].length === 0) ||
+      (typeof obj[key] === 'string' && obj[key].trim().length === 0)) {
+      obj[key] = null;
+    }
+  }
+
   // validate all accepted keys
   for (const key of Object.keys(validator)) {
     const keyValidator = validator[key as keyof Validator<T>];
 
     objKeys.splice(objKeys.indexOf(key, 1)); // remove this key from objKeys
 
-    if (obj[key] === undefined || obj[key] === null) {
+    if (obj[key] === null || obj[key] === undefined) {
       if (keyValidator.required) throw new Error(`required key not present: ${key}`);
 
       continue; // don't run validator check if not required and it is not set
@@ -192,30 +201,30 @@ export const updateCategoriesWithResource =
   async (resourceKey: string,
          oldCategoryKeys?: string[],
          newCategoryKeys?: string[]) => {
-  const categoriesToRemove = difference(oldCategoryKeys ?? [], newCategoryKeys ?? []);
-  const categoriesToAdd = difference(newCategoryKeys ?? [], oldCategoryKeys ?? []);
+    const categoriesToRemove = difference(oldCategoryKeys ?? [], newCategoryKeys ?? []);
+    const categoriesToAdd = difference(newCategoryKeys ?? [], oldCategoryKeys ?? []);
 
-  for (const key of categoriesToAdd) {
-    await addToList(`/categories/${key}/resources`, resourceKey);
-  }
+    for (const key of categoriesToAdd) {
+      await addToList(`/categories/${key}/resources`, resourceKey);
+    }
 
-  for (const key of categoriesToRemove) {
-    await removeFromList(`/categories/${key}/resources`, resourceKey);
-  }
-};
+    for (const key of categoriesToRemove) {
+      await removeFromList(`/categories/${key}/resources`, resourceKey);
+    }
+  };
 
 export const deleteResourceFromCategories = async (resourceKey: string, categoryKeys?: string[]) => {
   for (const key of categoryKeys ?? []) {
     await removeFromList(`/categories/${key}/resources`, resourceKey);
   }
-}
+};
 
 export const checkUserPermission = async (context: CallableContext) => {
-  if (!context.auth?.uid){
+  if (!context.auth?.uid) {
     throw new https.HttpsError('unauthenticated', 'Not authenticated');
   }
 
   if (!(await db.ref(`/users/${context.auth?.uid}`).get()).val()) {
     throw new https.HttpsError('permission-denied', 'Not allowed');
   }
-}
+};
