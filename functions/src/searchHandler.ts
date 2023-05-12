@@ -2,15 +2,23 @@ import {db} from './firebaseadmin';
 import {database} from 'firebase-admin';
 import Reference = database.Reference;
 import {checkUserPermission, wordsFromName} from './util';
-import {NamedEntity, NamedEntityType} from './types';
+import {NamedEntityType} from './types';
 import type {CallableContext} from 'firebase-functions/lib/common/providers/https';
 import {https} from 'firebase-functions';
 
-type NamedEntityMap = { [p: string]: Pick<NamedEntity, 'name' | 'description'> };
+type SearchResultItem = {
+  name: string;
+  description: string;
+  icon?: string;
+}
+
+type SearchResultMap = { [p: string]: SearchResultItem };
+
 type SearchResult = {
   key: string;
   name: string;
   description: string;
+  icon?: string;
   rank: number;
 };
 
@@ -27,7 +35,7 @@ export const searchHandlerFactory = (unit: NamedEntityType) => {
     }
 
     const ref = db.ref(`/search/${unit}`);
-    const categoryNames: NamedEntityMap = {};
+    const categoryNames: SearchResultMap = {};
     const words = wordsFromName(data);
 
     // grab first three words of the search query in order to improve performance and limit search results
@@ -36,26 +44,29 @@ export const searchHandlerFactory = (unit: NamedEntityType) => {
     }
 
     return rankedResults(categoryNames, words);
-  }
-}
+  };
+};
 
-const getCategoryNamesForWord = async (unit: string, ref: Reference, word: string, categoryNames: NamedEntityMap) => {
+const getCategoryNamesForWord = async (unit: string, ref: Reference, word: string, categoryNames: SearchResultMap) => {
   const snapshot = await ref.orderByKey().startAt(word).endAt(`${word}\uf8ff`).limitToFirst(3).once('value');
   const snapshotVal = snapshot.val() as { [p: string]: string[] };
 
   for (const searchKey in snapshotVal) {
     for (const categoryKey of snapshotVal[searchKey]) {
       const itemSnapshot = await db.ref(`/${unit}/${categoryKey}`).once('value');
-      const item = itemSnapshot.val() as NamedEntity;
+      const item = itemSnapshot.val() as SearchResultItem;
       categoryNames[categoryKey] = {
         name: item.name,
         description: item.description
       };
+      if (item.icon) {
+        categoryNames[categoryKey].icon = item.icon;
+      }
     }
   }
 };
 
-const rankedResults = (categoryNames: NamedEntityMap, searchWords: string[]): SearchResult[] => {
+const rankedResults = (categoryNames: SearchResultMap, searchWords: string[]): SearchResult[] => {
   const keysAndNames: SearchResult[] = [];
 
   for (const key in categoryNames) {
