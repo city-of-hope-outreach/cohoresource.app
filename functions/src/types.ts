@@ -50,3 +50,5 @@ export type Validator<T> = {
     validate: (obj: any, parent: T) => void;
   };
 };
+
+export type UserRole = 'user' | 'admin';

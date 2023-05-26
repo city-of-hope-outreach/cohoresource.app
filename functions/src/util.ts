@@ -1,4 +1,4 @@
-import type {Resource} from './types';
+import type {Resource, UserRole} from './types';
 import {db} from './firebaseadmin';
 import {https} from 'firebase-functions';
 import {addToList, removeFromList} from './titleIndexing';
@@ -106,12 +106,14 @@ export const deleteResourceFromCategories = async (resourceKey: string, category
   }
 };
 
-export const checkUserPermission = async (context: CallableContext) => {
+export const authorizeForRole = async (context: CallableContext, role: UserRole) => {
   if (!context.auth?.uid) {
     throw new https.HttpsError('unauthenticated', 'Not authenticated');
   }
 
-  if (!(await db.ref(`/users/${context.auth?.uid}`).get()).val()) {
+  const usersRoles = (await db.ref(`/users/${context.auth?.uid}`).get()).val() as UserRole[] | null;
+
+  if (!usersRoles || !usersRoles.includes(role)) {
     throw new https.HttpsError('permission-denied', 'Not allowed');
   }
 };

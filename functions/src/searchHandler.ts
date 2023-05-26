@@ -1,7 +1,7 @@
 import {db} from './firebaseadmin';
 import {database} from 'firebase-admin';
 import Reference = database.Reference;
-import {checkUserPermission, wordsFromName} from './util';
+import {authorizeForRole, wordsFromName} from './util';
 import {NamedEntityType} from './types';
 import type {CallableContext} from 'firebase-functions/lib/common/providers/https';
 import {https} from 'firebase-functions';
@@ -24,7 +24,7 @@ type SearchResult = {
 
 export const searchHandlerFactory = (unit: NamedEntityType) => {
   return async (data: any, context: CallableContext) => {
-    await checkUserPermission(context);
+    await authorizeForRole(context, 'user');
 
     if (typeof data !== 'string') {
       throw new https.HttpsError('invalid-argument', `Type of req.body.data: ${typeof data}`);

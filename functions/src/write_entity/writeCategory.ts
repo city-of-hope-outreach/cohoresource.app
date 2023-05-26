@@ -1,5 +1,5 @@
 import {Category, Resource, Validator} from '../types';
-import {checkUserPermission, getNewId} from '../util';
+import {authorizeForRole, getNewId} from '../util';
 import {db} from '../firebaseadmin';
 import type {CallableContext} from 'firebase-functions/lib/common/providers/https';
 import {https} from 'firebase-functions';
@@ -16,7 +16,7 @@ const categoryValidator: Validator<Category> = {
 };
 
 export const postCategoryCallableHandler = async (data: any, context: CallableContext) => {
-  await checkUserPermission(context);
+  await authorizeForRole(context, 'user');
 
   try {
     runValidator(data, categoryValidator);
@@ -46,7 +46,7 @@ export const postCategoryCallableHandler = async (data: any, context: CallableCo
 };
 
 export const putCategoryCallableHandler = async (data: any, context: CallableContext) => {
-  await checkUserPermission(context);
+  await authorizeForRole(context, 'user');
 
   if (!data.key) {
     throw new https.HttpsError('invalid-argument', 'data.key is missing');
@@ -95,7 +95,7 @@ export const putCategoryCallableHandler = async (data: any, context: CallableCon
 };
 
 export const deleteCategoryCallableHandler = async (data: any, context: CallableContext) => {
-  await checkUserPermission(context);
+  await authorizeForRole(context, 'user');
 
   if (!data.key) {
     throw new https.HttpsError('invalid-argument', 'data.key is missing');

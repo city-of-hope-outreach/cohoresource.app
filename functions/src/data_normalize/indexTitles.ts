@@ -2,13 +2,13 @@ import {db} from '../firebaseadmin';
 import {NamedEntity} from '../types';
 import {database} from 'firebase-admin';
 import Reference = database.Reference;
-import {checkUserPermission, wordsFromName} from '../util';
+import {authorizeForRole, wordsFromName} from '../util';
 import {CallableContext} from 'firebase-functions/lib/common/providers/https';
 
 type IndexMap = { [p: string]: string[] };
 
 export const indexTitlesHandler = async (_: any, context: CallableContext) => {
-  await checkUserPermission(context);
+  await authorizeForRole(context, 'admin');
 
   const categories = db.ref('/categories');
   const counties = db.ref('/counties');

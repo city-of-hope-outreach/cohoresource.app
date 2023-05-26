@@ -6,7 +6,7 @@ import {
   addResourceToCategories,
   updateCategoriesWithResource,
   deleteResourceFromCategories,
-  checkUserPermission
+  authorizeForRole
 } from '../util';
 import {CallableContext} from 'firebase-functions/lib/common/providers/https';
 import {https} from 'firebase-functions';
@@ -109,7 +109,7 @@ const resourceValidator: Validator<Resource> = {
 };
 
 export const postResourceCallableHandler = async (data: any, context: CallableContext) => {
-  await checkUserPermission(context);
+  await authorizeForRole(context, 'user');
 
   try {
     runValidator(data, resourceValidator);
@@ -148,7 +148,7 @@ export const postResourceCallableHandler = async (data: any, context: CallableCo
 };
 
 export const putResourceCallableHandler = async (data: any, context: CallableContext) => {
-  await checkUserPermission(context);
+  await authorizeForRole(context, 'user');
 
   if (!data.key) {
     throw new https.HttpsError('invalid-argument', 'data.key is missing');
@@ -201,7 +201,7 @@ export const putResourceCallableHandler = async (data: any, context: CallableCon
 };
 
 export const deleteResourceCallablehandler = async (data: any, context: CallableContext) => {
-  await checkUserPermission(context);
+  await authorizeForRole(context, 'user');
 
   if (!data.key) {
     throw new https.HttpsError('invalid-argument', 'data.key is missing');

@@ -1,10 +1,10 @@
 import {db} from '../firebaseadmin';
 import {Category, County, Resource} from '../types';
 import {CallableContext} from 'firebase-functions/lib/common/providers/https';
-import {checkUserPermission} from '../util';
+import {authorizeForRole} from '../util';
 
 const generateLowerCaseNames = async (_: any, context: CallableContext) => {
-  await checkUserPermission(context);
+  await authorizeForRole(context, 'admin');
 
   const categories = db.ref('/categories');
   const counties = db.ref('/counties');
