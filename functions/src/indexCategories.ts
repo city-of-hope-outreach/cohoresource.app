@@ -13,4 +13,6 @@ export const indexCategoriesCallable = async () => {
   for (const categoryKey in categoryResources) {
     await db.ref(`/categories/${categoryKey}/resources`).set(categoryResources[categoryKey]);
   }
+
+  return {status: 'ok'};
 };

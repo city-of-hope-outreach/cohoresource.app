@@ -1,18 +1,15 @@
-import * as functions from 'firebase-functions';
 import {Category} from './types';
 import {db} from './firebaseadmin';
+import {CallableContext} from 'firebase-functions/lib/common/providers/https';
+import {checkUserPermission} from './util';
 
-export const categoryAndCountyKeys = async (req: functions.https.Request, res: functions.Response): Promise<void> => {
-  try {
-    await addKeys('categories', 'categoryKeys');
-    await addKeys('counties', 'countyKeys');
+export const categoryAndCountyKeys = async (_: any, context: CallableContext) => {
+  await checkUserPermission(context);
 
-    res.status(200);
-    res.json("ok");
-  } catch (e) {
-    res.status(500);
-    res.json(e);
-  }
+  await addKeys('categories', 'categoryKeys');
+  await addKeys('counties', 'countyKeys');
+
+  return {status: 'ok'};
 };
 
 const addKeys = async (unit: 'categories' | 'counties', childKey: 'categoryKeys' | 'countyKeys') => {
@@ -36,4 +33,4 @@ const addKeys = async (unit: 'categories' | 'counties', childKey: 'categoryKeys'
     });
     a.child(childKey).ref.set(resCategoriesKeysArr);
   });
-}
+};

@@ -1,8 +1,11 @@
-import * as functions from 'firebase-functions';
 import {db} from './firebaseadmin';
 import {Category, County, Resource} from './types';
+import {CallableContext} from 'firebase-functions/lib/common/providers/https';
+import {checkUserPermission} from './util';
 
-const generateLowerCaseNames = async (req: functions.https.Request, res: functions.Response): Promise<void> => {
+const generateLowerCaseNames = async (_: any, context: CallableContext) => {
+  await checkUserPermission(context);
+
   const categories = db.ref('/categories');
   const counties = db.ref('/counties');
   const resources = db.ref('/resources');
@@ -28,8 +31,7 @@ const generateLowerCaseNames = async (req: functions.https.Request, res: functio
     a.ref.set(obj)
   });
 
-  res.status(200);
-  res.json("ok");
+  return {status: 'ok'};
 }
 
 export default generateLowerCaseNames;

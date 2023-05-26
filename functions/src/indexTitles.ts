@@ -1,13 +1,15 @@
-import * as functions from 'firebase-functions';
 import {db} from './firebaseadmin';
 import {NamedEntity} from './types';
 import {database} from 'firebase-admin';
 import Reference = database.Reference;
-import {wordsFromName} from './util';
+import {checkUserPermission, wordsFromName} from './util';
+import {CallableContext} from 'firebase-functions/lib/common/providers/https';
 
 type IndexMap = { [p: string]: string[] };
 
-export const indexTitlesHandler = async (req: functions.https.Request, res: functions.Response): Promise<void> => {
+export const indexTitlesHandler = async (_: any, context: CallableContext) => {
+  await checkUserPermission(context);
+
   const categories = db.ref('/categories');
   const counties = db.ref('/counties');
   const resources = db.ref('/resources');
@@ -25,8 +27,7 @@ export const indexTitlesHandler = async (req: functions.https.Request, res: func
   await indexSnapshot(resources, indexedResourceTitles);
   await db.ref('/search/resources').set(indexedResourceTitles);
 
-  res.status(200);
-  res.json();
+  return {status: 'ok'};
 };
 
 const indexSnapshot = async (dbRef: Reference, index: IndexMap) => {
