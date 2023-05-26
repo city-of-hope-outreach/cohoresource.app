@@ -1,8 +1,8 @@
-import {db} from './firebaseadmin';
-import {NamedEntity} from './types';
+import {db} from '../firebaseadmin';
+import {NamedEntity} from '../types';
 import {database} from 'firebase-admin';
 import Reference = database.Reference;
-import {checkUserPermission, wordsFromName} from './util';
+import {checkUserPermission, wordsFromName} from '../util';
 import {CallableContext} from 'firebase-functions/lib/common/providers/https';
 
 type IndexMap = { [p: string]: string[] };

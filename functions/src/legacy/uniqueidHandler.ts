@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import {db} from './firebaseadmin';
+import {db} from '../firebaseadmin';
 
 const app = express();
 app.use(cors({origin: true}));

@@ -1,24 +1,23 @@
-import {db} from './firebaseadmin';
-import {Resource, ResourceContact, ResourceLocation, Validator} from './types';
+import {db} from '../firebaseadmin';
+import {Resource, ResourceContact, ResourceLocation, Validator} from '../types';
 import {
   getNewId,
-  indexNewItem,
-  removeIndexOfItem,
-  runValidator,
-  updateIndexOfItem,
-  validateNonEmptyArrayOfType,
-  validateNonEmptyString,
-  validateNumberArr,
-  validateStringArr,
   setIntIds,
-  validateNumber,
   addResourceToCategories,
   updateCategoriesWithResource,
   deleteResourceFromCategories,
   checkUserPermission
-} from './util';
+} from '../util';
 import {CallableContext} from 'firebase-functions/lib/common/providers/https';
 import {https} from 'firebase-functions';
+import {
+  runValidator,
+  validateNonEmptyArrayOfType,
+  validateNonEmptyString,
+  validateNumber, validateNumberArr,
+  validateStringArr
+} from '../validation';
+import {indexNewItem, removeIndexOfItem, updateIndexOfItem} from '../titleIndexing';
 
 const resourceContactValidator: Validator<ResourceContact> = {
   typeInt: {

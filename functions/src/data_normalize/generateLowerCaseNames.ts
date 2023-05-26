@@ -1,7 +1,7 @@
-import {db} from './firebaseadmin';
-import {Category, County, Resource} from './types';
+import {db} from '../firebaseadmin';
+import {Category, County, Resource} from '../types';
 import {CallableContext} from 'firebase-functions/lib/common/providers/https';
-import {checkUserPermission} from './util';
+import {checkUserPermission} from '../util';
 
 const generateLowerCaseNames = async (_: any, context: CallableContext) => {
   await checkUserPermission(context);

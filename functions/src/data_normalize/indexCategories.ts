@@ -1,4 +1,4 @@
-import {db} from './firebaseadmin';
+import {db} from '../firebaseadmin';
 
 export const indexCategoriesCallable = async () => {
   const categoryResources: {[p: string]: string[]} = {};

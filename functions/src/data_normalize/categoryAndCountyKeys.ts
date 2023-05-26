@@ -1,7 +1,7 @@
-import {Category} from './types';
-import {db} from './firebaseadmin';
+import {Category} from '../types';
+import {db} from '../firebaseadmin';
 import {CallableContext} from 'firebase-functions/lib/common/providers/https';
-import {checkUserPermission} from './util';
+import {checkUserPermission} from '../util';
 
 export const categoryAndCountyKeys = async (_: any, context: CallableContext) => {
   await checkUserPermission(context);

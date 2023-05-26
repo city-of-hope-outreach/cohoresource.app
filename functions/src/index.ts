@@ -1,14 +1,14 @@
 import * as functions from 'firebase-functions';
-import {fulldatabaseHandler} from './fulldatabaseHandler';
-import {feedbackHandler} from './feedbackHandler';
-import {uniqueIdApp} from './uniqueidHandler';
+import {fulldatabaseHandler} from './legacy/fulldatabaseHandler';
+import {feedbackHandler} from './legacy/feedbackHandler';
+import {uniqueIdApp} from './legacy/uniqueidHandler';
 import {searchHandlerFactory} from './searchHandler';
-import generateLowerCaseNamesHandler from './generateLowerCaseNames';
-import {indexTitlesHandler} from './indexTitles';
-import {deleteResourceCallablehandler, postResourceCallableHandler, putResourceCallableHandler} from './writeResource';
-import {deleteCategoryCallableHandler, postCategoryCallableHandler, putCategoryCallableHandler} from './writeCategory';
-import {indexCategoriesCallable} from './indexCategories';
-import {categoryAndCountyKeys} from './categoryAndCountyKeys';
+import generateLowerCaseNamesHandler from './data_normalize/generateLowerCaseNames';
+import {indexTitlesHandler} from './data_normalize/indexTitles';
+import {deleteResourceCallablehandler, postResourceCallableHandler, putResourceCallableHandler} from './write_entity/writeResource';
+import {deleteCategoryCallableHandler, postCategoryCallableHandler, putCategoryCallableHandler} from './write_entity/writeCategory';
+import {indexCategoriesCallable} from './data_normalize/indexCategories';
+import {categoryAndCountyKeys} from './data_normalize/categoryAndCountyKeys';
 
 export const fulldatabase = functions.https.onRequest(fulldatabaseHandler);
 export const feedback = functions.https.onRequest(feedbackHandler);

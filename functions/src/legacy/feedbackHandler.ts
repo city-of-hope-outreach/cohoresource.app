@@ -1,5 +1,5 @@
 import * as functions from 'firebase-functions';
-import {db} from './firebaseadmin';
+import {db} from '../firebaseadmin';
 
 export const feedbackHandler = async (req: functions.https.Request, res: functions.Response): Promise<void> => {
   const feedbackRef = db.ref('/feedback');

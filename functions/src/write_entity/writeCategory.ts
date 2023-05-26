@@ -1,14 +1,10 @@
-import {Category, Resource, Validator} from './types';
-import {
-  checkUserPermission,
-  getNewId, indexNewItem, removeIndexOfItem,
-  runValidator, updateIndexOfItem,
-  validateNonEmptyString, validateNumber
-} from './util';
-import {db} from './firebaseadmin';
+import {Category, Resource, Validator} from '../types';
+import {checkUserPermission, getNewId} from '../util';
+import {db} from '../firebaseadmin';
 import type {CallableContext} from 'firebase-functions/lib/common/providers/https';
 import {https} from 'firebase-functions';
-import {removeFromList} from './dbutil';
+import {indexNewItem, removeFromList, removeIndexOfItem, updateIndexOfItem} from '../titleIndexing';
+import {runValidator, validateNonEmptyString, validateNumber} from '../validation';
 
 const categoryValidator: Validator<Category> = {
   id: {required: false, validate: validateNumber}, // id will be set after validation
@@ -40,14 +36,14 @@ export const postCategoryCallableHandler = async (data: any, context: CallableCo
   const pushedCatRef = await db.ref('/categories').push(category);
 
   if (!pushedCatRef.key) {
-    throw new Error('No key for new category')
+    throw new Error('No key for new category');
   }
 
   // update index of title, might need to update resource
   await indexNewItem('categories', pushedCatRef.key, category.name);
 
   return pushedCatRef.key;
-}
+};
 
 export const putCategoryCallableHandler = async (data: any, context: CallableContext) => {
   await checkUserPermission(context);
@@ -96,7 +92,7 @@ export const putCategoryCallableHandler = async (data: any, context: CallableCon
   await dbref.set(category);
 
   return category;
-}
+};
 
 export const deleteCategoryCallableHandler = async (data: any, context: CallableContext) => {
   await checkUserPermission(context);
@@ -126,5 +122,5 @@ export const deleteCategoryCallableHandler = async (data: any, context: Callable
     await removeFromList(`/resources/${resourceKey}/categories`, oldCategory.id);
   }
 
-  return {status: 'ok'}
-}
+  return {status: 'ok'};
+};
