@@ -1,5 +1,5 @@
 import type {Resource, UserRole} from './types';
-import {db} from './firebaseadmin';
+import {auth, db} from './firebaseadmin';
 import {https} from 'firebase-functions';
 import {addToList, removeFromList} from './titleIndexing';
 import type {CallableContext} from 'firebase-functions/lib/common/providers/https';
@@ -111,9 +111,9 @@ export const authorizeForRole = async (context: CallableContext, role: UserRole)
     throw new https.HttpsError('unauthenticated', 'Not authenticated');
   }
 
-  const usersRoles = (await db.ref(`/users/${context.auth?.uid}`).get()).val() as UserRole[] | null;
+  const user = await auth.getUser(context.auth.uid);
 
-  if (!usersRoles || !usersRoles.includes(role)) {
+  if (!user.customClaims?.roles || !(user.customClaims.roles as UserRole[]).includes(role)) {
     throw new https.HttpsError('permission-denied', 'Not allowed');
   }
 };
