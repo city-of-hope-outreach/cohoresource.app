@@ -5,10 +5,19 @@ import {uniqueIdApp} from './legacy/uniqueidHandler';
 import {searchHandlerFactory} from './searchHandler';
 import generateLowerCaseNamesHandler from './data_normalize/generateLowerCaseNames';
 import {indexTitlesHandler} from './data_normalize/indexTitles';
-import {deleteResourceCallablehandler, postResourceCallableHandler, putResourceCallableHandler} from './write_entity/writeResource';
-import {deleteCategoryCallableHandler, postCategoryCallableHandler, putCategoryCallableHandler} from './write_entity/writeCategory';
+import {
+  deleteResourceCallablehandler,
+  postResourceCallableHandler,
+  putResourceCallableHandler
+} from './write_entity/writeResource';
+import {
+  deleteCategoryCallableHandler,
+  postCategoryCallableHandler,
+  putCategoryCallableHandler
+} from './write_entity/writeCategory';
 import {indexCategoriesCallable} from './data_normalize/indexCategories';
 import {categoryAndCountyKeys} from './data_normalize/categoryAndCountyKeys';
+import {listUsersHandler} from './user_admin/listUsers';
 
 export const fulldatabase = functions.https.onRequest(fulldatabaseHandler);
 export const feedback = functions.https.onRequest(feedbackHandler);
@@ -21,6 +30,7 @@ export const deleteResource = functions.https.onCall(deleteResourceCallablehandl
 export const postCategory = functions.https.onCall(postCategoryCallableHandler);
 export const putCategory = functions.https.onCall(putCategoryCallableHandler);
 export const deleteCategory = functions.https.onCall(deleteCategoryCallableHandler);
+export const listUsers = functions.https.onCall(listUsersHandler);
 export const generateLowerCaseNames = functions.https.onCall(generateLowerCaseNamesHandler);
 export const titleindex = functions.https.onCall(indexTitlesHandler);
 export const indexCategories = functions.https.onCall(indexCategoriesCallable);
