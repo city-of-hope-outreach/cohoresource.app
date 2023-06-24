@@ -9,11 +9,9 @@ export const disableUserHandler = async (data: { uid: string }, context: Callabl
   runValidator(data, userSelectionValidator);
 
    try {
-     const user = await auth.updateUser(data.uid, {
+     return await auth.updateUser(data.uid, {
        disabled: true,
-     })
-
-     return user;
+     });
    } catch (e) {
      firebaseAuthErrorHandling(e);
    }
