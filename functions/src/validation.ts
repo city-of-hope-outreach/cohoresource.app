@@ -1,12 +1,12 @@
 // object validator system
-import {Validator} from './types';
+import {UpdateUser, User, Validator} from './types';
 
 export const validateEmail = (obj: any) => {
   validateNonEmptyString(obj);
   if (!/^.+@.+\..+$/.test(obj)) {
     throw new Error('must be an email format (xxx@xxx.xxx)');
   }
-}
+};
 
 export const validateNonEmptyString = (obj: any) => {
   if (typeof obj !== 'string' || obj.length === 0) {
@@ -87,4 +87,24 @@ export const runValidator = <T>(obj: any, validator: Validator<T>) => {
 
   // if there are any keys left in objKeys, they are not recognized, failing validation
   if (objKeys.length > 0) throw new Error(`Unrecognized keys: ${objKeys}`);
+};
+
+export const validateUserRoles = (obj: any) => {
+  validateStringArr(obj);
+  const roles = ['user', 'admin'];
+  const filtered = (obj as string[]).filter(s => !roles.includes(s));
+  if (filtered.length !== 0) {
+    throw Error(`must be array with following strings: ${roles.join(', ')}`);
+  }
+};
+
+export const userValidator: Validator<User> = {
+  email: {required: true, validate: validateEmail},
+  displayName: {required: true, validate: validateNonEmptyString},
+  roles: {required: true, validate: validateUserRoles},
+};
+
+export const updateUserValidator: Validator<UpdateUser> = {
+  ...userValidator,
+  uid: {required: true, validate: validateNonEmptyString},
 };

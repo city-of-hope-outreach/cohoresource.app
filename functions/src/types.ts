@@ -52,3 +52,11 @@ export type Validator<T> = {
 };
 
 export type UserRole = 'user' | 'admin';
+
+export type User = {
+  email: string;
+  displayName: string;
+  roles: UserRole[];
+}
+
+export type UpdateUser = User & {uid: string}
