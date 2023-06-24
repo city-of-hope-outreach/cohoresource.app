@@ -3,6 +3,7 @@ import {auth, db} from './firebaseadmin';
 import {https} from 'firebase-functions';
 import {addToList, removeFromList} from './titleIndexing';
 import type {CallableContext} from 'firebase-functions/lib/common/providers/https';
+import {randomInt} from 'crypto';
 
 export const wordsFromName = (name: string): string[] => {
   const normalized = name
@@ -117,3 +118,12 @@ export const authorizeForRole = async (context: CallableContext, role: UserRole)
     throw new https.HttpsError('permission-denied', 'Not allowed');
   }
 };
+
+export const generateStarterPassword = () => {
+  const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789-_!?.$&*"
+  let pw = '';
+  for (let i = 0; i < 15; i++) {
+    pw += chars.charAt(randomInt(chars.length));
+  }
+  return pw;
+}

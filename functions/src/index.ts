@@ -18,6 +18,7 @@ import {
 import {indexCategoriesCallable} from './data_normalize/indexCategories';
 import {categoryAndCountyKeys} from './data_normalize/categoryAndCountyKeys';
 import {listUsersHandler} from './user_admin/listUsers';
+import {createUserHandler} from './user_admin/createUser';
 
 export const fulldatabase = functions.https.onRequest(fulldatabaseHandler);
 export const feedback = functions.https.onRequest(feedbackHandler);
@@ -31,6 +32,7 @@ export const postCategory = functions.https.onCall(postCategoryCallableHandler);
 export const putCategory = functions.https.onCall(putCategoryCallableHandler);
 export const deleteCategory = functions.https.onCall(deleteCategoryCallableHandler);
 export const listUsers = functions.https.onCall(listUsersHandler);
+export const createUser = functions.https.onCall(createUserHandler);
 export const generateLowerCaseNames = functions.https.onCall(generateLowerCaseNamesHandler);
 export const titleindex = functions.https.onCall(indexTitlesHandler);
 export const indexCategories = functions.https.onCall(indexCategoriesCallable);
