@@ -127,3 +127,17 @@ export const generateStarterPassword = () => {
   }
   return pw;
 }
+
+export const firebaseAuthErrorHandling = (e: unknown) => {
+  const firebaseError = e as {message?: string, code?: string};
+  if (firebaseError.code) {
+    if (firebaseError.code === 'auth/user-not-found') {
+      throw new https.HttpsError('not-found', 'There is no user record for the provided UID.');
+    } else {
+      throw new https.HttpsError('internal', `Auth error: ${firebaseError.code}. ${firebaseError.message}`);
+    }
+  } else if (firebaseError.message) {
+    throw new https.HttpsError('internal', `Unknown auth error: ${firebaseError.message}`);
+  }
+  throw new https.HttpsError('internal', `Unknown auth error: ${e}`);
+}

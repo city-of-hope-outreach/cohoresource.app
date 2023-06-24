@@ -21,6 +21,8 @@ import {listUsersHandler} from './user_admin/listUsers';
 import {createUserHandler} from './user_admin/createUser';
 import {updateUserHandler} from './user_admin/updateUser';
 import {deleteUserHandler} from './user_admin/deleteUser';
+import {disableUserHandler} from './user_admin/disableUser';
+import {enableUserHandler} from './user_admin/enableUser';
 
 export const fulldatabase = functions.https.onRequest(fulldatabaseHandler);
 export const feedback = functions.https.onRequest(feedbackHandler);
@@ -37,6 +39,8 @@ export const listUsers = functions.https.onCall(listUsersHandler);
 export const createUser = functions.https.onCall(createUserHandler);
 export const updateUser = functions.https.onCall(updateUserHandler);
 export const deleteUser = functions.https.onCall(deleteUserHandler);
+export const disableUser = functions.https.onCall(disableUserHandler);
+export const enableUser = functions.https.onCall(enableUserHandler);
 export const generateLowerCaseNames = functions.https.onCall(generateLowerCaseNamesHandler);
 export const titleindex = functions.https.onCall(indexTitlesHandler);
 export const indexCategories = functions.https.onCall(indexCategoriesCallable);

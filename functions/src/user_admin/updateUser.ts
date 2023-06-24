@@ -1,6 +1,6 @@
 import {CallableContext} from 'firebase-functions/lib/common/providers/https';
 import {UpdateUser} from '../types';
-import {authorizeForRole} from '../util';
+import {authorizeForRole, firebaseAuthErrorHandling} from '../util';
 import {runValidator, updateUserValidator} from '../validation';
 import {https} from 'firebase-functions';
 import {auth} from '../firebaseadmin';
@@ -34,16 +34,8 @@ export const updateUserHandler = async (data: UpdateUser, context: CallableConte
       roles: data.roles ?? user.customClaims?.roles,
     };
   } catch (e) {
-    const firebaseError = e as {message?: string, code?: string};
-    if (firebaseError.code) {
-      if (firebaseError.code === 'auth/user-not-found') {
-        throw new https.HttpsError('not-found', 'There is no user record for the provided UID.');
-      } else {
-        throw new https.HttpsError('internal', `Auth error: ${firebaseError.code}. ${firebaseError.message}`);
-      }
-    } else if (firebaseError.message) {
-      throw new https.HttpsError('internal', `Unknown auth error: ${firebaseError.message}`);
-    }
-    throw new https.HttpsError('internal', `Unknown auth error: ${e}`);
+    firebaseAuthErrorHandling(e);
   }
+
+  return {success: false};
 }

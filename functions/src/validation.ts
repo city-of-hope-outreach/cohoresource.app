@@ -108,3 +108,7 @@ export const updateUserValidator: Validator<UpdateUser> = {
   ...userValidator,
   uid: {required: true, validate: validateNonEmptyString},
 };
+
+export const userSelectionValidator: Validator<{ uid: string }> = {
+  uid: {required: true, validate: validateNonEmptyString}
+};
