@@ -1,6 +1,13 @@
 // object validator system
 import {Validator} from './types';
 
+export const validateEmail = (obj: any) => {
+  validateNonEmptyString(obj);
+  if (!/^.+@.+\..+$/.test(obj)) {
+    throw new Error('must be an email format (xxx@xxx.xxx)');
+  }
+}
+
 export const validateNonEmptyString = (obj: any) => {
   if (typeof obj !== 'string' || obj.length === 0) {
     throw new Error('must be nonempty string');

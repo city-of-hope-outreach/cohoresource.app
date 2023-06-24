@@ -11,7 +11,7 @@ import {
 import {CallableContext} from 'firebase-functions/lib/common/providers/https';
 import {https} from 'firebase-functions';
 import {
-  runValidator,
+  runValidator, validateEmail,
   validateNonEmptyArrayOfType,
   validateNonEmptyString,
   validateNumber, validateNumberArr,
@@ -38,9 +38,7 @@ const resourceContactValidator: Validator<ResourceContact> = {
           throw new Error('does not match the phone number regex');
         }
       } else if (parent.typeInt === 1) {
-        if (!/^.+@.+\..+$/.test(obj)) {
-          throw new Error('does not match the email regex');
-        }
+        validateEmail(obj);
       } else {
         if (obj.length === 0) {
           throw new Error('must not be empty');
