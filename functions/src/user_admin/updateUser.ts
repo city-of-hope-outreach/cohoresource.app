@@ -36,8 +36,8 @@ export const updateUserHandler = async (data: UpdateUser, context: CallableConte
   } catch (e) {
     const firebaseError = e as {message?: string, code?: string};
     if (firebaseError.code) {
-      if (firebaseError.code === 'auth/email-already-exists') {
-        throw new https.HttpsError('already-exists', 'A user with that email already exists!');
+      if (firebaseError.code === 'auth/user-not-found') {
+        throw new https.HttpsError('not-found', 'There is no user record for the provided UID.');
       } else {
         throw new https.HttpsError('internal', `Auth error: ${firebaseError.code}. ${firebaseError.message}`);
       }
