@@ -101,7 +101,7 @@ export const validateUserRoles = (obj: any) => {
 export const userValidator: Validator<User> = {
   email: {required: true, validate: validateEmail},
   displayName: {required: true, validate: validateNonEmptyString},
-  roles: {required: true, validate: validateUserRoles},
+  roles: {required: false, validate: validateUserRoles},
 };
 
 export const updateUserValidator: Validator<UpdateUser> = {

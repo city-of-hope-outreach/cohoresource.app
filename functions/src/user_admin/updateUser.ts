@@ -23,6 +23,8 @@ export const updateUserHandler = async (data: UpdateUser, context: CallableConte
     // add claims
     if (data.roles) {
       await auth.setCustomUserClaims(user.uid, {roles: data.roles});
+    } else {
+      await auth.setCustomUserClaims(user.uid, null);
     }
 
     return {
@@ -31,7 +33,7 @@ export const updateUserHandler = async (data: UpdateUser, context: CallableConte
       displayName: user.displayName,
       disabled: user.disabled,
       metadata: user.metadata,
-      roles: data.roles ?? user.customClaims?.roles,
+      roles: data.roles,
     };
   } catch (e) {
     firebaseAuthErrorHandling(e);
