@@ -1,8 +1,8 @@
 import {Category, Resource, Validator} from '../types';
 import {authorizeForRole, getNewId} from '../util';
 import {db} from '../firebaseadmin';
-import type {CallableContext} from 'firebase-functions/lib/common/providers/https';
-import {https} from 'firebase-functions';
+import type {CallableRequest} from 'firebase-functions/lib/common/providers/https';
+import {https} from 'firebase-functions/v2';
 import {indexNewItem, removeFromList, removeIndexOfItem, updateIndexOfItem} from '../titleIndexing';
 import {runValidator, validateNonEmptyString, validateNumber} from '../validation';
 
@@ -15,16 +15,16 @@ const categoryValidator: Validator<Category> = {
   resources: {required: false, validate: () => false} // this value is not allowed in input because it is set from previous value
 };
 
-export const postCategoryCallableHandler = async (data: any, context: CallableContext) => {
-  await authorizeForRole(context, 'user');
+export const postCategoryCallableHandler = async (request: CallableRequest) => {
+  await authorizeForRole(request.auth, 'user');
 
   try {
-    runValidator(data, categoryValidator);
+    runValidator(request.data, categoryValidator);
   } catch (e) {
     throw new https.HttpsError('invalid-argument', (e as Error).message);
   }
 
-  const category = data as Resource;
+  const category = request.data as Resource;
 
   // find new id, will need rewritten function because at this point the resource has not been added yet
   category.id = await getNewId('categories');
@@ -45,35 +45,35 @@ export const postCategoryCallableHandler = async (data: any, context: CallableCo
   return pushedCatRef.key;
 };
 
-export const putCategoryCallableHandler = async (data: any, context: CallableContext) => {
-  await authorizeForRole(context, 'user');
+export const putCategoryCallableHandler = async (request: CallableRequest) => {
+  await authorizeForRole(request.auth, 'user');
 
-  if (!data.key) {
+  if (!request.data.key) {
     throw new https.HttpsError('invalid-argument', 'data.key is missing');
   }
 
-  if (typeof data.key !== 'string') {
+  if (typeof request.data.key !== 'string') {
     throw new https.HttpsError('invalid-argument', 'data.key must be a string');
   }
 
-  if (!data.category) {
+  if (!request.data.category) {
     throw new https.HttpsError('invalid-argument', 'data.category is missing');
   }
 
-  const dbref = db.ref(`/categories/${data.key}`);
+  const dbref = db.ref(`/categories/${request.data.key}`);
   const beforeSnapshot = await dbref.get();
   if (!beforeSnapshot.exists()) {
     throw new https.HttpsError('not-found', 'Category not found');
   }
 
   try {
-    runValidator(data.category, categoryValidator);
+    runValidator(request.data.category, categoryValidator);
   } catch (e) {
     throw new https.HttpsError('invalid-argument', (e as Error).message);
   }
 
   const oldCategory = beforeSnapshot.val() as Category;
-  const category = data.category as Category;
+  const category = request.data.category as Category;
 
   // set id to old id
   category.id = oldCategory.id;
@@ -87,25 +87,25 @@ export const putCategoryCallableHandler = async (data: any, context: CallableCon
   }
 
   // update indexing of title
-  await updateIndexOfItem('categories', data.key, oldCategory.name, category.name);
+  await updateIndexOfItem('categories', request.data.key, oldCategory.name, category.name);
 
   await dbref.set(category);
 
   return category;
 };
 
-export const deleteCategoryCallableHandler = async (data: any, context: CallableContext) => {
-  await authorizeForRole(context, 'user');
+export const deleteCategoryCallableHandler = async (request: CallableRequest) => {
+  await authorizeForRole(request.auth, 'user');
 
-  if (!data.key) {
+  if (!request.data.key) {
     throw new https.HttpsError('invalid-argument', 'data.key is missing');
   }
 
-  if (typeof data.key !== 'string') {
+  if (typeof request.data.key !== 'string') {
     throw new https.HttpsError('invalid-argument', 'data.key must be a string!');
   }
 
-  const ref = db.ref(`/categories/${data.key}`);
+  const ref = db.ref(`/categories/${request.data.key}`);
   const beforeSnapshot = await ref.get();
   if (!beforeSnapshot.exists()) {
     throw new https.HttpsError('not-found', 'Category not found');
@@ -113,12 +113,12 @@ export const deleteCategoryCallableHandler = async (data: any, context: Callable
 
   const oldCategory = beforeSnapshot.val();
 
-  await removeIndexOfItem('categories', oldCategory.name, data.key);
+  await removeIndexOfItem('categories', oldCategory.name, request.data.key);
   await ref.remove();
 
   // remove all occurrences of this category from resources
   for (const resourceKey of oldCategory.resources ?? []) {
-    await removeFromList(`/resources/${resourceKey}/categoryKeys`, data.key);
+    await removeFromList(`/resources/${resourceKey}/categoryKeys`, request.data.key);
     await removeFromList(`/resources/${resourceKey}/categories`, oldCategory.id);
   }
 

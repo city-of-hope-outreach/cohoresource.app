@@ -3,12 +3,12 @@ import {NamedEntity} from '../types';
 import {database} from 'firebase-admin';
 import Reference = database.Reference;
 import {authorizeForRole, wordsFromName} from '../util';
-import {CallableContext} from 'firebase-functions/lib/common/providers/https';
+import {CallableRequest} from 'firebase-functions/lib/common/providers/https';
 
 type IndexMap = { [p: string]: string[] };
 
-export const indexTitlesHandler = async (_: any, context: CallableContext) => {
-  await authorizeForRole(context, 'admin');
+export const indexTitlesHandler = async ({auth}: CallableRequest) => {
+  await authorizeForRole(auth, 'admin');
 
   const categories = db.ref('/categories');
   const counties = db.ref('/counties');

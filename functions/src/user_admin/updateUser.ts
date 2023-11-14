@@ -1,18 +1,20 @@
-import {CallableContext} from 'firebase-functions/lib/common/providers/https';
-import {UpdateUser} from '../types';
+import {CallableRequest} from 'firebase-functions/lib/common/providers/https';
+import type {UpdateUser} from '../types';
 import {authorizeForRole, firebaseAuthErrorHandling} from '../util';
 import {runValidator, updateUserValidator} from '../validation';
 import {https} from 'firebase-functions';
 import {auth} from '../firebaseadmin';
 
-export const updateUserHandler = async (data: UpdateUser, context: CallableContext) => {
-  await authorizeForRole(context, 'admin');
+export const updateUserHandler = async (request: CallableRequest) => {
+  await authorizeForRole(request.auth, 'admin');
 
   try {
-    runValidator(data, updateUserValidator);
+    runValidator(request.data, updateUserValidator);
   } catch (e) {
     throw new https.HttpsError('invalid-argument', (e as Error).message);
   }
+
+  const data = request.data as UpdateUser;
 
   try {
     const user = await auth.updateUser(data.uid, {

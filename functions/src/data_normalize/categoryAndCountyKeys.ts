@@ -1,10 +1,10 @@
 import {Category} from '../types';
 import {db} from '../firebaseadmin';
-import {CallableContext} from 'firebase-functions/lib/common/providers/https';
+import {CallableRequest} from 'firebase-functions/lib/common/providers/https';
 import {authorizeForRole} from '../util';
 
-export const categoryAndCountyKeys = async (_: any, context: CallableContext) => {
-  await authorizeForRole(context, 'admin');
+export const categoryAndCountyKeys = async ({auth}: CallableRequest) => {
+  await authorizeForRole(auth, 'admin');
 
   await addKeys('categories', 'categoryKeys');
   await addKeys('counties', 'countyKeys');

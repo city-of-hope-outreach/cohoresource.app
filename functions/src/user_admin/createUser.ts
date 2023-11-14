@@ -1,4 +1,3 @@
-import {CallableContext} from 'firebase-functions/lib/common/providers/https';
 import {authorizeForRole, generateStarterPassword} from '../util';
 import type {User} from '../types';
 import {runValidator, userValidator} from '../validation';
@@ -6,16 +5,19 @@ import {auth} from '../firebaseadmin';
 import sendgrid from '@sendgrid/mail';
 import apiKey from '../sendgridkey.json';
 import type {UserRecord} from 'firebase-admin/lib/auth';
-import {https} from 'firebase-functions';
+import type {CallableRequest} from 'firebase-functions/lib/common/providers/https';
+import {https} from 'firebase-functions/v2';
 
-export const createUserHandler = async (data: User, context: CallableContext) => {
-  await authorizeForRole(context, 'admin');
+export const createUserHandler = async (request: CallableRequest) => {
+  await authorizeForRole(request.auth, 'admin');
 
   try {
-    runValidator(data, userValidator);
+    runValidator(request.data, userValidator);
   } catch (e) {
     throw new https.HttpsError('invalid-argument', (e as Error).message);
   }
+
+  const data = request.data as User;
 
   // generate a password
   const startPw = generateStarterPassword();

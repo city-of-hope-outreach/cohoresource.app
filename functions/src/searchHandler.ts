@@ -3,7 +3,7 @@ import {database} from 'firebase-admin';
 import Reference = database.Reference;
 import {authorizeForRole, wordsFromName} from './util';
 import {NamedEntityType} from './types';
-import type {CallableContext} from 'firebase-functions/lib/common/providers/https';
+import type {CallableRequest} from 'firebase-functions/lib/common/providers/https';
 import {https} from 'firebase-functions';
 
 type SearchResultItem = {
@@ -23,20 +23,20 @@ type SearchResult = {
 };
 
 export const searchHandlerFactory = (unit: NamedEntityType) => {
-  return async (data: any, context: CallableContext) => {
-    await authorizeForRole(context, 'user');
+  return async (request: CallableRequest) => {
+    await authorizeForRole(request.auth, 'user');
 
-    if (typeof data !== 'string') {
-      throw new https.HttpsError('invalid-argument', `Type of req.body.data: ${typeof data}`);
+    if (typeof request.data !== 'string') {
+      throw new https.HttpsError('invalid-argument', `Type of req.body.data: ${typeof request.data}`);
     }
 
-    if (data.length === 0) {
+    if (request.data.length === 0) {
       throw new https.HttpsError('invalid-argument', 'Search query must be a nonempty string');
     }
 
     const ref = db.ref(`/search/${unit}`);
     const categoryNames: SearchResultMap = {};
-    const words = wordsFromName(data);
+    const words = wordsFromName(request.data);
 
     // grab first three words of the search query in order to improve performance and limit search results
     for (const word of words.slice(0, 3)) {

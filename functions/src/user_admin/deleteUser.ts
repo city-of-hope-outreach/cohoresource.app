@@ -1,14 +1,15 @@
-import {CallableContext} from 'firebase-functions/lib/common/providers/https';
+import type {CallableRequest} from 'firebase-functions/lib/common/providers/https';
 import {authorizeForRole, firebaseAuthErrorHandling} from '../util';
 import {runValidator, userSelectionValidator} from '../validation';
 import {auth} from '../firebaseadmin';
 
 
+export const deleteUserHandler = async (request: CallableRequest) => {
+  await authorizeForRole(request.auth, 'admin');
 
-export const deleteUserHandler = async (data: { uid: string }, context: CallableContext) => {
-  await authorizeForRole(context, 'admin');
+  runValidator(request.data, userSelectionValidator);
 
-  runValidator(data, userSelectionValidator);
+  const data = request.data as { uid: string };
 
   try {
     await auth.deleteUser(data.uid);

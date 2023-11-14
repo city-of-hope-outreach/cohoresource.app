@@ -1,8 +1,8 @@
 import type {Resource, UserRole} from './types';
 import {auth, db} from './firebaseadmin';
-import {https} from 'firebase-functions';
+import {https} from 'firebase-functions/v2';
 import {addToList, removeFromList} from './titleIndexing';
-import type {CallableContext} from 'firebase-functions/lib/common/providers/https';
+import type {AuthData} from 'firebase-functions/lib/common/providers/https';
 import {randomInt} from 'crypto';
 
 export const wordsFromName = (name: string): string[] => {
@@ -107,12 +107,12 @@ export const deleteResourceFromCategories = async (resourceKey: string, category
   }
 };
 
-export const authorizeForRole = async (context: CallableContext, role: UserRole) => {
-  if (!context.auth?.uid) {
+export const authorizeForRole = async (authData: AuthData | undefined, role: UserRole) => {
+  if (!authData?.uid) {
     throw new https.HttpsError('unauthenticated', 'Not authenticated');
   }
 
-  const user = await auth.getUser(context.auth.uid);
+  const user = await auth.getUser(authData.uid);
 
   if (!user.customClaims?.roles || !(user.customClaims.roles as UserRole[]).includes(role)) {
     throw new https.HttpsError('permission-denied', 'Not allowed');

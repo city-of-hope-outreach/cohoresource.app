@@ -8,8 +8,8 @@ import {
   deleteResourceFromCategories,
   authorizeForRole
 } from '../util';
-import {CallableContext} from 'firebase-functions/lib/common/providers/https';
-import {https} from 'firebase-functions';
+import {CallableRequest} from 'firebase-functions/lib/common/providers/https';
+import {https} from 'firebase-functions/v2';
 import {
   runValidator, validateEmail,
   validateNonEmptyArrayOfType,
@@ -106,16 +106,16 @@ const resourceValidator: Validator<Resource> = {
   locations: {required: false, validate: validateLocationList}
 };
 
-export const postResourceCallableHandler = async (data: any, context: CallableContext) => {
-  await authorizeForRole(context, 'user');
+export const postResourceCallableHandler = async (request: CallableRequest) => {
+  await authorizeForRole(request.auth, 'user');
 
   try {
-    runValidator(data, resourceValidator);
+    runValidator(request.data, resourceValidator);
   } catch (e) {
     throw new https.HttpsError('invalid-argument', (e as Error).message);
   }
 
-  const resource = data as Resource;
+  const resource = request.data as Resource;
 
   // find new id, will need rewritten function because at this point the resource has not been added yet
   resource.id = await getNewId('resources');
@@ -145,35 +145,35 @@ export const postResourceCallableHandler = async (data: any, context: CallableCo
   return pushedResRef.key;
 };
 
-export const putResourceCallableHandler = async (data: any, context: CallableContext) => {
-  await authorizeForRole(context, 'user');
+export const putResourceCallableHandler = async (request: CallableRequest) => {
+  await authorizeForRole(request.auth, 'user');
 
-  if (!data.key) {
+  if (!request.data.key) {
     throw new https.HttpsError('invalid-argument', 'data.key is missing');
   }
 
-  if (typeof data.key !== 'string') {
+  if (typeof request.data.key !== 'string') {
     throw new https.HttpsError('invalid-argument', 'data.key must be a string');
   }
 
-  if (!data.resource) {
+  if (!request.data.resource) {
     throw new https.HttpsError('invalid-argument', 'data.resource is missing');
   }
 
-  const dbref = db.ref(`/resources/${data.key}`);
+  const dbref = db.ref(`/resources/${request.data.key}`);
   const beforeSnapshot = await dbref.get();
   if (!beforeSnapshot.exists()) {
     throw new https.HttpsError('not-found', 'Resource not found');
   }
 
   try {
-    runValidator(data.resource, resourceValidator);
+    runValidator(request.data.resource, resourceValidator);
   } catch (e) {
     throw new https.HttpsError('invalid-argument', (e as Error).message);
   }
 
   const oldResource = beforeSnapshot.val() as Resource;
-  const resource = data.resource as Resource;
+  const resource = request.data.resource as Resource;
 
   // set id to old id
   resource.id = oldResource.id;
@@ -182,7 +182,7 @@ export const putResourceCallableHandler = async (data: any, context: CallableCon
   resource.name_lower = resource.name.toLowerCase();
 
   // update indexing of title
-  await updateIndexOfItem('resources', data.key, oldResource.name, resource.name);
+  await updateIndexOfItem('resources', request.data.key, oldResource.name, resource.name);
 
   // set category ids from category keys
   await setIntIds('categories', resource);
@@ -191,36 +191,36 @@ export const putResourceCallableHandler = async (data: any, context: CallableCon
   await setIntIds('counties', resource);
 
   // add resources to categories
-  await updateCategoriesWithResource(data.key, oldResource.categoryKeys, resource.categoryKeys);
+  await updateCategoriesWithResource(request.data.key, oldResource.categoryKeys, resource.categoryKeys);
 
   await dbref.set(resource);
 
   return resource;
 };
 
-export const deleteResourceCallablehandler = async (data: any, context: CallableContext) => {
-  await authorizeForRole(context, 'user');
+export const deleteResourceCallablehandler = async (request: CallableRequest) => {
+  await authorizeForRole(request.auth, 'user');
 
-  if (!data.key) {
+  if (!request.data.key) {
     throw new https.HttpsError('invalid-argument', 'data.key is missing');
   }
 
-  if (typeof data.key !== 'string') {
+  if (typeof request.data.key !== 'string') {
     throw new https.HttpsError('invalid-argument', 'data.key must be a string!');
   }
 
-  const ref = db.ref(`/resources/${data.key}`);
+  const ref = db.ref(`/resources/${request.data.key}`);
   const beforeSnapshot = await ref.get();
   if (!beforeSnapshot.exists()) {
     throw new https.HttpsError('not-found', 'Resource not found');
   }
 
   const resource = beforeSnapshot.val() as Resource;
-  await removeIndexOfItem('resources', resource.name, data.key);
+  await removeIndexOfItem('resources', resource.name, request.data.key);
   await ref.remove();
 
   // remove resource from categories
-  await deleteResourceFromCategories(data.key, resource.categoryKeys);
+  await deleteResourceFromCategories(request.data.key, resource.categoryKeys);
 
   return {status: 'ok'};
 };

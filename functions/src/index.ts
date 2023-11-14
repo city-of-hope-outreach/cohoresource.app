@@ -1,4 +1,4 @@
-import * as functions from 'firebase-functions';
+import * as functions from 'firebase-functions/v2';
 import {fulldatabaseHandler} from './legacy/fulldatabaseHandler';
 import {feedbackHandler} from './legacy/feedbackHandler';
 import {uniqueIdApp} from './legacy/uniqueidHandler';
@@ -17,6 +17,7 @@ import {
 } from './write_entity/writeCategory';
 import {indexCategoriesCallable} from './data_normalize/indexCategories';
 import {categoryAndCountyKeys} from './data_normalize/categoryAndCountyKeys';
+import {blockUserCreation as userAdminBlockUserCreation} from './user_admin/blockUserCreation';
 import {listUsersHandler} from './user_admin/listUsers';
 import {createUserHandler} from './user_admin/createUser';
 import {updateUserHandler} from './user_admin/updateUser';
@@ -35,6 +36,7 @@ export const deleteResource = functions.https.onCall(deleteResourceCallablehandl
 export const postCategory = functions.https.onCall(postCategoryCallableHandler);
 export const putCategory = functions.https.onCall(putCategoryCallableHandler);
 export const deleteCategory = functions.https.onCall(deleteCategoryCallableHandler);
+export const blockUserCreation = userAdminBlockUserCreation;
 export const listUsers = functions.https.onCall(listUsersHandler);
 export const createUser = functions.https.onCall(createUserHandler);
 export const updateUser = functions.https.onCall(updateUserHandler);
